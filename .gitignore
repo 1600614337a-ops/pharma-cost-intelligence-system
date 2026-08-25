@@ -1,0 +1,38 @@
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+
+# Local configuration and secrets
+.env
+*.pem
+*.key
+*.p12
+
+# Runtime and generated artifacts
+tmp/
+output/
+release/
+07_报告输出/
+08_RPA任务输出/
+09_审核工作台/
+10_批量运行/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Competition-restricted data and source documents
+01_成本明细数据/
+02_行业参考数据/
+03_制药知识文档/
+04_报告模板/
+05_RPA接口文档/
+06_知识证据索引/
+8.16调整更新/
+7.（创灵境）2026年第二届重庆市AI大模型创新应用大赛企业出题.docx
+
+# Office temporary files
+~$*

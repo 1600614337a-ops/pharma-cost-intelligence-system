@@ -1,0 +1,2 @@
+"""Cost intelligence application package."""
+

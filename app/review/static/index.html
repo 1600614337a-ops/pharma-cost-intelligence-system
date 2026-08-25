@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>成本任务审核工作台</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand-mark">审</div>
+      <div>
+        <p class="eyebrow">COST INTELLIGENCE</p>
+        <h1>成本任务审核工作台</h1>
+      </div>
+      <div class="topbar-actions">
+        <span id="userIdentity" class="identity-pill">未连接</span>
+        <span id="testSubmitPill" class="test-pill hidden">仅测试环境提交</span>
+        <span class="safety-pill">外部提交已关闭</span>
+        <button id="refreshButton" class="ghost-button" type="button">刷新</button>
+        <button id="lockButton" class="ghost-button" type="button">锁定</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="metric-grid" aria-label="审核概览">
+        <article class="metric-card"><span>候选总数</span><strong id="metricTotal">—</strong></article>
+        <article class="metric-card amber"><span>待审核</span><strong id="metricPending">—</strong></article>
+        <article class="metric-card green"><span>已批准</span><strong id="metricApproved">—</strong></article>
+        <article class="metric-card red"><span>已拒绝</span><strong id="metricRejected">—</strong></article>
+        <article class="metric-card blue"><span>已预演</span><strong id="metricDryRun">—</strong></article>
+        <article class="metric-card purple"><span>待对账</span><strong id="metricReconcile">—</strong></article>
+      </section>
+
+      <section class="workspace">
+        <aside class="queue-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">REVIEW QUEUE</p>
+              <h2>审核队列</h2>
+            </div>
+            <span id="auditBadge" class="audit-badge">审计待检查</span>
+          </div>
+          <div id="candidateList" class="candidate-list" aria-live="polite"></div>
+        </aside>
+
+        <section id="detailPanel" class="detail-panel empty-state">
+          <div id="emptyMessage">
+            <div class="empty-icon">✓</div>
+            <h2>选择一条任务候选</h2>
+            <p>查看计算结论、原始来源、审批信息和完整审计记录。</p>
+          </div>
+
+          <div id="candidateDetail" class="hidden">
+            <div class="detail-title-row">
+              <div>
+                <p id="detailMeta" class="eyebrow"></p>
+                <h2 id="detailTitle"></h2>
+              </div>
+              <div class="status-stack">
+                <span id="reviewState" class="state-badge"></span>
+                <span id="submissionState" class="state-badge neutral"></span>
+                <span id="executionState" class="state-badge neutral"></span>
+              </div>
+            </div>
+
+            <div class="evidence-grid">
+              <article class="evidence-card finding-card">
+                <span class="section-label">受控 FINDING</span>
+                <p id="findingText"></p>
+              </article>
+              <article class="evidence-card">
+                <span class="section-label">整改建议</span>
+                <p id="suggestionText"></p>
+              </article>
+            </div>
+
+            <div class="facts-row">
+              <div><span>报告编号</span><strong id="reportNumber"></strong></div>
+              <div><span>分析月份</span><strong id="analysisMonth"></strong></div>
+              <div><span>产品</span><strong id="productName"></strong></div>
+              <div><span>建议优先级</span><strong id="suggestedPriority"></strong></div>
+            </div>
+
+            <section class="source-section">
+              <div class="section-heading">
+                <h3>原始证据来源</h3>
+                <span id="sourceCount"></span>
+              </div>
+              <ul id="sourceList" class="source-list"></ul>
+            </section>
+
+            <div id="reviewForms" class="review-grid">
+              <form id="approvalForm" class="action-card approval-card">
+                <div class="section-heading">
+                  <h3>批准并补全任务</h3>
+                  <span>不会自动提交</span>
+                </div>
+                <div class="form-grid">
+                  <label>责任人<input name="assignee_name" required maxlength="100"></label>
+                  <label>责任部门<input name="department" required maxlength="100"></label>
+                  <label>岗位<input name="role" maxlength="100"></label>
+                  <label>截止日期<input name="deadline" type="date" required></label>
+                  <label>优先级
+                    <select name="priority" required>
+                      <option value="medium">中</option><option value="high">高</option><option value="low">低</option>
+                    </select>
+                  </label>
+                  <label>通知方式
+                    <select name="notify_method" required>
+                      <option value="email">邮件</option><option value="wechat">微信</option><option value="sms">短信</option>
+                    </select>
+                  </label>
+                  <label class="wide">审批备注<textarea name="comment" rows="3" maxlength="1000"></textarea></label>
+                </div>
+                <button class="primary-button" type="submit">批准任务</button>
+              </form>
+
+              <form id="rejectionForm" class="action-card rejection-card">
+                <div class="section-heading"><h3>拒绝候选</h3><span>必须填写原因</span></div>
+                <label>拒绝原因<textarea name="comment" rows="5" required maxlength="1000"></textarea></label>
+                <button class="danger-button" type="submit">拒绝任务</button>
+              </form>
+            </div>
+
+            <section id="reviewResult" class="review-result hidden">
+              <div class="section-heading"><h3>审批结果</h3><span id="reviewTime"></span></div>
+              <div id="reviewSummary" class="review-summary"></div>
+              <button id="dryRunButton" class="primary-button hidden" type="button">执行安全预演（dry-run）</button>
+              <button id="authorizeButton" class="secondary-button hidden" type="button">第二人授权提交</button>
+              <button id="executeTestButton" class="test-button hidden" type="button">提交到本机测试RPA并核验回执</button>
+              <p id="authorizationStatus" class="authorization-status"></p>
+              <p id="executionStatus" class="authorization-status"></p>
+            </section>
+
+            <section class="audit-section">
+              <div class="section-heading"><h3>审计事件</h3><span>SHA-256 链式校验</span></div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>序号</th><th>事件</th><th>操作者</th><th>时间</th><th>事件哈希</th></tr></thead>
+                  <tbody id="auditTable"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="authOverlay" class="auth-overlay">
+    <form id="authForm" class="auth-card">
+      <div class="brand-mark large">审</div>
+      <p class="eyebrow">LOCAL SECURE ACCESS</p>
+      <h2>连接审核工作台</h2>
+      <p id="authDescription">令牌只保存在当前浏览器会话中，用于保护审核数据和写操作。</p>
+      <label id="tokenLabel">审核令牌<input id="tokenInput" type="password" minlength="16" required autocomplete="current-password"></label>
+      <button id="connectButton" class="primary-button" type="submit">安全连接</button>
+      <p id="authError" class="error-text"></p>
+    </form>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

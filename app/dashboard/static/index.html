@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="基于模拟数据的制药产品成本智能分析竞赛原型">
+  <link rel="icon" href="data:,">
+  <title>制药成本智能分析系统</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="制药成本智能分析首页">
+        <span class="brand-mark" aria-hidden="true">本</span>
+        <span><strong>本草智析</strong><small>成本分析控制台</small></span>
+      </a>
+      <nav aria-label="主导航">
+        <span class="nav-label">分析中心</span>
+        <a class="nav-item active" href="#comparisonSection" aria-current="page"><span class="nav-icon" aria-hidden="true">◫</span><span class="nav-text">成本分析</span></a>
+        <a class="nav-item" href="#trendSection"><span class="nav-icon" aria-hidden="true">⌁</span><span class="nav-text">趋势图表</span></a>
+        <a class="nav-item" href="#heatmapSection"><span class="nav-icon" aria-hidden="true">▦</span><span class="nav-text">成本热力图</span></a>
+        <a class="nav-item" href="#detailSection"><span class="nav-icon" aria-hidden="true">驱</span><span class="nav-text">成本驱动</span></a>
+        <a class="nav-item" href="#laborEfficiencySection"><span class="nav-icon" aria-hidden="true">时</span><span class="nav-text">人工分析</span></a>
+        <a class="nav-item" href="#benchmarkSection"><span class="nav-icon" aria-hidden="true">⇄</span><span class="nav-text">差异归因</span></a>
+        <span class="nav-label">治理与执行</span>
+        <a class="nav-item" href="#evidence"><span class="nav-icon" aria-hidden="true">⌕</span><span class="nav-text">知识证据</span></a>
+        <a class="nav-item" href="#workflowPanel"><span class="nav-icon" aria-hidden="true">✓</span><span class="nav-text">整改闭环</span></a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PHARMACEUTICAL COST INTELLIGENCE</p>
+          <h1 id="pageTitle">成本分析</h1>
+        </div>
+      </header>
+
+      <section class="analysis-controls" aria-label="分析条件">
+        <label>分析类型<select id="analysisType" aria-label="分析类型"></select></label>
+        <label>产品<select id="productSelect" aria-label="产品"></select></label>
+        <label id="monthControl">分析月份<select id="monthSelect" aria-label="分析月份"></select></label>
+        <label id="quarterControl" hidden>分析季度<select id="quarterSelect" aria-label="分析季度"></select></label>
+        <label id="topicControl" hidden>专题类型<select id="topicSelect" aria-label="专题类型"></select></label>
+        <label class="llm-control" title="仅改写受控叙述和整改候选字段；数值、事实、引用、审批与提交不交给大模型">
+          <span><input id="useLlmToggle" type="checkbox"> 大模型辅助叙述与整改候选</span>
+          <small id="llmStatus">正在检查可用性</small>
+        </label>
+        <div class="control-actions">
+          <button id="analyzeButton" type="button"><span>运行分析</span><span aria-hidden="true">→</span></button>
+          <button id="reportButton" class="secondary" type="button" disabled><span>生成报告</span><span aria-hidden="true">↓</span></button>
+        </div>
+      </section>
+
+      <section class="report-progress" id="reportProgress" aria-live="polite" hidden>
+        <div class="report-progress-head">
+          <strong id="reportProgressTitle">正在生成报告</strong>
+          <span id="reportProgressStage">准备数据与证据</span>
+        </div>
+        <div class="report-progress-track" id="reportProgressBar" role="progressbar" aria-label="报告生成进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="准备生成">
+          <i id="reportProgressFill"></i>
+        </div>
+        <small>将依次完成数据校验、受控叙述、Word排版与PDF渲染；完成前请勿重复点击。</small>
+      </section>
+
+      <div class="notice error" id="errorNotice" role="alert" hidden></div>
+      <div class="loading" id="loadingState" aria-live="polite" hidden>
+        <span></span><span></span><span></span><p>正在执行数据校验、成本计算与证据检索…</p>
+      </div>
+
+      <div id="dashboard" hidden>
+        <div class="reading-position" id="readingPosition" aria-live="polite">
+          <span>当前阅读</span><strong id="readingPositionTitle">成本分析</strong>
+        </div>
+
+        <section class="report-export" id="reportPanel" aria-live="polite" hidden>
+          <div><span class="section-kicker">完整报告</span><strong id="reportStatus">报告已生成</strong><small id="reportGeneration">—</small></div>
+          <div class="report-links">
+            <a id="previewLink" target="_blank" rel="noopener">在线预览 PDF</a>
+            <a id="pdfLink">下载 PDF</a>
+            <a id="wordLink">下载 Word</a>
+          </div>
+        </section>
+
+        <section class="panel analysis-summary-panel" id="analysisSummarySection" aria-labelledby="conclusionLabel">
+          <div class="panel-head">
+            <div><span class="section-kicker">经营概览</span><h3 id="conclusionLabel">本月分析摘要</h3></div>
+            <span class="legend-note report-id" id="reportId">—</span>
+          </div>
+          <div class="analysis-summary-content" id="headlineInsight">—</div>
+        </section>
+
+        <section class="benchmark-summary" aria-label="工厂单位成本对标" hidden>
+          <span class="benchmark-mark" aria-hidden="true">对</span>
+          <div class="benchmark-copy"><span>单位成本工厂对标</span><strong id="benchmarkTitle">中药一厂 vs 中药二厂</strong><small>差异按一厂减二厂计算，成本越低越有利</small></div>
+          <div class="benchmark-result"><strong><span class="benchmark-number" id="benchmarkValue">—</span><span class="benchmark-unit">元/盒</span></strong><span id="benchmarkChange">—</span></div>
+        </section>
+
+        <section class="panel comparison-panel dashboard-module" id="comparisonSection" data-module="成本分析">
+          <div class="panel-head">
+            <div><span class="section-kicker">分析对象</span><h2 id="scenarioTitle">—</h2></div>
+            <span class="legend-note" id="businessPeriodLabel">本月实际 · 上月 · 去年同月 · 年度预算</span>
+          </div>
+          <div class="business-card-grid" id="yearBudgetCards"></div>
+          <p class="boundary" id="comparisonBoundary">绿色表示经营有利，红色表示经营不利。</p>
+        </section>
+
+        <section class="chart-grid dashboard-module dashboard-module-grid" id="trendSection" data-module="趋势图表">
+          <article class="panel wide">
+            <div class="panel-head"><div><span class="section-kicker" id="trendPeriodLabel">数据范围</span><h3 id="trendTitle">单位成本趋势</h3></div><span class="legend-note">元 / 盒</span></div>
+            <div class="chart" id="trendChart" role="img" aria-label="单位成本趋势图"></div>
+            <p class="boundary" id="trendBoundary">—</p>
+          </article>
+          <article class="panel contribution-panel">
+            <div class="panel-head"><div><span class="section-kicker">成本归因</span><h3>总成本变动贡献度</h3></div><span class="legend-note" id="contributionTotal">合计 —</span></div>
+            <div class="chart" id="contributionChart" role="img" aria-label="三大成本要素对总成本变动的贡献度横向柱状图"></div>
+          </article>
+          <article class="panel waterfall-panel">
+            <div class="panel-head"><div><span class="section-kicker" id="waterfallPeriodLabel">环比拆解</span><h3>单位成本变动瀑布</h3></div><span class="legend-note" id="waterfallHint">正数推高成本</span></div>
+            <div class="chart" id="waterfallChart" role="img" aria-label="单位成本变动瀑布图"></div>
+          </article>
+          <div class="bridge-structure-grid">
+            <article class="panel total-cost-bridge-panel">
+              <div class="panel-head"><div><span class="section-kicker" id="bridgePeriodLabel">环比桥接</span><h3>总成本变动桥接</h3></div><span class="legend-note" id="totalCostBridgeHint">产量影响使用中性色</span></div>
+              <div class="chart total-cost-bridge-chart" id="totalCostBridgeChart" role="img" aria-label="产量影响与单位成本影响构成的总成本变动桥接瀑布图"></div>
+              <div class="boundary bridge-boundary-note">
+                <strong>口径：</strong>
+                <div><span>产量影响＝（本期产量－上期产量）×上期单位成本；单位成本影响＝本期产量×（本期单位成本－上期单位成本）。</span><span>产量影响不直接判定经营利弊。</span></div>
+              </div>
+            </article>
+            <article class="panel structure-panel">
+              <div class="panel-head"><div><span class="section-kicker" id="structurePeriodLabel">本月构成</span><h3>成本结构</h3></div><span class="legend-note">占单位成本</span></div>
+              <div class="chart" id="structureChart" role="img" aria-label="本月成本结构环形图"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel heatmap-panel dashboard-module" id="heatmapSection" data-module="成本热力图">
+          <div class="panel-head heatmap-head">
+            <div><span class="section-kicker">产品 × 月份 × 成本要素</span><h3>三维交叉分析热力图</h3></div>
+            <div class="heatmap-controls" aria-label="热力图显示设置">
+              <label>显示指标<select id="heatmapMetric" aria-label="热力图显示指标"></select></label>
+            </div>
+          </div>
+          <p class="heatmap-note" id="heatmapNote">红色表示成本上升，绿色表示成本下降；2026-01无上月数据。</p>
+          <div class="chart heatmap-chart" id="heatmapChart" role="img" aria-label="产品月份成本要素三维交叉分析热力图"></div>
+          <p class="boundary"><strong>计算边界：</strong>环比由后端确定性计算；绝对环比超过10%显示告警。市场行情和缺失数据不参与本图推测。</p>
+        </section>
+
+        <section class="panel evidence-panel detail-panel dashboard-module" id="detailSection" data-module="成本驱动">
+          <div class="panel-head"><div><span class="section-kicker">确定性计算</span><h3>主要成本驱动</h3></div><span id="alertBadge" class="badge">—</span></div>
+          <div class="driver-analysis-grid">
+            <div class="table-wrap driver-table-wrap">
+              <table class="driver-table">
+                <colgroup><col class="driver-col-name"><col><col><col></colgroup>
+                <thead><tr><th>成本明细</th><th id="driverCurrentLabel">本月</th><th id="driverChangeLabel">环比变动</th><th>单位成本贡献度</th></tr></thead>
+                <tbody id="driverRows"></tbody>
+              </table>
+            </div>
+            <div class="driver-contribution-visual">
+              <div class="driver-chart-head"><h4>明细贡献度</h4><span>正值同向 · 负值抵消</span></div>
+              <div class="chart driver-contribution-chart" id="driverContributionChart" role="img" aria-label="各项成本明细对单位成本变动的贡献度横向条形图"></div>
+            </div>
+          </div>
+          <div class="boundary driver-evidence-boundary"><strong>证据边界：</strong><div class="material-narrative-copy" id="materialNarrative">—</div></div>
+        </section>
+
+        <section class="panel labor-panel dashboard-module" id="laborEfficiencySection" data-module="人工分析" aria-labelledby="laborComparisonTitle">
+          <div class="panel-head">
+            <div><span class="section-kicker">人工分析</span><h3 id="laborComparisonTitle">人工投入与生产效率分析</h3></div>
+            <span class="legend-note" id="laborPeriodLabel">本月对上月</span>
+          </div>
+          <div class="labor-card-list" id="laborMetricCards"></div>
+          <div class="labor-analysis-insight" aria-label="人工指标分析解读">
+            <div><span>综合结果</span><p id="laborInterpretation">—</p></div>
+            <div><span>管理关注</span><p id="laborManagementNote">—</p></div>
+          </div>
+        </section>
+
+        <section class="panel benchmark-analysis-panel dashboard-module" id="benchmarkSection" data-module="差异归因" aria-label="对标差异分析">
+          <div class="benchmark-stage benchmark-overview-stage">
+            <div class="benchmark-stage-head">
+              <div class="benchmark-stage-title"><div><span class="section-kicker">对标分析</span><h3>对标差异总览</h3></div></div>
+            </div>
+            <div class="benchmark-overview-meta" aria-label="差异总览分析条件">
+              <div><span>分析产品</span><strong id="benchmarkProduct">—</strong></div>
+              <div><span>对标组合</span><strong id="benchmarkFactoryPair">—</strong></div>
+              <div><span>比较期间</span><strong id="benchmarkPeriod">—</strong></div>
+            </div>
+            <div class="table-wrap benchmark-table-wrap">
+              <table class="benchmark-overview-table" aria-label="对标差异总览表">
+                <colgroup><col class="benchmark-col-product"><col class="benchmark-col-factor"><col><col><col><col><col class="benchmark-col-outcome"></colgroup>
+                <thead>
+                  <tr>
+                    <th>产品</th><th>成本要素</th><th class="benchmark-centered-heading" id="benchmarkTargetHeader">中药一厂（元/盒）</th><th class="benchmark-centered-heading" id="benchmarkPeerHeader">中药二厂（元/盒）</th><th class="benchmark-centered-heading">差异金额（元/盒）</th><th class="benchmark-centered-heading">差异率</th><th class="benchmark-centered-heading">评价</th>
+                  </tr>
+                </thead>
+                <tbody id="benchmarkRows"></tbody>
+              </table>
+            </div>
+            <p class="boundary benchmark-boundary"><strong>评价规则：</strong>差异金额＝本厂－对标厂；成本低于对标厂为经营有利（绿色），高于对标厂为经营不利（红色）。本表只作同产品、同规格、同期数值对标，不推断未提供的业务原因。</p>
+          </div>
+
+          <div class="benchmark-stage benchmark-tree-stage" id="benchmarkTreeSection">
+            <div class="benchmark-stage-head">
+              <div class="benchmark-stage-title"><div><span class="section-kicker">结构拆解</span><h3>成本差异结构树</h3></div></div>
+            </div>
+            <div class="benchmark-tree-summary" aria-label="差异结构结论和图例">
+              <div class="benchmark-tree-summary-main">
+                <span>结构结论</span>
+                <strong id="benchmarkTreeHeadline">—</strong>
+                <small id="benchmarkTreeBasis">—</small>
+              </div>
+              <div class="benchmark-tree-legend" aria-label="经营评价图例">
+                <span><i class="tree-legend-dot tree-legend-good"></i>经营有利</span>
+                <span><i class="tree-legend-dot tree-legend-bad"></i>经营不利</span>
+                <span><i class="tree-legend-dot tree-legend-missing"></i>对标明细暂缺</span>
+              </div>
+            </div>
+            <div class="benchmark-tree-chart-wrap">
+              <div class="chart benchmark-tree-chart" id="benchmarkTreeChart" role="img" aria-label="产品成本对标差异结构树"></div>
+            </div>
+          </div>
+
+          <div class="benchmark-stage benchmark-attribution" id="benchmarkAttributionSection">
+            <div class="benchmark-stage-head">
+              <div class="benchmark-stage-title"><div><span class="section-kicker">归因建议</span><h3>归因分析与改进建议</h3></div></div>
+              <span class="legend-note" id="benchmarkNarrativeMode">确定性分析 · RPA候选建议</span>
+            </div>
+            <div class="benchmark-output-grid">
+              <section class="benchmark-output-card" aria-labelledby="benchmarkAttributionTextTitle">
+                <h4 id="benchmarkAttributionTextTitle">归因分析文本</h4>
+                <div class="benchmark-narrative" id="benchmarkAttributionText"><p>—</p></div>
+                <p class="benchmark-output-note">网页与报告使用同一受控文本字段；配置大模型生成报告时由模型分段改写，未配置或调用失败时使用确定性回退文本，所有数值仍来自结构化计算结果。</p>
+              </section>
+              <section class="benchmark-output-card" aria-labelledby="benchmarkActionTitle">
+                <h4 id="benchmarkActionTitle">改进建议列表</h4>
+                <div class="benchmark-recommendation-list" id="benchmarkRecommendationList"><p>—</p></div>
+                <p class="benchmark-output-note">列表可转换为RPA整改任务候选；正式下发仍须在整改闭环中经业务人员审核。</p>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel evidence-list dashboard-module" id="evidence" data-module="知识证据">
+          <div class="panel-head"><div><span class="section-kicker">可追溯解释</span><h3>知识证据与数据来源</h3></div><span class="badge neutral">受治理引用</span></div>
+          <div class="evidence-grid" id="evidenceGrid"></div>
+          <details>
+            <summary>查看结构化数据来源</summary>
+            <ul id="sourceList"></ul>
+          </details>
+        </section>
+
+        <section class="panel workflow-panel dashboard-module" id="workflowPanel" data-module="整改闭环">
+          <div class="panel-head">
+            <div><span class="section-kicker">人工确认后执行</span><h3>整改任务与模拟 RPA 闭环</h3></div>
+            <span class="badge neutral" id="workflowState">等待形成候选</span>
+          </div>
+          <div class="tracking-summary" aria-label="整改任务追踪汇总">
+            <div><span>已形成候选</span><strong id="trackingGenerated">—</strong></div>
+            <div><span>已人工确认</span><strong id="trackingConfirmed">—</strong></div>
+            <div><span>已模拟送达</span><strong id="trackingDelivered">—</strong></div>
+            <div><span>发送失败</span><strong id="trackingFailed">—</strong></div>
+          </div>
+          <ol class="workflow-steps" aria-label="演示流程进度">
+            <li class="complete" data-step="analysis"><span>1</span>完成分析</li>
+            <li class="complete" data-step="report"><span>2</span>生成报告</li>
+            <li data-step="candidate"><span>3</span>形成候选</li>
+            <li data-step="approve"><span>4</span>人工确认</li>
+            <li data-step="submit"><span>5</span>模拟发送</li>
+          </ol>
+
+          <div class="workflow-body">
+            <div id="workflowEmpty" class="workflow-callout">
+              <div><strong id="workflowEmptyTitle">整改闭环尚未开始</strong><p id="workflowEmptyMessage">请先运行分析并生成报告；报告通过校验后，才能形成可追溯整改候选。</p></div>
+              <button id="candidateButton" type="button" disabled>请先生成报告</button>
+            </div>
+
+            <div id="candidateCard" hidden>
+              <div class="candidate-summary">
+                <div><span>任务编号</span><strong id="candidateTaskId">—</strong></div>
+                <div><span>建议优先级</span><strong id="candidatePriority">—</strong></div>
+                <div><span>验证状态</span><strong id="candidateValidation">—</strong></div>
+              </div>
+              <h4 id="candidateTitle">—</h4>
+              <div class="finding-grid">
+                <article><span>已验证发现</span><p id="candidateFinding">—</p></article>
+                <article><span>整改建议</span><p id="candidateSuggestion">—</p></article>
+              </div>
+              <details><summary>查看任务证据来源</summary><ul id="candidateSources"></ul></details>
+
+              <form id="approvalForm" class="approval-form">
+                <div class="form-heading"><strong>人工确认责任信息</strong><small>系统不虚构审批人、责任人或截止时间</small></div>
+                <label>审批人<input id="reviewerInput" name="reviewer" required maxlength="100" autocomplete="off"></label>
+                <label>责任人<input id="assigneeInput" name="assignee_name" required maxlength="100" autocomplete="off"></label>
+                <label>责任部门<input id="departmentInput" name="department" required maxlength="100" autocomplete="off"></label>
+                <label>岗位（选填）<input id="roleInput" name="role" maxlength="100" autocomplete="off"></label>
+                <label>截止日期<input id="deadlineInput" name="deadline" type="date" required></label>
+                <label>优先级<select id="priorityInput" name="priority"><option value="high">高</option><option value="medium">中</option><option value="low">低</option></select></label>
+                <label>通知方式<select id="notifyInput" name="notify_method"><option value="wechat">模拟微信</option><option value="email">模拟邮件</option><option value="sms">模拟短信</option></select></label>
+                <label class="wide-field">审批备注（选填）<input id="commentInput" name="comment" maxlength="1000" autocomplete="off"></label>
+                <label class="confirm-check wide-field"><input id="approvalConfirm" type="checkbox" required>我已核对任务发现、建议和责任信息</label>
+                <button class="wide-field" id="approveButton" type="submit">确认并形成 RPA 载荷</button>
+              </form>
+
+              <div id="approvedCard" class="approved-card" hidden>
+                <div><span>人工确认</span><strong id="approvedBy">—</strong><small id="approvedAt">—</small></div>
+                <div><span>任务接收人</span><strong id="approvedAssignee">—</strong><small id="approvedDeadline">—</small></div>
+              </div>
+              <div id="submissionAction" class="submission-action" hidden>
+                <p><strong>提交边界：</strong>只允许发送至本机 <code>127.0.0.1 / localhost</code> 模拟RPA，生产系统不可用。</p>
+                <label class="confirm-check"><input id="submitConfirm" type="checkbox">我确认执行本机模拟 HTTP 提交</label>
+                <button id="submitButton" type="button">发送至模拟 RPA</button>
+              </div>
+              <div id="receiptCard" class="receipt-card" hidden>
+                <span id="receiptState">—</span>
+                <strong id="receiptMessage">—</strong>
+                <p id="receiptNotify">—</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

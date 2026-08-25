@@ -1,0 +1,21 @@
+services:
+  cost-intelligence:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cost-intelligence-demo
+    init: true
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+    environment:
+      COST_LLM_ENABLED: "${COST_LLM_ENABLED:-false}"
+      COST_LLM_PROVIDER: "${COST_LLM_PROVIDER:-dashscope}"
+      COST_LLM_API_STYLE: "${COST_LLM_API_STYLE:-chat_completions}"
+      COST_LLM_BASE_URL: "${COST_LLM_BASE_URL:-https://dashscope.aliyuncs.com/compatible-mode/v1}"
+      COST_LLM_MODEL: "${COST_LLM_MODEL:-qwen3.8-max}"
+      COST_LLM_API_KEY: "${COST_LLM_API_KEY:-}"
+    restart: unless-stopped
