@@ -191,7 +191,7 @@ class ReportingContractTests(unittest.TestCase):
         for contract in (self.yinhuang, self.banlangen, self.liuwei):
             self.assertEqual(set(contract.evidence.model_dump()), expected_fields)
             self.assertTrue(all(contract.evidence.model_dump().values()))
-            self.assertEqual(contract.contract_version, "1.2.4")
+            self.assertEqual(contract.contract_version, "1.2.5")
 
     def test_controlled_text_respects_forbidden_conclusions(self) -> None:
         for contract in (self.yinhuang, self.banlangen, self.liuwei):
@@ -258,6 +258,24 @@ class ReportingContractTests(unittest.TestCase):
         self.assertEqual(len(tables["整改任务表格"].rows), 1)
         self.assertEqual(tables["整改任务表格"].rows[0][2], "审批时指定")
         self.assertEqual(tables["整改任务表格"].rows[0][5], "审批时确定")
+        self.assertIn("直接材料", tables["整改任务表格"].rows[0][1])
+        self.assertEqual(tables["整改任务表格"].rows[0][3], "high")
+
+    def test_zero_change_market_evidence_is_not_described_as_opposite(self) -> None:
+        february = build_report_contract(
+            PROJECT_ROOT,
+            INDEX_ROOT,
+            "银黄口服液",
+            "2026-02",
+            generated_date="2026-08-02",
+        )
+        reasons = [row[-1] for row in february.dynamic_tables["原材料成本明细表格"].rows]
+        self.assertTrue(any("均持平" in reason for reason in reasons))
+
+    def test_citations_use_product_and_data_sections(self) -> None:
+        self.assertNotIn("板蓝根颗粒", self.yinhuang.evidence.process_citation)
+        self.assertIn("银黄口服液2026年基线", self.yinhuang.evidence.factory_benchmark_citation)
+        self.assertNotIn("文档治理", self.yinhuang.evidence.factory_benchmark_citation)
 
     def test_all_golden_scenario_contracts_pass(self) -> None:
         for contract in (self.yinhuang, self.banlangen, self.liuwei):

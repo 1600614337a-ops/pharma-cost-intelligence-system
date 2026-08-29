@@ -226,9 +226,10 @@ def _dynamic_tables(result: dict[str, Any], base: ReportContract, period: str) -
     for item in result.get("trend", []):
         unit = _decimal(item.get("unit_cost"))
         rate = None if previous_unit in {None, Decimal("0")} or unit is None else (unit - previous_unit) / previous_unit * Decimal("100")
+        rate_text = "暂无数据（缺少上期基期）" if previous_unit is None else _pct(rate)
         trend_rows.append([
             str(item.get("month")), _qty(item.get("quantity_boxes")), _money(item.get("direct_material")),
-            _money(item.get("direct_labor")), _money(item.get("manufacturing_overhead")), _money(unit), _pct(rate),
+            _money(item.get("direct_labor")), _money(item.get("manufacturing_overhead")), _money(unit), rate_text,
         ])
         previous_unit = unit
 
@@ -245,11 +246,20 @@ def _dynamic_tables(result: dict[str, Any], base: ReportContract, period: str) -
         [str(item["sequence"]), item["action"], item["owner"], item["priority"], item["expected_effect"], item["due"]]
         for item in result.get("recommendations", [])
     ]
-    top_name = result.get("material_drivers", [{}])[0].get("name", "成本差异") if result.get("material_drivers") else "成本差异"
     month = result["meta"]["month"]
+    lead = result.get("recommendations", [{}])[0] if result.get("recommendations") else {}
+    action = str(lead.get("action", ""))
+    subject = (
+        "直接人工"
+        if "直接人工" in action or "实际工时" in action
+        else "制造费用"
+        if "制造费用" in action or "设备利用" in action
+        else "直接材料"
+    )
+    priority = {"高": "high", "中": "medium", "低": "low"}.get(str(lead.get("priority", "中")), "medium")
     task_rows = [[
         f"TASK-{month.replace('-', '')}-{PRODUCT_TASK_SEQUENCE[result['meta']['product']]}",
-        f"复核{top_name}成本变动证据", "审批时指定", "medium", f"{period}{result['meta']['product']}{result['meta']['analysis_type']}", "审批时确定",
+        f"复核{result['meta']['product']}{subject}差异证据", "审批时指定", priority, f"{period}{result['meta']['product']}{result['meta']['analysis_type']}", "审批时确定",
     ]]
     market = base.dynamic_tables["原材料价格跟踪表格"].model_copy(deep=True)
     market.headers = ["原材料", "年初价", "期末价", "涨幅", "趋势", "证据边界"]
@@ -287,7 +297,12 @@ def build_period_report_contract(
     supplemental = {name: value.model_copy(deep=True) for name, value in base.supplemental_fields.items()}
     refs = _source_refs(result)
 
-    title = f"{period} {product}季度成本分析报告" if analysis_type == "季度成本分析" else f"{period} {product}{topic}报告"
+    if analysis_type == "季度成本分析":
+        title = f"{period} {product}季度成本分析报告"
+    elif analysis_type == "专题分析":
+        title = f"{period} {product}{topic or '专题成本分析'}报告"
+    else:
+        title = f"{period} {product}月度成本分析报告"
     for name, value, rule in (
         ("报告标题", title, "统一标题模板"),
         ("报告编号", result["meta"]["report_number"], "分析类型编号规则"),

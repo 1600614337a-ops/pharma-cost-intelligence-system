@@ -53,6 +53,8 @@ class WechatNotifyRequest(BaseModel):
 
 
 def _auto_advance_status(task_id: str) -> None:
+    if "-OVERDUE" in task_id:
+        return
     time.sleep(30)
     if task_id not in tasks_db:
         return
@@ -60,6 +62,22 @@ def _auto_advance_status(task_id: str) -> None:
     tasks_db[task_id]["status_history"].append(
         {"status": "received", "time": datetime.now().isoformat()}
     )
+    if "-FAST" in task_id:
+        time.sleep(10)
+        if task_id in tasks_db:
+            tasks_db[task_id]["status"] = "confirmed"
+            tasks_db[task_id]["status_history"].append(
+                {"status": "confirmed", "time": datetime.now().isoformat()}
+            )
+    elif "-DONE" in task_id:
+        time.sleep(10)
+        if task_id in tasks_db:
+            for status in ("confirmed", "in_progress", "completed"):
+                time.sleep(5)
+                tasks_db[task_id]["status"] = status
+                tasks_db[task_id]["status_history"].append(
+                    {"status": status, "time": datetime.now().isoformat()}
+                )
 
 
 @app.get("/health")

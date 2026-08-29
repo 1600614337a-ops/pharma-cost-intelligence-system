@@ -1235,6 +1235,20 @@ class DashboardWebTests(unittest.TestCase):
         self.assertEqual(word.status_code, 200)
         self.assertEqual(len(Document(BytesIO(word.content)).inline_shapes), 3)
 
+    def test_material_price_special_report_rejects_a_falling_material_month(self) -> None:
+        response = self.client.post(
+            "/api/reports",
+            json={
+                "analysis_type": "专题分析",
+                "product": "银黄口服液",
+                "month": "2026-06",
+                "topic": "原材料涨价专项",
+                "use_llm": False,
+            },
+        )
+        self.assertEqual(response.status_code, 422, response.text)
+        self.assertIn("直接材料成本未上涨", response.json()["detail"])
+
     def test_workflow_rejects_non_loopback_rpa_target(self) -> None:
         with self.assertRaisesRegex(Exception, "只允许连接本机"):
             create_dashboard_app(

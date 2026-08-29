@@ -268,6 +268,17 @@ class ControlledLlmTests(unittest.TestCase):
                 generated_date="2026-08-21",
             ),
         )
+        monthly_contract = build_period_report_contract(
+            PROJECT_ROOT,
+            INDEX_ROOT,
+            analysis_type="月度成本分析",
+            product="银黄口服液",
+            month="2026-05",
+            generated_date="2026-08-21",
+        )
+        self.assertEqual(monthly_contract.fields["报告标题"].value, "2026-05 银黄口服液月度成本分析报告")
+        self.assertEqual(scenarios[0].fields["报告标题"].value, "2026-Q2 银黄口服液季度成本分析报告")
+        self.assertEqual(scenarios[1].fields["报告标题"].value, "2026-05 银黄口服液工厂成本差异专项报告")
         prompts: list[str] = []
         for contract in scenarios:
             draft = self.draft_for(contract)

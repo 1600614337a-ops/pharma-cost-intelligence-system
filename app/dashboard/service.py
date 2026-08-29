@@ -1031,6 +1031,21 @@ def build_special_dashboard_analysis(
     result["meta"]["period"] = month
     result["meta"]["report_number"] = result["meta"]["report_number"].replace("CA-", "SA-")
     if topic == "原材料涨价专项":
+        material = result.get("kpis", {}).get("direct_material", {})
+        material_delta = material.get("delta")
+        positive_detail = any(
+            (item.get("delta") or 0) > 0
+            for item in result.get("material_drivers", [])
+        )
+        positive_market = any(
+            (item.get("price_change_rate_pct") or 0) > 0
+            for item in result.get("market_evidence", [])
+        )
+        if material_delta is None or material_delta <= 0 or not (positive_detail or positive_market):
+            raise AnalysisError(
+                "当前月份直接材料成本未上涨，不符合“原材料涨价专项”准入条件；"
+                "请选择材料成本上升月份，或改用“工厂成本差异专项”。"
+            )
         result["narratives"]["本月亮点"] = "专题聚焦材料单位消耗成本与同名市场行情的方向关系。"
         result["narratives"]["需关注问题"] = "市场行情不等于企业实际采购价；缺少采购数量和实际采购价时，不计算价格差与用量差。"
     elif topic == "工厂成本差异专项":

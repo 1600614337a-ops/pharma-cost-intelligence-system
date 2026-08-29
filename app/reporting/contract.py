@@ -17,12 +17,13 @@ from .benchmark_guidance import BenchmarkGap, build_benchmark_guidance
 from .models import DynamicTable, ReportContract, ReportEvidence, ReportFieldValue
 
 
-CONTRACT_VERSION = "1.2.4"
+CONTRACT_VERSION = "1.2.5"
 MARKDOWN_TEMPLATE = Path("04_报告模板") / "月度成本分析报告模板.md"
 WORD_TEMPLATE = Path("04_报告模板") / "月度成本分析报告模板.docx"
 PRODUCT_CODE = {"银黄口服液": "YH", "板蓝根颗粒": "BLG", "六味地黄胶囊": "LWDH"}
 PRODUCT_TASK_SEQUENCE = {"银黄口服液": "101", "板蓝根颗粒": "201", "六味地黄胶囊": "301"}
 PRODUCT_CATEGORY = {"银黄口服液": "口服液类", "板蓝根颗粒": "颗粒剂类", "六味地黄胶囊": "胶囊剂类"}
+PRODUCTS = tuple(PRODUCT_CODE)
 PROCESS_QUERY = {
     "银黄口服液": "银黄口服液 关键工艺参数 提取收率 0.08元/盒",
     "板蓝根颗粒": "板蓝根颗粒 关键工艺参数 提取收率 0.03元/盒",
@@ -118,8 +119,99 @@ def _directional_pct(
     return f"{_direction(delta)}{_pct(abs(rate), status)}"
 
 
-def _citation(result) -> str:
-    return result.hits[0].citation.display if result.hits else "暂无可靠知识证据"
+def _product_scoped_section(section: str, product: str | None) -> str:
+    """Trim mixed-page PDF headings to the requested product's subsection."""
+
+    if not product:
+        return section
+    parts = [part.strip() for part in section.split(" / ") if part.strip()]
+    product_heading_indexes = [
+        index for index, part in enumerate(parts) if any(name in part for name in PRODUCTS)
+    ]
+    own_heading = next(
+        (index for index in product_heading_indexes if product in parts[index]),
+        None,
+    )
+    if own_heading is not None:
+        end = next(
+            (
+                index
+                for index in product_heading_indexes
+                if index > own_heading and product not in parts[index]
+            ),
+            len(parts),
+        )
+        return " / ".join(parts[own_heading:end])
+    first_other = next(
+        (index for index in product_heading_indexes if product not in parts[index]),
+        len(parts),
+    )
+    return " / ".join(parts[:first_other]) or section
+
+
+def _citation(result, *, product: str | None = None) -> str:
+    if not result.hits:
+        return "暂无可靠知识证据"
+    citation = result.hits[0].citation
+    if citation.location_type == "section":
+        return f"《{citation.document_title}》{citation.version}，章节：{citation.section}"
+    section = _product_scoped_section(citation.section, product)
+    return f"《{citation.document_title}》{citation.version}，第{citation.page}页，{section}"
+
+
+def _factory_benchmark_citation(result, *, product: str, year: str) -> str:
+    """Prefer the product/year data section over governance prose."""
+
+    if not result.hits:
+        return "暂无可靠知识证据"
+    hit = next(
+        (
+            item
+            for item in result.hits
+            if product in item.citation.section and year in item.citation.section
+        ),
+        None,
+    )
+    if hit is None:
+        hit = next(
+            (
+                item
+                for item in result.hits
+                if product in item.citation.section
+                and not any(word in item.citation.section for word in ("治理", "数据源", "计算口径"))
+            ),
+            result.hits[0],
+        )
+    citation = hit.citation
+    return f"《{citation.document_title}》{citation.version}，章节：{citation.section}"
+
+
+def _task_from_recommendation(
+    recommendation,
+    *,
+    product: str,
+    month: str,
+    source: str,
+) -> list[str]:
+    action = recommendation.action
+    if "直接人工" in action or "实际工时" in action:
+        subject = "直接人工"
+    elif "制造费用" in action or "设备利用" in action:
+        subject = "制造费用"
+    else:
+        subject = "直接材料"
+    priority = {"高": "high", "中": "medium", "低": "low"}.get(
+        recommendation.priority,
+        "medium",
+    )
+    return [
+        f"TASK-{month.replace('-', '')}-{PRODUCT_TASK_SEQUENCE[product]}",
+        f"复核{product}{subject}差异证据",
+        "审批时指定",
+        priority,
+        source,
+        "审批时确定",
+    ]
 
 
 def _field(name: str, value: str, status: str, refs: list[str], rule: str) -> ReportFieldValue:
@@ -159,7 +251,7 @@ def build_report_contract(
         document_types=["配方"],
         top_k=1,
     )
-    process = search_knowledge(index_dir, PROCESS_QUERY[product], product=product, document_types=["工艺"], top_k=1)
+    process = search_knowledge(index_dir, PROCESS_QUERY[product], product=product, document_types=["工艺"], top_k=3)
     gmp = search_knowledge(index_dir, "生产全过程 记录 偏差 调查 批记录 追溯", regulatory_claim=True, top_k=1)
     equipment = search_knowledge(index_dir, f"{product} 设备 维修 故障", product=product, document_types=["设备"], top_k=1)
     factory_benchmark_knowledge = search_knowledge(
@@ -167,7 +259,7 @@ def build_report_contract(
         f"{product} {month} 中药二厂 同集团 成本对标基线",
         product=product,
         document_types=["对标基线"],
-        top_k=1,
+        top_k=10,
     )
     anomaly_history = search_knowledge(
         index_dir,
@@ -179,8 +271,8 @@ def build_report_contract(
     industry_item = next(item for item in analysis.industry_benchmark if "单位成本" in item.name)
     market_materials = "、".join(item.material_name for item in analysis.market_evidence)
     evidence = ReportEvidence(
-        recipe_citation=_citation(recipe),
-        process_citation=_citation(process),
+        recipe_citation=_citation(recipe, product=product),
+        process_citation=_citation(process, product=product),
         gmp_citation=_citation(gmp),
         industry_citation=(
             f"行业成本基准数据_2026.csv，{PRODUCT_CATEGORY[product]}，"
@@ -193,7 +285,11 @@ def build_report_contract(
             else None
         ),
         factory_benchmark_citation=(
-            _citation(factory_benchmark_knowledge)
+            _factory_benchmark_citation(
+                factory_benchmark_knowledge,
+                product=product,
+                year=month[:4],
+            )
             if factory_benchmark_knowledge.hits
             else None
         ),
@@ -209,8 +305,14 @@ def build_report_contract(
         market = material_market.get(item.name)
         if market and market.relationship == "same_direction":
             reason = "与同名市场行情同向，仅作外部相关性参考"
-        elif market:
+        elif market and market.relationship == "opposite_direction":
             reason = "与同名市场行情方向不一致，需进一步核查"
+        elif market:
+            price_delta = market.current_price - market.previous_price
+            if price_delta == 0 and (item.delta or Decimal("0")) == 0:
+                reason = "与同名市场行情均持平，仅作外部相关性参考"
+            else:
+                reason = "至少一侧持平，未形成相反方向，仅作外部相关性参考"
         else:
             reason = "无精确同名市场证据，不判断市场价格影响"
         material_rows.append([str(number), item.name, _money(item.current), _money(item.previous), _pct(item.change_rate_pct, item.status), reason])
@@ -221,7 +323,8 @@ def build_report_contract(
     prior = None
     for row in rows[-6:]:
         rate = None if prior is None else (row.unit_cost - prior.unit_cost) / prior.unit_cost * Decimal("100")
-        trend_rows.append([row.month, _qty(row.quantity_boxes), _money(row.direct_material), _money(row.direct_labor), _money(row.manufacturing_overhead), _money(row.unit_cost), _pct(rate)])
+        rate_text = "暂无数据（缺少上期基期）" if prior is None else _pct(rate)
+        trend_rows.append([row.month, _qty(row.quantity_boxes), _money(row.direct_material), _money(row.direct_labor), _money(row.manufacturing_overhead), _money(row.unit_cost), rate_text])
         prior = row
 
     market_points = normalize_market_prices(bundle.market_prices)
@@ -317,6 +420,28 @@ def build_report_contract(
         f"同比{_pct(yoy.value, yoy.status)}，预算偏差{_pct(budget_variance.value, budget_variance.status)}。"
         f"{alert_text}"
     )
+    labor_parts: list[str] = []
+    for metric_name, label in (
+        ("工时环比", "单位产出工时"),
+        ("时薪环比", "平均小时工资"),
+        ("效率环比", "人工效率"),
+    ):
+        metric = report_metrics[metric_name]
+        if metric.value is not None:
+            labor_parts.append(
+                f"{label}较上月{_direction(metric.value)}{_pct(abs(metric.value))}"
+            )
+    if labor_parts:
+        anomaly += (
+            "人工指标显示：" + "，".join(labor_parts) + "。"
+            "该组指标用于解释直接人工单位成本的统计方向；缺少标准工时、排产与人员配置记录时，不推断具体业务原因。"
+        )
+    quantity_budget = report_metrics["产量预算偏差"]
+    if quantity_budget.value is not None and abs(quantity_budget.value) >= Decimal("10"):
+        anomaly += (
+            f"本月产量较预算{_direction(quantity_budget.value)}{_pct(abs(quantity_budget.value))}，"
+            "属于计划执行偏差；缺少排产、订单与节假日证据时，不判断季节性原因。"
+        )
     if product == "六味地黄胶囊" and month == "2026-03":
         anomaly += "设备文档记录胶囊填充机故障及维修事件，但当月单位成本实际下降；缺少费用归属和分摊依据，不量化其单位成本影响。"
     highlight = f"一厂单位成本较二厂低{_money(abs(benchmark['单位成本'].difference or Decimal('0')))}元/盒；单位成本同比{_pct(yoy.value, yoy.status)}、预算偏差{_pct(budget_variance.value, budget_variance.status)}。" if benchmark["单位成本"].direction == "favorable" else f"单位成本环比{_directional_pct(unit.delta, unit.change_rate_pct, unit.status)}，同比{_pct(yoy.value, yoy.status)}。"
@@ -332,7 +457,14 @@ def build_report_contract(
         ]
         for item in governed_recommendations
     ]
-    tasks = [[f"TASK-{month.replace('-', '')}-{PRODUCT_TASK_SEQUENCE[product]}", f"复核{top_material.name}成本变动证据", "审批时指定", "medium", f"{month}{product}月度分析", "审批时确定"]]
+    tasks = [
+        _task_from_recommendation(
+            governed_recommendations[0],
+            product=product,
+            month=month,
+            source=f"{month}{product}月度分析",
+        )
+    ]
     tables = {
         "原材料成本明细表格": DynamicTable(name="原材料成本明细表格", headers=["序号", "原材料名称", "本月单位消耗成本", "上月单位消耗成本", "环比", "证据边界"], rows=material_rows),
         "近6个月成本趋势表格": DynamicTable(name="近6个月成本趋势表格", headers=["月份", "产量(盒)", "材料", "人工", "制造费用", "单位成本", "环比"], rows=trend_rows),

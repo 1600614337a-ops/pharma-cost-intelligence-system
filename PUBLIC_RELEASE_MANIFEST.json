@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-source",
-  "created_at": "2026-08-25T11:29:57.471408+00:00",
+  "created_at": "2026-08-29T09:38:23.708082+00:00",
   "restricted_data_included": false,
   "requires_secure_data_overlay": true,
   "files": [
@@ -86,8 +86,8 @@
     },
     {
       "path": "app/dashboard/period_reports.py",
-      "size": 19661,
-      "sha256": "3ae3398c31a97153140cdd3b475c086e33fb46f9fef1cf4485ff3933c4fee1c7"
+      "size": 20272,
+      "sha256": "b68b370126ac8bc765c6081ca480797bf7a5102d35961303efa48ca8ae2ec00a"
     },
     {
       "path": "app/dashboard/report_view.py",
@@ -101,8 +101,8 @@
     },
     {
       "path": "app/dashboard/service.py",
-      "size": 48302,
-      "sha256": "fe16d84048248de7131321dd9a413f54d5a208f08ba93e97359d2b0caf557511"
+      "size": 49073,
+      "sha256": "6736000d411f22774e8a2cc422afe866246c61b47c10ce47307412611bb4d431"
     },
     {
       "path": "app/dashboard/static/app.js",
@@ -196,8 +196,8 @@
     },
     {
       "path": "app/knowledge/retrieval.py",
-      "size": 12321,
-      "sha256": "eb282684c075891e70e0e9a2eda8e87e4311dd4ea1cadf4b7479e4fcb4aecdd2"
+      "size": 12505,
+      "sha256": "f5f572e593594222f4788e2aff43573449f5fc0c9fdfafe0fdc1f834e4b69e06"
     },
     {
       "path": "app/llm/__init__.py",
@@ -236,8 +236,8 @@
     },
     {
       "path": "app/mock_rpa/server.py",
-      "size": 6519,
-      "sha256": "87d8c8fd4aa1bc426a110db51ad084783339d2f8ddff925539011e3052080073"
+      "size": 7235,
+      "sha256": "03288ea50bc60666fb4247f34056fe016f50df241e096c00021ef791d314636c"
     },
     {
       "path": "app/reporting/__init__.py",
@@ -261,8 +261,8 @@
     },
     {
       "path": "app/reporting/contract.py",
-      "size": 23392,
-      "sha256": "a91a6b1c14119833da7ab957a029921828bf7b3db639c5b0550d4258db71f494"
+      "size": 28183,
+      "sha256": "13e4adfbcf9c299025c8e2e554507798a0b74381749a35bd527a4444b910718f"
     },
     {
       "path": "app/reporting/models.py",
@@ -391,8 +391,8 @@
     },
     {
       "path": "docs/三场景竞赛评测报告.md",
-      "size": 5263,
-      "sha256": "22bc67e65400a1a0e07e8cf910c4aee4e76fd761836e7fc68886f5a780546d94"
+      "size": 5255,
+      "sha256": "5ff5d9a8811bf0d2405d3c264349ec32ac3d5c9d74f3f4de0205424a3461f90d"
     },
     {
       "path": "docs/前三项交付与公开仓库检查报告.md",
@@ -401,8 +401,8 @@
     },
     {
       "path": "docs/竞赛技术方案.md",
-      "size": 19077,
-      "sha256": "01b8aa71d2f266e7d5668ae437afaad9b63230bb9db2e70968c9938259dc5575"
+      "size": 20052,
+      "sha256": "fb638041a7189fcbe7b3492f04ed79a0b64abf77cdf168208a1a647a839dffe0"
     },
     {
       "path": "docs/端到端验收与交付检查报告.md",
@@ -475,6 +475,11 @@
       "sha256": "9f91697dabb43963ffc840960cd4b7cae5d348a28b55dea63591f5b35681458c"
     },
     {
+      "path": "scripts/prepare_judge_package.py",
+      "size": 5427,
+      "sha256": "e2cb581fe93192f01dad87841c969ec21f51b85a3ca9dc2154393b7ad4f6ea57"
+    },
+    {
       "path": "scripts/prepare_public_release.py",
       "size": 4435,
       "sha256": "fabb0fb65068fe66c1af2f1efda913a121d4ec61aa94b8daa411efd00c09b963"
@@ -531,8 +536,8 @@
     },
     {
       "path": "tests/test_dashboard.py",
-      "size": 61107,
-      "sha256": "b1fdc862ee5301dd98a74210b1ec409654e2a011cf144c783816d04391cc83a6"
+      "size": 61670,
+      "sha256": "cbe91205a3e2422d662a07bc83005a18f560d63fd25bcccca38adb9bc3ca4c0c"
     },
     {
       "path": "tests/test_data_quality.py",
@@ -556,8 +561,8 @@
     },
     {
       "path": "tests/test_knowledge.py",
-      "size": 18069,
-      "sha256": "abfbe99f28e4edfeed3c9af20e2acee428f500c09fdcbaed8f90f808326c662c"
+      "size": 18146,
+      "sha256": "38884984ba93b22b2a473f96fbac65562abbf3dd5e572ca8bf6598f86bb033a3"
     },
     {
       "path": "tests/test_llamaindex_adapter.py",
@@ -566,8 +571,8 @@
     },
     {
       "path": "tests/test_llm.py",
-      "size": 19233,
-      "sha256": "192dc816610d53db71ee0f49bcb49f1af78fd59f6369148eeda6cfc676c22e9f"
+      "size": 19874,
+      "sha256": "ad4e30045c0e1ba81b41d5c2702fbbd3d299a6317a3a024494d63b1b037883ba"
     },
     {
       "path": "tests/test_llm_golden_evaluation.py",
@@ -576,8 +581,8 @@
     },
     {
       "path": "tests/test_reporting.py",
-      "size": 25062,
-      "sha256": "8185cb2b1bf1dfdb1f7d0c5e4d4fd711ce4c0117fd89d7e383294c30be893acd"
+      "size": 26022,
+      "sha256": "92bece844409567a6a662aa25e8e4fe6188dfb5b95e0e16c0c4026b837260654"
     },
     {
       "path": "tests/test_review.py",

@@ -191,12 +191,20 @@ def _citation(chunk: KnowledgeChunk, source_root: Path) -> KnowledgeCitation:
         if chunk.document_type in {"GMP摘要", "对标基线", "异常处理"}
         else "primary"
     )
-    location = f"第{chunk.page}页" if chunk.location_type == "page" else f"第{chunk.page}节"
+    location = (
+        f"第{chunk.page}页"
+        if chunk.location_type == "page"
+        else f"章节：{chunk.section}"
+    )
     return KnowledgeCitation(
         source_path=chunk.source_path, absolute_path=str(source_root / Path(chunk.source_path)), document_title=chunk.document_title,
         document_type=chunk.document_type, version=chunk.version, effective_date=chunk.effective_date, page=chunk.page,
         section=chunk.section, content_hash=chunk.content_hash, authority=authority,
-        display=f"《{chunk.document_title}》{chunk.version}，{location}，{chunk.section}",
+        display=(
+            f"《{chunk.document_title}》{chunk.version}，{location}，{chunk.section}"
+            if chunk.location_type == "page"
+            else f"《{chunk.document_title}》{chunk.version}，{location}"
+        ),
         source_format=chunk.source_format, location_type=chunk.location_type,
     )
 

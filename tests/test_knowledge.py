@@ -257,7 +257,8 @@ class MultiFormatKnowledgeIndexTests(unittest.TestCase):
             self.assertTrue(result.hits)
             self.assertEqual(result.hits[0].citation.document_title, "设备维修记录")
             self.assertEqual(result.hits[0].citation.location_type, "section")
-            self.assertIn("第1节", result.hits[0].citation.display)
+            self.assertIn("章节：", result.hits[0].citation.display)
+            self.assertIn("设备事件", result.hits[0].citation.display)
 
 
 class GoldenKnowledgeRetrievalTests(unittest.TestCase):
