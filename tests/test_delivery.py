@@ -80,6 +80,8 @@ class CompetitionDeliveryTests(unittest.TestCase):
         self.assertIn("-m venv", start_script)
         self.assertIn("requirements.txt", start_script)
         self.assertIn(".requirements.sha256", start_script)
+        requirements = (ROOT / "requirements.txt").read_text(encoding="utf-8")
+        self.assertIn("pywin32", requirements)
         self.assertIn("ChuangLingJingCostIntelligence", qwen_setup)
         self.assertIn("ConvertFrom-SecureString", qwen_setup)
         self.assertIn('response_format = @{ type = "json_object" }', qwen_setup)

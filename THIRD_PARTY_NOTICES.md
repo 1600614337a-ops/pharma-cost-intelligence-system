@@ -11,6 +11,7 @@ This project directly uses the following third-party software. Copyright remains
 | FastAPI | 0.141.1 | MIT | https://github.com/fastapi/fastapi/blob/master/LICENSE |
 | Uvicorn | 0.52.1 | BSD-3-Clause | https://github.com/Kludex/uvicorn/blob/main/LICENSE.md |
 | httpx2 | 2.9.1 | BSD-3-Clause | https://github.com/pydantic/httpx2 |
+| pywin32 (Windows only) | 311 | PSF-2.0 | https://github.com/mhammond/pywin32/blob/main/LICENSE.txt |
 | LlamaIndex Core (optional) | 0.14.23 | MIT | https://github.com/run-llama/llama_index/blob/main/LICENSE |
 | Apache ECharts | 6.0.0 | Apache-2.0 | https://github.com/apache/echarts/blob/master/LICENSE |
 | LibreOffice | 26.2.3.1, separately installed | MPL-2.0 and component licenses | https://www.libreoffice.org/about-us/licenses/ |

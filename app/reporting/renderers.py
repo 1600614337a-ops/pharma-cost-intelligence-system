@@ -857,10 +857,11 @@ def render_pdf(
 ) -> Path:
     """Convert a template-derived DOCX while preserving its VML watermark.
 
-    Microsoft Word/WPS is the default Windows renderer because LibreOffice
-    ignores the template watermark's fixed-angle VML rotation and exports the
-    company name horizontally. Set ``COST_PDF_CONVERTER=libreoffice`` only for
-    templates that do not depend on that Office-specific watermark behavior.
+    Windows first attempts Microsoft Word/WPS because LibreOffice ignores the
+    template watermark's fixed-angle VML rotation and exports the company name
+    horizontally. If the Office COM bridge or application is unavailable, the
+    default ``auto`` mode falls back to LibreOffice so report generation remains
+    usable on a clean judge machine.
     """
     if contract.validation_status != "PASS":
         raise ReportRenderError(f"报告契约未通过：{contract.validation_issues}")
@@ -883,7 +884,7 @@ def render_pdf(
         converted = work / "report.pdf"
         mode = os.environ.get(
             "COST_PDF_CONVERTER",
-            "office" if os.name == "nt" else "libreoffice",
+            "auto" if os.name == "nt" else "libreoffice",
         ).strip().lower()
         if libreoffice_path is not None:
             mode = "libreoffice"

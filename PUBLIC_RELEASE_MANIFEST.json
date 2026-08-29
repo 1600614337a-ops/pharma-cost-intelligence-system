@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-source",
-  "created_at": "2026-08-29T09:44:23.723842+00:00",
+  "created_at": "2026-08-29T10:01:50.010438+00:00",
   "restricted_data_included": false,
   "requires_secure_data_overlay": true,
   "files": [
@@ -271,8 +271,8 @@
     },
     {
       "path": "app/reporting/renderers.py",
-      "size": 41028,
-      "sha256": "3bd45ff6d4da0e450c17baea2b943a4c7d34ac763968e609e1ee4edc3418edc8"
+      "size": 41070,
+      "sha256": "5252a893997659bae8667a7ac4c84f859ca6c61827a0937e30fc1ac595780922"
     },
     {
       "path": "app/reporting/trend_context.py",
@@ -411,8 +411,8 @@
     },
     {
       "path": "docs/第三方依赖与许可证清单.md",
-      "size": 3419,
-      "sha256": "e4078152c7073ae922c08cf86ac3b52df19418817f163d36636759a997951791"
+      "size": 3580,
+      "sha256": "d375d7b4a8ff21e8984999210cd2b24088bb9734d1e44c20e5c0c0c29d41d81c"
     },
     {
       "path": "README.md",
@@ -426,8 +426,8 @@
     },
     {
       "path": "requirements.txt",
-      "size": 151,
-      "sha256": "0fb0198cf463adb3c9ad43b458e01f1d9823bb28b624ed0e87d5254870c5474b"
+      "size": 199,
+      "sha256": "a30d49bf37e95e7628c751d810a2a747ba2af7a37561b8c8da1774a9c8978336"
     },
     {
       "path": "scripts/audit_public_release.py",
@@ -546,8 +546,8 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "size": 4016,
-      "sha256": "18a4706f33c0099b9e97b363460e444a5d8998d4226c270dc0569c1663b2ee3e"
+      "size": 4142,
+      "sha256": "5f5ade36eecc73c78398d1a2c554ce247557fc5b526abce88e56757fc6c773cb"
     },
     {
       "path": "tests/test_deployment.py",
@@ -601,8 +601,8 @@
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "size": 1751,
-      "sha256": "5e2c0b5e47d651f3b02f56b526577878a1b371b595a3ccc86ef1311f8b9ade56"
+      "size": 1854,
+      "sha256": "038aa89658ad446c03a9ed54e9e6b23b70e1f87cc863b8ed640484e359e61d1b"
     },
     {
       "path": "停止演示系统.cmd",
