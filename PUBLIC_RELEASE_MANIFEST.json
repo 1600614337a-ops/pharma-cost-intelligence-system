@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-source",
-  "created_at": "2026-08-29T10:01:50.010438+00:00",
+  "created_at": "2026-08-29T10:33:35.961645+00:00",
   "restricted_data_included": false,
   "requires_secure_data_overlay": true,
   "files": [
@@ -271,8 +271,8 @@
     },
     {
       "path": "app/reporting/renderers.py",
-      "size": 41070,
-      "sha256": "5252a893997659bae8667a7ac4c84f859ca6c61827a0937e30fc1ac595780922"
+      "size": 41003,
+      "sha256": "c8662827004bf26dd31aada80da4cf1997f53b52b3d0af2da4901671111d17f2"
     },
     {
       "path": "app/reporting/trend_context.py",
@@ -426,8 +426,8 @@
     },
     {
       "path": "requirements.txt",
-      "size": 199,
-      "sha256": "a30d49bf37e95e7628c751d810a2a747ba2af7a37561b8c8da1774a9c8978336"
+      "size": 250,
+      "sha256": "c86b719c54dca1d9f62888b7c38e6c857d100dba2d8e803cf4a331c239980172"
     },
     {
       "path": "scripts/audit_public_release.py",
@@ -581,8 +581,8 @@
     },
     {
       "path": "tests/test_reporting.py",
-      "size": 26022,
-      "sha256": "92bece844409567a6a662aa25e8e4fe6188dfb5b95e0e16c0c4026b837260654"
+      "size": 26730,
+      "sha256": "0953202e27167275bf7af1c37e10fc97da191df1d0031f8dc0c24774304c93a6"
     },
     {
       "path": "tests/test_review.py",

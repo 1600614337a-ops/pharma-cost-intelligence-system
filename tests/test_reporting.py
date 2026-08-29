@@ -406,7 +406,25 @@ class ReportingRendererTests(unittest.TestCase):
             for spacer in cover_paragraphs[solution_index + 1:version_index]:
                 self.assertEqual(spacer.paragraph_format.space_before.pt, 0.0)
                 self.assertEqual(spacer.paragraph_format.space_after.pt, 0.0)
-                self.assertEqual(spacer.paragraph_format.line_spacing.pt, 12.0)
+                self.assertEqual(spacer.paragraph_format.line_spacing.pt, 18.0)
+
+            reader_index = next(
+                paragraph
+                for paragraph in cover_paragraphs
+                if paragraph.text.strip().startswith("一、封面与基本信息")
+                and "六、总结与建议" in paragraph.text
+            )
+            self.assertEqual(
+                reader_index.text.splitlines(),
+                [
+                    "一、封面与基本信息\t1",
+                    "二、总成本概览\t1",
+                    "三、成本要素明细分析\t2",
+                    "四、重点产品专项分析\t4",
+                    "五、对标分析\t5",
+                    "六、总结与建议\t6",
+                ],
+            )
 
             for table in document.tables:
                 for row_index, row in enumerate(table.rows):

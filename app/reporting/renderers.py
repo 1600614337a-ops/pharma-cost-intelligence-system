@@ -265,10 +265,10 @@ def _materialize_reader_index(document: Document, contract: ReportContract) -> N
     entries = (
         ("一、封面与基本信息", "1"),
         ("二、总成本概览", "1"),
-        ("三、成本要素明细分析", "1"),
-        (section_four, "3"),
-        ("五、对标分析", "3"),
-        ("六、总结与建议", "4"),
+        ("三、成本要素明细分析", "2"),
+        (section_four, "4"),
+        ("五、对标分析", "5"),
+        ("六、总结与建议", "6"),
     )
     for index, (title, page) in enumerate(entries):
         run = paragraph.add_run(f"{title}\t{page}")
@@ -591,14 +591,13 @@ def _stabilize_front_matter_pagination(document: Document) -> None:
     cover_spacers = paragraphs[solution_index + 1:version_index]
     if len(cover_spacers) != 7 or any(paragraph.text.strip() for paragraph in cover_spacers):
         raise ReportRenderError("Word模板封面应在整体解决方案后保留七行空白")
-    # “七行”必须按固定行高表达。模板原空段混用了正文样式和带段前/段后的
-    # 普通样式，在 Word/WPS 中尚能容纳，但 LibreOffice 会把编制日期和编制
-    # 单位推到第 2 页。统一成 12 磅的七个空行，既保持受控模板要求，也消除
-    # 跨渲染器的累计高度差。
+    # “七行”按小四正文的 1.5 倍行距表达，即每个空段固定为 18 磅。
+    # 这样左下角信息从“整体解决方案”下方完整七行后开始，同时避免继续
+    # 沿用模板中混合段前/段后值所造成的跨渲染器累计漂移。
     for spacer in cover_spacers:
         spacer.paragraph_format.space_before = Pt(0)
         spacer.paragraph_format.space_after = Pt(0)
-        spacer.paragraph_format.line_spacing = Pt(12)
+        spacer.paragraph_format.line_spacing = Pt(18)
         spacer.paragraph_format.keep_with_next = False
         spacer.paragraph_format.keep_together = False
     company_name = "重庆创灵境数字技术有限公司"
