@@ -51,7 +51,7 @@
 
 ## Windows本机快速启动（备选）
 
-已安装 Python 3.11+、LibreOffice且依赖安装完成时，可以双击 `启动演示系统.cmd`；首次启用通义千问可运行 `配置通义千问API.cmd`，密钥由当前Windows用户DPAPI加密保存。该路径便于现场演示，但跨环境复现以Docker方式为准。
+已安装 Python 3.11+ 和 LibreOffice时，可以双击 `启动演示系统.cmd`；首次运行会自动创建 `.venv` 并安装 `requirements.txt`，避免目标电脑因缺少 `pydantic` 等依赖而启动失败。首次启用通义千问可运行 `配置通义千问API.cmd`，密钥由当前Windows用户DPAPI加密保存。该路径便于现场演示，但跨环境复现以Docker方式为准。
 
 ## 核心功能
 

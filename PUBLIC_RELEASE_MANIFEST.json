@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-source",
-  "created_at": "2026-08-29T09:38:23.708082+00:00",
+  "created_at": "2026-08-29T09:44:23.723842+00:00",
   "restricted_data_included": false,
   "requires_secure_data_overlay": true,
   "files": [
@@ -386,8 +386,8 @@
     },
     {
       "path": "docs/一键启动与演示前预检报告.md",
-      "size": 4888,
-      "sha256": "aa15cb2f83970f9974c72d69ef7a7a77876387fffad92d4dc816b51961b9d1a3"
+      "size": 5028,
+      "sha256": "3afee2e1c37dc129766916e7518ae994c7a5d7f34fed094824ac76eb5989ea4b"
     },
     {
       "path": "docs/三场景竞赛评测报告.md",
@@ -401,8 +401,8 @@
     },
     {
       "path": "docs/竞赛技术方案.md",
-      "size": 20052,
-      "sha256": "fb638041a7189fcbe7b3492f04ed79a0b64abf77cdf168208a1a647a839dffe0"
+      "size": 20138,
+      "sha256": "952e54c6f968759df4e5e5f7f380579223b5db3e247c54e2ebddea225ad6f540"
     },
     {
       "path": "docs/端到端验收与交付检查报告.md",
@@ -416,8 +416,8 @@
     },
     {
       "path": "README.md",
-      "size": 4527,
-      "sha256": "7c6172d945c346d225dafe73205058a8137e3119780183fb27c3f48b802b64c6"
+      "size": 4641,
+      "sha256": "4c82a35f5ec53748fc25ffeda74f353c12e58ece66886c2d8eb4655ed72fd384"
     },
     {
       "path": "requirements-llamaindex.txt",
@@ -501,8 +501,8 @@
     },
     {
       "path": "scripts/start_demo.ps1",
-      "size": 6636,
-      "sha256": "a2e6916c9e8992d1c2995253be6aa6dc7b57f33497aa0877fcc92b20fbaa3784"
+      "size": 7912,
+      "sha256": "42d00858969ce57b9257c4365837de681c5d7172e5e79f733a4c273dd1c92bda"
     },
     {
       "path": "scripts/stop_demo.ps1",
@@ -546,8 +546,8 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "size": 3853,
-      "sha256": "0d62dc2d28c2b9c13d65698acb127bdb69590cc461ddbb11fa8dedb04954a24a"
+      "size": 4016,
+      "sha256": "18a4706f33c0099b9e97b363460e444a5d8998d4226c270dc0569c1663b2ee3e"
     },
     {
       "path": "tests/test_deployment.py",
