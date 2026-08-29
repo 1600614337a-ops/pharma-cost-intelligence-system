@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-source",
-  "created_at": "2026-08-29T10:33:35.961645+00:00",
+  "created_at": "2026-08-29T15:23:34.154945+00:00",
   "restricted_data_included": false,
   "requires_secure_data_overlay": true,
   "files": [
@@ -416,8 +416,8 @@
     },
     {
       "path": "README.md",
-      "size": 4641,
-      "sha256": "4c82a35f5ec53748fc25ffeda74f353c12e58ece66886c2d8eb4655ed72fd384"
+      "size": 4759,
+      "sha256": "47687cd67de12d782fe1af1b390d3444c8e99b8c349721b06f1c3672b553626e"
     },
     {
       "path": "requirements-llamaindex.txt",
@@ -501,8 +501,8 @@
     },
     {
       "path": "scripts/start_demo.ps1",
-      "size": 7912,
-      "sha256": "42d00858969ce57b9257c4365837de681c5d7172e5e79f733a4c273dd1c92bda"
+      "size": 11560,
+      "sha256": "f650d6551046513eeefcaa7e41d0ff5fcb1542932ceb5f316a7c91bc800acef9"
     },
     {
       "path": "scripts/stop_demo.ps1",
@@ -546,8 +546,8 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "size": 4142,
-      "sha256": "5f5ade36eecc73c78398d1a2c554ce247557fc5b526abce88e56757fc6c773cb"
+      "size": 4440,
+      "sha256": "90cd0018425f5e9fe595793e47a473e335aace1e52aba0eb521d3dbfc2d86524"
     },
     {
       "path": "tests/test_deployment.py",

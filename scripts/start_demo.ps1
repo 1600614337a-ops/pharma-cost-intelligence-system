@@ -1,6 +1,8 @@
 ﻿param(
     [int]$WebPort = 8080,
     [int]$RpaPort = 8090,
+    [ValidateRange(1, 100)]
+    [int]$PortSearchLimit = 20,
     [switch]$NoBrowser
 )
 
@@ -83,13 +85,99 @@ function Import-LlmConfiguration {
     }
 }
 
+function Get-OwnedDemoProcess {
+    param(
+        [object]$ProcessId,
+        [string]$Marker
+    )
+    if (-not $ProcessId) {
+        return $null
+    }
+    $process = Get-CimInstance Win32_Process -Filter "ProcessId=$([int]$ProcessId)" -ErrorAction SilentlyContinue
+    if (
+        -not $process -or
+        -not $process.CommandLine -or
+        $process.CommandLine -notlike "*$Marker*" -or
+        $process.CommandLine -notlike "*$projectRoot*"
+    ) {
+        return $null
+    }
+    return $process
+}
+
+function Test-DemoHealth {
+    param(
+        [int]$Port,
+        [ValidateSet("web", "rpa")]
+        [string]$Kind
+    )
+    try {
+        $health = Invoke-RestMethod "http://127.0.0.1:$Port/health" -TimeoutSec 2
+        if ($Kind -eq "web") {
+            return $health.status -eq "ok" -and $null -ne $health.data_quality
+        }
+        return $health.status -eq "ok" -and $null -ne $health.tasks_count
+    } catch {
+        return $false
+    }
+}
+
+function Test-LocalPortAvailable {
+    param([int]$Port)
+    $listener = [Net.Sockets.TcpListener]::new([Net.IPAddress]::Loopback, $Port)
+    try {
+        $listener.Start()
+        return $true
+    } catch {
+        return $false
+    } finally {
+        try { $listener.Stop() } catch { }
+    }
+}
+
+function Find-AvailablePortPair {
+    param(
+        [int]$PreferredWebPort,
+        [int]$PreferredRpaPort,
+        [int]$SearchLimit
+    )
+    for ($offset = 0; $offset -le $SearchLimit; $offset++) {
+        $candidateWeb = $PreferredWebPort + $offset
+        $candidateRpa = $PreferredRpaPort + $offset
+        if ($candidateWeb -gt 65535 -or $candidateRpa -gt 65535) {
+            break
+        }
+        if (
+            $candidateWeb -ne $candidateRpa -and
+            (Test-LocalPortAvailable -Port $candidateWeb) -and
+            (Test-LocalPortAvailable -Port $candidateRpa)
+        ) {
+            return [pscustomobject]@{ web = $candidateWeb; rpa = $candidateRpa; offset = $offset }
+        }
+    }
+    throw "在首选端口之后的$SearchLimit组端口中未找到可用的Web/RPA端口，请关闭占用程序后重试。"
+}
+
 $llmRuntime = Import-LlmConfiguration
 
 if (Test-Path -LiteralPath $statePath) {
-    $oldState = Get-Content -LiteralPath $statePath -Raw -Encoding UTF8 | ConvertFrom-Json
-    $oldWeb = Get-Process -Id $oldState.web_pid -ErrorAction SilentlyContinue
-    $oldRpa = Get-Process -Id $oldState.rpa_pid -ErrorAction SilentlyContinue
-    if ($oldWeb -and $oldRpa -and $oldState.status -eq "running") {
+    try {
+        $oldState = Get-Content -LiteralPath $statePath -Raw -Encoding UTF8 | ConvertFrom-Json
+    } catch {
+        Write-Warning "检测到无法解析的旧运行记录，将忽略并重新启动。"
+        $oldState = $null
+    }
+    $oldWeb = if ($oldState) { Get-OwnedDemoProcess -ProcessId $oldState.web_pid -Marker "app.dashboard" } else { $null }
+    $oldRpa = if ($oldState) { Get-OwnedDemoProcess -ProcessId $oldState.rpa_pid -Marker "run_mock_rpa_local.py" } else { $null }
+    $oldHealthy = (
+        $oldState -and
+        $oldWeb -and
+        $oldRpa -and
+        $oldState.status -eq "running" -and
+        (Test-DemoHealth -Port ([int]$oldState.web_port) -Kind "web") -and
+        (Test-DemoHealth -Port ([int]$oldState.rpa_port) -Kind "rpa")
+    )
+    if ($oldHealthy) {
         Write-Host "Demo services are already running: http://127.0.0.1:$($oldState.web_port)"
         if ($llmRuntime.configured -and -not $oldState.llm_configured) {
             Write-Warning "Qwen is configured but the running service has not loaded it. Stop and restart the demo services."
@@ -99,6 +187,25 @@ if (Test-Path -LiteralPath $statePath) {
         }
         exit 0
     }
+    foreach ($ownedProcess in @($oldWeb, $oldRpa)) {
+        if ($ownedProcess) {
+            Stop-Process -Id $ownedProcess.ProcessId -Force -ErrorAction SilentlyContinue
+        }
+    }
+    if ($oldState) {
+        $oldState.status = "stale"
+        $oldState | Add-Member -NotePropertyName stale_at -NotePropertyValue (Get-Date).ToString("o") -Force
+        $oldState | ConvertTo-Json | Set-Content -LiteralPath $statePath -Encoding UTF8
+    }
+}
+
+$requestedWebPort = $WebPort
+$requestedRpaPort = $RpaPort
+$portPair = Find-AvailablePortPair -PreferredWebPort $requestedWebPort -PreferredRpaPort $requestedRpaPort -SearchLimit $PortSearchLimit
+$WebPort = [int]$portPair.web
+$RpaPort = [int]$portPair.rpa
+if ($portPair.offset -gt 0) {
+    Write-Warning "首选端口${requestedWebPort}/${requestedRpaPort}已被占用，已自动切换到${WebPort}/${RpaPort}。"
 }
 
 $preflightArgs = @(
@@ -165,6 +272,9 @@ $state = [ordered]@{
     rpa_pid = $rpaProcess.Id
     web_port = $WebPort
     rpa_port = $RpaPort
+    requested_web_port = $requestedWebPort
+    requested_rpa_port = $requestedRpaPort
+    port_auto_selected = ($portPair.offset -gt 0)
     web_url = "http://127.0.0.1:$WebPort"
     rpa_url = "http://127.0.0.1:$RpaPort"
     llm_configured = $llmRuntime.configured
