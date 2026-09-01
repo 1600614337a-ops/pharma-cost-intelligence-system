@@ -146,7 +146,7 @@ def main() -> int:
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     temporary.replace(output)
 
-    zip_path = output.with_suffix(".zip")
+    zip_path = output.with_name(output.name + ".zip")
     if zip_path.exists():
         zip_path.unlink()
     shutil.make_archive(str(output), "zip", root_dir=output)

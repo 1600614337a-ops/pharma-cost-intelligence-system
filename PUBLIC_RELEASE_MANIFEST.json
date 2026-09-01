@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-source",
-  "created_at": "2026-09-01T11:03:40.938611+00:00",
+  "created_at": "2026-09-01T11:06:13.889941+00:00",
   "restricted_data_included": false,
   "requires_secure_data_overlay": true,
   "files": [
@@ -476,8 +476,8 @@
     },
     {
       "path": "scripts/prepare_judge_package.py",
-      "size": 6134,
-      "sha256": "556b45eb9b07cfe6093f1cb4103dab4a3f6063f5660c736f9496c64f7ad0d932"
+      "size": 6146,
+      "sha256": "c8fe3a1c71836df69ae211759a8f18faa3bfeaa6598373778fc0a68567c943fd"
     },
     {
       "path": "scripts/prepare_public_release.py",
@@ -546,8 +546,8 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "size": 4992,
-      "sha256": "723a5bfc4cb80f8db9ade5cf6b101703b261772a79c6cafdba92a764e72af144"
+      "size": 5157,
+      "sha256": "62bb51cd155b5606c5946bddba216c6e6ee91e2acd05b195d94c1117eda82fdc"
     },
     {
       "path": "tests/test_deployment.py",

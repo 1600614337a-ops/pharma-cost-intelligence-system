@@ -21,6 +21,8 @@ class CompetitionDeliveryTests(unittest.TestCase):
         self.assertTrue(any(path.endswith(".pdf") for path in formal_documents))
         for source in formal_documents:
             self.assertTrue((ROOT / source).is_file(), source)
+        script = (ROOT / "scripts" / "prepare_judge_package.py").read_text(encoding="utf-8")
+        self.assertIn('output.with_name(output.name + ".zip")', script)
 
     def test_demo_preflight_passes_without_port_probe(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_dir:
