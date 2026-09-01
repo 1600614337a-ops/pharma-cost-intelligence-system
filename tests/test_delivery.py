@@ -6,12 +6,22 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+import runpy
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 class CompetitionDeliveryTests(unittest.TestCase):
+    def test_judge_package_includes_formal_technical_solution(self) -> None:
+        namespace = runpy.run_path(str(ROOT / "scripts" / "prepare_judge_package.py"))
+        formal_documents = namespace["FORMAL_DOCUMENTS"]
+        self.assertEqual(len(formal_documents), 2)
+        self.assertTrue(any(path.endswith(".docx") for path in formal_documents))
+        self.assertTrue(any(path.endswith(".pdf") for path in formal_documents))
+        for source in formal_documents:
+            self.assertTrue((ROOT / source).is_file(), source)
+
     def test_demo_preflight_passes_without_port_probe(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_dir:
             output = Path(temporary_dir) / "preflight.json"

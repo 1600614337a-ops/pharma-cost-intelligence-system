@@ -21,6 +21,10 @@ CONTROLLED_DIRECTORIES = (
     "05_RPA接口文档",
     "06_知识证据索引",
 )
+FORMAL_DOCUMENTS = {
+    "00_项目规范/成本智能分析系统竞赛技术方案_V1.7.docx": "docs/成本智能分析系统竞赛技术方案_V1.7.docx",
+    "00_项目规范/成本智能分析系统竞赛技术方案_V1.7.pdf": "docs/成本智能分析系统竞赛技术方案_V1.7.pdf",
+}
 EXCLUDED_NAMES = {
     ".git", ".env", "__pycache__", ".pytest_cache", "tmp", "output",
     "07_报告输出", "08_RPA任务输出", "09_审核工作台", "10_批量运行",
@@ -97,6 +101,9 @@ def main() -> int:
     missing = [name for name in CONTROLLED_DIRECTORIES if not (root / name).is_dir()]
     if missing:
         raise RuntimeError("缺少受控目录：" + "、".join(missing))
+    missing_documents = [source for source in FORMAL_DOCUMENTS if not (root / source).is_file()]
+    if missing_documents:
+        raise RuntimeError("缺少正式交付文档：" + "、".join(missing_documents))
 
     temporary = output.with_name(output.name + ".building")
     for target in (temporary, output):
@@ -106,6 +113,10 @@ def main() -> int:
     shutil.copytree(public_repo, temporary, ignore=_ignore)
     for directory in CONTROLLED_DIRECTORIES:
         shutil.copytree(root / directory, temporary / directory, ignore=_ignore)
+    for source, destination in FORMAL_DOCUMENTS.items():
+        target = temporary / destination
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(root / source, target)
     shutil.copy2(root / "README_JUDGE.md", temporary / "README_评委运行说明.md")
 
     issues = _audit_secrets(temporary)

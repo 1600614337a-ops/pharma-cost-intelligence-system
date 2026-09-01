@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-source",
-  "created_at": "2026-08-29T15:23:34.154945+00:00",
+  "created_at": "2026-09-01T11:03:40.938611+00:00",
   "restricted_data_included": false,
   "requires_secure_data_overlay": true,
   "files": [
@@ -401,8 +401,8 @@
     },
     {
       "path": "docs/竞赛技术方案.md",
-      "size": 20138,
-      "sha256": "952e54c6f968759df4e5e5f7f380579223b5db3e247c54e2ebddea225ad6f540"
+      "size": 20830,
+      "sha256": "5453642b39720bb2ad0ed79b0a2c235db8c103753c20d031a6b6175ab71f44ab"
     },
     {
       "path": "docs/端到端验收与交付检查报告.md",
@@ -476,8 +476,8 @@
     },
     {
       "path": "scripts/prepare_judge_package.py",
-      "size": 5427,
-      "sha256": "e2cb581fe93192f01dad87841c969ec21f51b85a3ca9dc2154393b7ad4f6ea57"
+      "size": 6134,
+      "sha256": "556b45eb9b07cfe6093f1cb4103dab4a3f6063f5660c736f9496c64f7ad0d932"
     },
     {
       "path": "scripts/prepare_public_release.py",
@@ -546,8 +546,8 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "size": 4440,
-      "sha256": "90cd0018425f5e9fe595793e47a473e335aace1e52aba0eb521d3dbfc2d86524"
+      "size": 4992,
+      "sha256": "723a5bfc4cb80f8db9ade5cf6b101703b261772a79c6cafdba92a764e72af144"
     },
     {
       "path": "tests/test_deployment.py",
@@ -557,7 +557,7 @@
     {
       "path": "tests/test_execution.py",
       "size": 13317,
-      "sha256": "c59f2145fc78b8a78f239f2ee0dfbe51e9199ec03b58c0e8a997a275fc6ca057"
+      "sha256": "81af2a7107d25fd626153b998da8802523fcf3a7078636e4703c17eba0ee22df"
     },
     {
       "path": "tests/test_knowledge.py",
@@ -587,7 +587,7 @@
     {
       "path": "tests/test_review.py",
       "size": 18142,
-      "sha256": "7358f1f044d931d42d001882dfecbce76cf77510af7eede32939a581076cc909"
+      "sha256": "3b9a3668aadbe5bb20b3b65f5a78d8673daeaaf001ad37d5bd0d288d7d279d01"
     },
     {
       "path": "tests/test_rpa.py",

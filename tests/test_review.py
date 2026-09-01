@@ -248,7 +248,7 @@ class ReviewWebTests(unittest.TestCase):
             "assignee_name": "测试责任人",
             "department": "成本管理部",
             "role": "成本分析员",
-            "deadline": "2026-08-31",
+            "deadline": "2099-12-31",
             "priority": "medium",
             "notify_method": "email",
             "comment": "API测试",
