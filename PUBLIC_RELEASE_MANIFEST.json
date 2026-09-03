@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-self-contained-demo",
-  "created_at": "2026-09-03T13:01:02.602585+00:00",
+  "created_at": "2026-09-03T13:02:16.293323+00:00",
   "competition_demo_data_included": true,
   "requires_secure_data_overlay": false,
   "api_key_included": false,
@@ -74,11 +74,6 @@
       "path": "02_行业参考数据/行业成本基准数据_2026.csv",
       "size": 1378,
       "sha256": "31fa1383e2cf2c9d38da3eee3d5398b207c1806a6b67bb18e222f6eddf4154ed"
-    },
-    {
-      "path": "03_制药知识文档/.DS_Store",
-      "size": 6148,
-      "sha256": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3"
     },
     {
       "path": "03_制药知识文档/GMP法规核心摘要_2010修订版.pdf",
@@ -622,13 +617,13 @@
     },
     {
       "path": "scripts/prepare_judge_package.py",
-      "size": 7279,
-      "sha256": "58f89b1e48402f224971b3027ef740f3f85a2263832ed030650ef3fe974d852a"
+      "size": 7292,
+      "sha256": "b7ef055f57bf1596708307e2365d448b47702673db007a845ba3fc290bb769c0"
     },
     {
       "path": "scripts/prepare_public_release.py",
-      "size": 5198,
-      "sha256": "c7272d5621e73f7402c6de5c75931a538dcb413e97bb83136a881b5293872700"
+      "size": 5219,
+      "sha256": "b2e390081ae65f314f4ab3ac037323ec42903020662fdbfdc6d441e19c6def72"
     },
     {
       "path": "scripts/review_database_ops.py",

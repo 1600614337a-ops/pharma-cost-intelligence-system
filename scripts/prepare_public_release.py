@@ -49,7 +49,8 @@ PUBLIC_DOCUMENTS = {
 def _ignore(_directory: str, names: list[str]) -> set[str]:
     return {
         name for name in names
-        if name in {"__pycache__", ".pytest_cache"} or name.endswith((".pyc", ".pyo"))
+        if name in {"__pycache__", ".pytest_cache", ".DS_Store"}
+        or name.endswith((".pyc", ".pyo"))
     }
 
 

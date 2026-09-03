@@ -33,7 +33,7 @@ EVALUATION_EVIDENCE = {
     "output/evaluation/端到端验收结果_20260903_最终.json": "docs/evidence/端到端验收结果_20260903_最终.json",
 }
 EXCLUDED_NAMES = {
-    ".git", ".env", "__pycache__", ".pytest_cache", "tmp", "output",
+    ".git", ".env", ".DS_Store", "__pycache__", ".pytest_cache", "tmp", "output",
     "07_报告输出", "08_RPA任务输出", "09_审核工作台", "10_批量运行",
 }
 TEXT_SUFFIXES = {
