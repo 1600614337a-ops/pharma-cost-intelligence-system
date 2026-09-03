@@ -106,6 +106,10 @@ def main() -> int:
     now = datetime.now(timezone(timedelta(hours=8)))
     results: list[dict] = []
     rpa_states: list[str] = []
+    structure_checks_passed = 0
+    structure_checks_total = 0
+    benchmark_step_checks_passed = 0
+    benchmark_step_checks_total = 0
     ledger = JsonSubmissionLedger(output.with_suffix(".rpa-ledger.json"))
 
     for scenario in SCENARIOS:
@@ -128,9 +132,16 @@ def main() -> int:
                 }
             )
 
-        record("报告契约状态", contract.validation_status == "PASS", contract.validation_status, "PASS")
-        record("报告字段数量", len(contract.fields) == 107, len(contract.fields), 107)
-        record("动态表格数量", len(contract.dynamic_tables) == 6, len(contract.dynamic_tables), 6)
+        structure_flags = (
+            contract.validation_status == "PASS",
+            len(contract.fields) == 107,
+            len(contract.dynamic_tables) == 6,
+        )
+        record("报告契约状态", structure_flags[0], contract.validation_status, "PASS")
+        record("报告字段数量", structure_flags[1], len(contract.fields), 107)
+        record("动态表格数量", structure_flags[2], len(contract.dynamic_tables), 6)
+        structure_checks_passed += sum(structure_flags)
+        structure_checks_total += len(structure_flags)
         for field, expected in scenario["expected"].items():
             actual = contract.fields[field].value
             record(field, actual == expected, actual, expected)
@@ -146,6 +157,52 @@ def main() -> int:
             benchmark_row[3],
             scenario["benchmark_difference"],
         )
+
+        benchmark_table = contract.dynamic_tables.get("对标差异表格")
+        recommendation_table = contract.dynamic_tables.get("改进建议表格")
+
+        def usable_field(name: str) -> bool:
+            field = contract.fields.get(name)
+            return bool(field and field.value and field.value != "暂无数据")
+
+        benchmark_step_flags = (
+            bool(
+                benchmark_table
+                and len(benchmark_table.headers) == 6
+                and len(benchmark_table.rows) == 4
+            ),
+            usable_field("差异结构拆解分析"),
+            bool(
+                usable_field("差异归因分析文本")
+                and recommendation_table
+                and recommendation_table.rows
+            ),
+        )
+        benchmark_step_actual = (
+            f"{len(benchmark_table.rows) if benchmark_table else 0}行×"
+            f"{len(benchmark_table.headers) if benchmark_table else 0}列"
+        )
+        record(
+            "对标三步法第1步：差异总览格式",
+            benchmark_step_flags[0],
+            benchmark_step_actual,
+            "4行×6列",
+        )
+        record(
+            "对标三步法第2步：结构拆解格式",
+            benchmark_step_flags[1],
+            usable_field("差异结构拆解分析"),
+            True,
+        )
+        record(
+            "对标三步法第3步：归因与建议格式",
+            benchmark_step_flags[2],
+            usable_field("差异归因分析文本")
+            and bool(recommendation_table and recommendation_table.rows),
+            True,
+        )
+        benchmark_step_checks_passed += sum(benchmark_step_flags)
+        benchmark_step_checks_total += len(benchmark_step_flags)
 
         narrative = "\n".join(
             contract.fields[name].value
@@ -225,13 +282,25 @@ def main() -> int:
 
     passed = sum(item["status"] == "PASS" for item in results)
     payload = {
-        "evaluation_version": "1.3.0",
+        "evaluation_version": "1.4.0",
         "generated_at": now.isoformat(),
         "status": "PASS" if passed == len(results) else "FAIL",
         "summary": {
             "scenario_count": len(results),
             "passed_scenarios": passed,
             "automated_scenario_pass_rate_pct": f"{passed / len(results) * 100:.2f}",
+            "report_structure_completeness_pct": (
+                f"{structure_checks_passed / structure_checks_total * 100:.2f}"
+            ),
+            "report_structure_checks": (
+                f"{structure_checks_passed}/{structure_checks_total}"
+            ),
+            "benchmark_three_step_format_accuracy_pct": (
+                f"{benchmark_step_checks_passed / benchmark_step_checks_total * 100:.2f}"
+            ),
+            "benchmark_three_step_checks": (
+                f"{benchmark_step_checks_passed}/{benchmark_step_checks_total}"
+            ),
             "rpa_executed": args.execute_rpa,
             "rpa_success_count": sum(
                 state in {"sent", "duplicate_local", "duplicate_remote"}

@@ -22,8 +22,15 @@ CONTROLLED_DIRECTORIES = (
     "06_知识证据索引",
 )
 FORMAL_DOCUMENTS = {
-    "00_项目规范/成本智能分析系统竞赛技术方案_V1.7.docx": "docs/成本智能分析系统竞赛技术方案_V1.7.docx",
-    "00_项目规范/成本智能分析系统竞赛技术方案_V1.7.pdf": "docs/成本智能分析系统竞赛技术方案_V1.7.pdf",
+    "（创灵境）成本智能分析系统技术方案文档.docx": "docs/（创灵境）成本智能分析系统技术方案文档.docx",
+    "（创灵境）成本智能分析系统技术方案文档.pdf": "docs/（创灵境）成本智能分析系统技术方案文档.pdf",
+    "（创灵境）成本智能分析系统竞赛评测报告.docx": "docs/（创灵境）成本智能分析系统竞赛评测报告.docx",
+    "（创灵境）成本智能分析系统竞赛评测报告.pdf": "docs/（创灵境）成本智能分析系统竞赛评测报告.pdf",
+}
+EVALUATION_EVIDENCE = {
+    "output/evaluation/三场景自动评测结果_V1.4.json": "docs/evidence/三场景自动评测结果_V1.4.json",
+    "output/evaluation/三场景大模型自动验收结果_20260824.json": "docs/evidence/三场景大模型自动验收结果_20260824.json",
+    "output/evaluation/端到端验收结果_20260903_最终.json": "docs/evidence/端到端验收结果_20260903_最终.json",
 }
 EXCLUDED_NAMES = {
     ".git", ".env", "__pycache__", ".pytest_cache", "tmp", "output",
@@ -104,6 +111,9 @@ def main() -> int:
     missing_documents = [source for source in FORMAL_DOCUMENTS if not (root / source).is_file()]
     if missing_documents:
         raise RuntimeError("缺少正式交付文档：" + "、".join(missing_documents))
+    missing_evidence = [source for source in EVALUATION_EVIDENCE if not (root / source).is_file()]
+    if missing_evidence:
+        raise RuntimeError("缺少评测证据：" + "、".join(missing_evidence))
 
     temporary = output.with_name(output.name + ".building")
     for target in (temporary, output):
@@ -112,8 +122,12 @@ def main() -> int:
 
     shutil.copytree(public_repo, temporary, ignore=_ignore)
     for directory in CONTROLLED_DIRECTORIES:
-        shutil.copytree(root / directory, temporary / directory, ignore=_ignore)
+        shutil.copytree(root / directory, temporary / directory, ignore=_ignore, dirs_exist_ok=True)
     for source, destination in FORMAL_DOCUMENTS.items():
+        target = temporary / destination
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(root / source, target)
+    for source, destination in EVALUATION_EVIDENCE.items():
         target = temporary / destination
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(root / source, target)

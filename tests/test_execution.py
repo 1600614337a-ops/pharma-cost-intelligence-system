@@ -21,10 +21,9 @@ from app.review.auth import AuthManager
 from app.review.execution import GovernedTestExecutor, TestSubmissionSettings
 from app.rpa import RpaSubmissionError, TaskCandidateBundle
 from app.rpa.client import TransportResponse
+from tests.fixture_factory import candidate_bundle, write_candidate_bundle
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-CANDIDATE_FILE = PROJECT_ROOT / "08_RPA任务输出" / "2026-05_银黄口服液_RPA任务候选.json"
 FIXED_TIME = datetime.fromisoformat("2026-08-03T10:00:00+08:00")
 
 
@@ -86,7 +85,7 @@ class GovernedExecutionTests(unittest.TestCase):
         )
         self.reviewer = reviewer
         self.submitter = submitter
-        self.bundle = TaskCandidateBundle.model_validate_json(CANDIDATE_FILE.read_text(encoding="utf-8"))
+        self.bundle = candidate_bundle()
         self.candidate_id = self.bundle.candidates[0].candidate_id
         self.store.import_bundle(self.bundle, occurred_at=FIXED_TIME)
         self._approve_and_authorize(self.candidate_id)
@@ -228,6 +227,7 @@ class GovernedExecutionWebTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.transport = MemoryReceiptTransport()
+        self.candidate_file = write_candidate_bundle(Path(self.temporary.name) / "candidates.json")
         settings = TestSubmissionSettings(
             enabled=True,
             base_url="http://127.0.0.1:8090",
@@ -236,14 +236,12 @@ class GovernedExecutionWebTests(unittest.TestCase):
         self.app = create_review_app(
             database_path=Path(self.temporary.name) / "web.sqlite3",
             admin_token="execution-web-admin-token",
-            candidate_files=[CANDIDATE_FILE],
+            candidate_files=[self.candidate_file],
             test_executor=GovernedTestExecutor(settings, transport=self.transport),
         )
         self.client = TestClient(self.app)
         self.admin_headers = {"X-Review-Token": "execution-web-admin-token"}
-        self.candidate_id = TaskCandidateBundle.model_validate_json(
-            CANDIDATE_FILE.read_text(encoding="utf-8")
-        ).candidates[0].candidate_id
+        self.candidate_id = candidate_bundle().candidates[0].candidate_id
 
     def tearDown(self) -> None:
         self.client.close()

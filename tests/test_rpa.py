@@ -14,7 +14,6 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from app.reporting.models import ReportContract
 from app.rpa import (
     JsonSubmissionLedger,
     RpaClient,
@@ -26,10 +25,10 @@ from app.rpa import (
     build_task_candidates,
     reject_candidate,
 )
+from tests.fixture_factory import report_contract, write_report_contract
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-REPORT_JSON = PROJECT_ROOT / "07_报告输出" / "2026-05_银黄口服液_月度成本分析报告.json"
 
 
 class FakeTransport:
@@ -64,7 +63,7 @@ def success_response(task_id: str = "TASK-202605-101") -> TransportResponse:
 class RpaFixtureMixin:
     @classmethod
     def setUpClass(cls) -> None:
-        cls.contract = ReportContract.model_validate_json(REPORT_JSON.read_text(encoding="utf-8"))
+        cls.contract = report_contract()
         cls.bundle = build_task_candidates(cls.contract)
         cls.candidate = cls.bundle.candidates[0]
 
@@ -91,14 +90,14 @@ class RpaWorkflowTests(RpaFixtureMixin, unittest.TestCase):
         self.assertEqual(self.candidate.candidate_id, repeated.candidate_id)
         self.assertEqual(self.candidate.task_id, "TASK-202605-101")
         self.assertEqual(self.candidate.state, "pending_review")
-        self.assertEqual(self.candidate.suggested_department, None)
-        self.assertEqual(len(self.candidate.source_refs), 6)
+        self.assertEqual(self.candidate.suggested_department, "采购部、生产部")
+        self.assertEqual(len(self.candidate.source_refs), 10)
         self.assertTrue(all(Path(path).is_file() for path in self.candidate.source_refs))
 
     def test_candidate_uses_governed_finding_not_interface_example(self) -> None:
         finding = self.candidate.finding
-        self.assertIn("金银花变动0.15元/盒", finding)
-        self.assertIn("市场价环比6.15%", finding)
+        self.assertIn("金银花单位消耗成本变动+0.15元/盒", finding)
+        self.assertIn("市场价环比上升6.15%", finding)
         self.assertIn("不能据此断言采购因果", finding)
         self.assertNotIn("采购价环比上涨12%", finding)
         self.assertNotIn("超出波动阈值10%", finding)
@@ -286,10 +285,11 @@ class RpaClientTests(RpaFixtureMixin, unittest.TestCase):
             candidates = root / "candidates.json"
             approved = root / "approved.json"
             result_path = root / "result.json"
+            report_json = write_report_contract(root / "report.json")
             commands = [
                 [
                     sys.executable, "-m", "app.rpa", "prepare",
-                    "--report-json", str(REPORT_JSON), "--output", str(candidates),
+                    "--report-json", str(report_json), "--output", str(candidates),
                 ],
                 [
                     sys.executable, "-m", "app.rpa", "approve",

@@ -10,18 +10,14 @@ import httpx2
 
 from app.llm import LlmSettings, enhance_task_candidates
 from app.llm.client import OpenAICompatibleClient
-from app.reporting.models import ReportContract
 from app.rpa import build_task_candidates
-
-
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-REPORT_JSON = PROJECT_ROOT / "07_报告输出" / "2026-05_银黄口服液_月度成本分析报告.json"
+from tests.fixture_factory import report_contract
 
 
 class ControlledTaskLlmTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.contract = ReportContract.model_validate_json(REPORT_JSON.read_text(encoding="utf-8"))
+        cls.contract = report_contract()
         cls.bundle = build_task_candidates(cls.contract)
 
     def settings(self, **updates: object) -> LlmSettings:

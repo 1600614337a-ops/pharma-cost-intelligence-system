@@ -1,4 +1,4 @@
-"""Build a reproducible, public-safe GitHub repository staging directory."""
+"""Build a reproducible, self-contained competition-demo GitHub repository."""
 
 from __future__ import annotations
 
@@ -22,6 +22,20 @@ ROOT_FILES = (
     "停止跨环境演示.cmd", "start-docker.sh", "stop-docker.sh",
 )
 SOURCE_DIRECTORIES = ("app", "scripts", "tests")
+DEMO_DIRECTORIES = (
+    "01_成本明细数据",
+    "02_行业参考数据",
+    "03_制药知识文档",
+    "04_报告模板",
+    "05_RPA接口文档",
+    "06_知识证据索引",
+)
+FORMAL_DOCUMENTS = (
+    "（创灵境）成本智能分析系统技术方案文档.docx",
+    "（创灵境）成本智能分析系统技术方案文档.pdf",
+    "（创灵境）成本智能分析系统竞赛评测报告.docx",
+    "（创灵境）成本智能分析系统竞赛评测报告.pdf",
+)
 PUBLIC_DOCUMENTS = {
     "00_项目规范/21_竞赛技术方案.md": "docs/竞赛技术方案.md",
     "00_项目规范/22_三场景竞赛评测报告.md": "docs/三场景竞赛评测报告.md",
@@ -73,19 +87,24 @@ def main() -> int:
 
     for directory in SOURCE_DIRECTORIES:
         shutil.copytree(root / directory, temporary / directory, ignore=_ignore)
+    for directory in DEMO_DIRECTORIES:
+        shutil.copytree(root / directory, temporary / directory, ignore=_ignore)
     for filename in ROOT_FILES:
         shutil.copy2(root / filename, temporary / filename)
     shutil.copy2(root / "README_PUBLIC.md", temporary / "README.md")
+    for filename in FORMAL_DOCUMENTS:
+        shutil.copy2(root / filename, temporary / filename)
     for source_name, target_name in PUBLIC_DOCUMENTS.items():
         target = temporary / target_name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(root / source_name, target)
 
     manifest = {
-        "release_format": "github-public-source",
+        "release_format": "github-public-self-contained-demo",
         "created_at": datetime.now(timezone.utc).isoformat(),
-        "restricted_data_included": False,
-        "requires_secure_data_overlay": True,
+        "competition_demo_data_included": True,
+        "requires_secure_data_overlay": False,
+        "api_key_included": False,
         "files": [],
     }
     for path in sorted(temporary.rglob("*")):

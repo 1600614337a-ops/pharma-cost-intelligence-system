@@ -26,12 +26,12 @@ from app.review import (
 )
 from app.review.database import ReviewStore
 from app.rpa.models import TaskCandidateBundle
+from tests.fixture_factory import candidate_bundle
 
 
 SIGNING_SECRET = "enterprise-test-signing-secret-32-bytes-minimum"
 FIXED_EPOCH = 1_785_696_000
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-CANDIDATE_FILE = PROJECT_ROOT / "08_RPA任务输出" / "2026-05_银黄口服液_RPA任务候选.json"
 
 
 def signed_headers(
@@ -71,11 +71,15 @@ def signed_headers(
 
 class DeploymentSettingsTests(unittest.TestCase):
     def test_local_configuration_is_ready_and_secrets_are_not_serialized(self) -> None:
-        settings = DeploymentSettings(admin_token="local-admin-token-1234")
-        self.assertTrue(settings.readiness().ready)
-        dumped = settings.model_dump(mode="json")
-        self.assertNotIn("admin_token", dumped)
-        self.assertNotIn("identity_signing_secret", dumped)
+        with tempfile.TemporaryDirectory() as temporary:
+            settings = DeploymentSettings(
+                admin_token="local-admin-token-1234",
+                database_path=Path(temporary) / "review.sqlite3",
+            )
+            self.assertTrue(settings.readiness().ready)
+            dumped = settings.model_dump(mode="json")
+            self.assertNotIn("admin_token", dumped)
+            self.assertNotIn("identity_signing_secret", dumped)
 
     def test_secret_file_is_supported_and_conflicting_sources_are_blocked(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -103,15 +107,17 @@ class DeploymentSettingsTests(unittest.TestCase):
                 admin_token="local-admin-token-1234",
                 public_base_url="https://review.example.test",
             )
-        settings = DeploymentSettings(
-            environment="enterprise_test",
-            auth_mode="signed_proxy",
-            identity_signing_secret=SIGNING_SECRET,
-            public_base_url="https://review.example.test",
-        )
-        self.assertFalse(settings.readiness().ready)
-        allowed = settings.model_copy(update={"allow_sqlite_enterprise_test": True})
-        self.assertTrue(allowed.readiness().ready)
+        with tempfile.TemporaryDirectory() as temporary:
+            settings = DeploymentSettings(
+                environment="enterprise_test",
+                auth_mode="signed_proxy",
+                identity_signing_secret=SIGNING_SECRET,
+                public_base_url="https://review.example.test",
+                database_path=Path(temporary) / "review.sqlite3",
+            )
+            self.assertFalse(settings.readiness().ready)
+            allowed = settings.model_copy(update={"allow_sqlite_enterprise_test": True})
+            self.assertTrue(allowed.readiness().ready)
 
     def test_enterprise_rpa_host_needs_exact_allowlist_and_https(self) -> None:
         allowed = TestSubmissionSettings(
@@ -266,7 +272,7 @@ class DatabaseOperationsTests(unittest.TestCase):
             source = Path(temporary) / "review.sqlite3"
             store = ReviewStore(source)
             store.initialize()
-            bundle = TaskCandidateBundle.model_validate_json(CANDIDATE_FILE.read_text(encoding="utf-8"))
+            bundle = candidate_bundle()
             store.import_bundle(bundle)
             before = inspect_sqlite_database(source)
             self.assertEqual(before.audit_status, "PASS")

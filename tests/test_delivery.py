@@ -13,14 +13,25 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class CompetitionDeliveryTests(unittest.TestCase):
-    def test_judge_package_includes_formal_technical_solution(self) -> None:
+    def test_judge_package_includes_formal_competition_documents(self) -> None:
         namespace = runpy.run_path(str(ROOT / "scripts" / "prepare_judge_package.py"))
         formal_documents = namespace["FORMAL_DOCUMENTS"]
-        self.assertEqual(len(formal_documents), 2)
-        self.assertTrue(any(path.endswith(".docx") for path in formal_documents))
-        self.assertTrue(any(path.endswith(".pdf") for path in formal_documents))
+        evaluation_evidence = namespace["EVALUATION_EVIDENCE"]
+        self.assertEqual(len(formal_documents), 4)
+        self.assertEqual(sum(path.endswith(".docx") for path in formal_documents), 2)
+        self.assertEqual(sum(path.endswith(".pdf") for path in formal_documents), 2)
+        self.assertIn(
+            "（创灵境）成本智能分析系统竞赛评测报告.docx",
+            formal_documents,
+        )
         for source in formal_documents:
             self.assertTrue((ROOT / source).is_file(), source)
+        self.assertEqual(len(evaluation_evidence), 3)
+        for source, destination in evaluation_evidence.items():
+            self.assertTrue(
+                (ROOT / source).is_file() or (ROOT / destination).is_file(),
+                source,
+            )
         script = (ROOT / "scripts" / "prepare_judge_package.py").read_text(encoding="utf-8")
         self.assertIn('output.with_name(output.name + ".zip")', script)
 
@@ -78,6 +89,10 @@ class CompetitionDeliveryTests(unittest.TestCase):
             self.assertEqual(payload["status"], "PASS")
             self.assertEqual(payload["summary"]["passed_scenarios"], 3)
             self.assertEqual(payload["summary"]["automated_scenario_pass_rate_pct"], "100.00")
+            self.assertEqual(payload["summary"]["report_structure_completeness_pct"], "100.00")
+            self.assertEqual(payload["summary"]["report_structure_checks"], "9/9")
+            self.assertEqual(payload["summary"]["benchmark_three_step_format_accuracy_pct"], "100.00")
+            self.assertEqual(payload["summary"]["benchmark_three_step_checks"], "9/9")
             self.assertTrue(all(item["status"] == "PASS" for item in payload["scenarios"]))
 
     def test_local_launchers_use_scoped_processes_and_loopback_rpa(self) -> None:

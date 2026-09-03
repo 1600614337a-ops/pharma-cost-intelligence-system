@@ -24,13 +24,7 @@ release/
 *.sqlite3-wal
 *.sqlite3-shm
 
-# Competition-restricted data and source documents
-01_成本明细数据/
-02_行业参考数据/
-03_制药知识文档/
-04_报告模板/
-05_RPA接口文档/
-06_知识证据索引/
+# Competition source materials not included in the public demo repository
 8.16调整更新/
 7.（创灵境）2026年第二届重庆市AI大模型创新应用大赛企业出题.docx
 

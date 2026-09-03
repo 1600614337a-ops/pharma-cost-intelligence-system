@@ -1,4 +1,4 @@
-"""Fail a public release when restricted data, generated artifacts or secrets leak in."""
+"""Fail a public demo release when runtime artifacts or secrets leak in."""
 
 from __future__ import annotations
 
@@ -8,15 +8,14 @@ from pathlib import Path
 
 
 FORBIDDEN_TOP_LEVEL = {
-    "01_成本明细数据", "02_行业参考数据", "03_制药知识文档", "04_报告模板",
-    "05_RPA接口文档", "06_知识证据索引", "07_报告输出", "08_RPA任务输出",
+    "07_报告输出", "08_RPA任务输出",
     "09_审核工作台", "10_批量运行", "8.16调整更新", "tmp", "output",
 }
-FORBIDDEN_SUFFIXES = {".csv", ".docx", ".pdf", ".sqlite3", ".pem", ".p12"}
+FORBIDDEN_SUFFIXES = {".sqlite3", ".pem", ".p12"}
 IGNORED_TOP_LEVEL = {".git"}
 TEXT_SUFFIXES = {
     ".py", ".ps1", ".cmd", ".sh", ".md", ".txt", ".json", ".yaml",
-    ".yml", ".toml", ".html", ".css", ".js",
+    ".yml", ".toml", ".html", ".css", ".js", ".csv",
 }
 SECRET_PATTERNS = {
     "DashScope/OpenAI样式密钥": re.compile(r"\bsk-[A-Za-z0-9_-]{16,}\b"),
@@ -73,7 +72,7 @@ def main() -> int:
         if path.is_file()
         and not (path.relative_to(root).parts and path.relative_to(root).parts[0] in IGNORED_TOP_LEVEL)
     )
-    print(f"公开仓库审计：PASS · {file_count}个文件 · 未发现受限目录、制品或密钥")
+    print(f"公开仓库审计：PASS · {file_count}个文件 · 未发现运行制品或密钥")
     return 0
 
 

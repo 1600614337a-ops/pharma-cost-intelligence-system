@@ -1,8 +1,9 @@
 {
-  "release_format": "github-public-source",
-  "created_at": "2026-09-01T11:06:13.889941+00:00",
-  "restricted_data_included": false,
-  "requires_secure_data_overlay": true,
+  "release_format": "github-public-self-contained-demo",
+  "created_at": "2026-09-03T13:01:02.602585+00:00",
+  "competition_demo_data_included": true,
+  "requires_secure_data_overlay": false,
+  "api_key_included": false,
   "files": [
     {
       "path": ".dockerignore",
@@ -21,8 +22,153 @@
     },
     {
       "path": ".gitignore",
-      "size": 634,
-      "sha256": "f2148480e498c12c66de1f1bf2232319339696eed63cbf659f26c4c000e0bea5"
+      "size": 528,
+      "sha256": "9accfa37e3125fedb0cf8124c98eea492960977b2003f129c0299f59b1a691eb"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_人工工时明细_2026年1-6月.csv",
+      "size": 1565,
+      "sha256": "cb4d519b474fe144dcbba64988039e60d5207c3bc44c5927e903bdf5ba4bf323"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_制造费用明细_2026年1-6月.csv",
+      "size": 8086,
+      "sha256": "9fe8245f517e8cd787d58e9113f93d08521043975a4997dead3329e12caee90f"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_原材料消耗明细_2026年1-6月.csv",
+      "size": 10175,
+      "sha256": "911cb2ac45043f027848df6ad7daea55c0f3d6b4d2a2397a783abfb1b71be8d5"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_成本汇总_2025年1-6月.csv",
+      "size": 1780,
+      "sha256": "a0d573417032d3fa865af82567fc81e1cad151678fe4f4fd77464f259fc3d96b"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_成本汇总_2026年1-6月.csv",
+      "size": 1779,
+      "sha256": "08b6be09c9297d8df82b346cfa83507f34a278d7a000187960768d9bb4931c26"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_预算数据_2026年.csv",
+      "size": 1779,
+      "sha256": "987526c99f4a98a2775830c110506460a6027eafcf9d6cf7a07a01eb74cef9aa"
+    },
+    {
+      "path": "01_成本明细数据/中药二厂_成本汇总_2025年1-6月.csv",
+      "size": 1779,
+      "sha256": "37dfacdddb93cda4d1d0df4f42043b48bc27429121d58384dfec51d7bb42eb09"
+    },
+    {
+      "path": "01_成本明细数据/中药二厂_成本汇总_2026年1-6月.csv",
+      "size": 1781,
+      "sha256": "8cb6f41faaa944f98060b0ae2e3fc989420cad0d0b03227dd160127567f3b240"
+    },
+    {
+      "path": "02_行业参考数据/药材市场价格行情_2026年上半年.csv",
+      "size": 1583,
+      "sha256": "44210be6e6fdb89e0212e544f63cd5f8cfe72389716019c1ddffcc5032cdf94c"
+    },
+    {
+      "path": "02_行业参考数据/行业成本基准数据_2026.csv",
+      "size": 1378,
+      "sha256": "31fa1383e2cf2c9d38da3eee3d5398b207c1806a6b67bb18e222f6eddf4154ed"
+    },
+    {
+      "path": "03_制药知识文档/.DS_Store",
+      "size": 6148,
+      "sha256": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3"
+    },
+    {
+      "path": "03_制药知识文档/GMP法规核心摘要_2010修订版.pdf",
+      "size": 815792,
+      "sha256": "2e599f526df282da063695de31a7007b97c7ff1ad16d7a97c91747f32534a048"
+    },
+    {
+      "path": "03_制药知识文档/产品配方文档_六味地黄胶囊.pdf",
+      "size": 436675,
+      "sha256": "281a6829ed15ce1df55d9c13f16fd5052e26276a6d30020520967657431eb4e7"
+    },
+    {
+      "path": "03_制药知识文档/产品配方文档_板蓝根颗粒.pdf",
+      "size": 386196,
+      "sha256": "5f1dd55e4a388b190fc74c601f0589574bccbfa716a2025ea3e79857dd2eec47"
+    },
+    {
+      "path": "03_制药知识文档/产品配方文档_银黄口服液.pdf",
+      "size": 345398,
+      "sha256": "834aa8a81c2938dfb9e6ec28b8743ea0e667c237e06a6609415d97fe3b85b5ad"
+    },
+    {
+      "path": "03_制药知识文档/派生知识/历史成本异常处理记录_中药一厂.md",
+      "size": 7263,
+      "sha256": "437a9b43f7d5f308ff289423811a3fcdd8388360574b4b11fc6468288b4a2b3a"
+    },
+    {
+      "path": "03_制药知识文档/派生知识/同集团工厂对标基线_中药二厂_2025-2026H1.md",
+      "size": 7488,
+      "sha256": "d840073d806eef1233e9655bbb26227944620ae2875729842d4902a047d22b86"
+    },
+    {
+      "path": "03_制药知识文档/生产工艺文档_中药一厂.pdf",
+      "size": 542078,
+      "sha256": "aa7d48f697f2caa2bedf5b16e84a4d4765d3c92a52a619a7a93360764d7d8e00"
+    },
+    {
+      "path": "03_制药知识文档/药品生产质量管理规范GMP.pdf",
+      "size": 483607,
+      "sha256": "871f86bfaa610bb0db8b84b0f45606019fe889ec437695baf150cbe696cfa102"
+    },
+    {
+      "path": "03_制药知识文档/车间设备清单_中药一厂.pdf",
+      "size": 375424,
+      "sha256": "1e3808fc86fece94d3736690f087c218b8e082e6defe869e68bbdfdcdce7e503"
+    },
+    {
+      "path": "04_报告模板/月度成本分析报告模板.docx",
+      "size": 35829,
+      "sha256": "188cbf06bd08df87acb1d9b4f33a0a13074a971249f14a9b0f1ca15544c509d6"
+    },
+    {
+      "path": "04_报告模板/月度成本分析报告模板.md",
+      "size": 6149,
+      "sha256": "3a1f0abb31efa05a91ee4edc3f4a7736b80c7f76db61db07caa911a7ebdf9b2b"
+    },
+    {
+      "path": "05_RPA接口文档/Dockerfile",
+      "size": 185,
+      "sha256": "83d5da6eb23a6400c9fac4e1a44a65c9c7c10a5c77b35cec85be1db51aa652e4"
+    },
+    {
+      "path": "05_RPA接口文档/mock_rpa_server.py",
+      "size": 8516,
+      "sha256": "c3db08e80147782d94cfd00cee24be4ace1823b5e3963dbbdc9a47c7ec14eada"
+    },
+    {
+      "path": "05_RPA接口文档/requirements.txt",
+      "size": 26,
+      "sha256": "72b7dd981782e40c30a580b5bc5233a96ece788ba1e69d7686917830d40ee106"
+    },
+    {
+      "path": "05_RPA接口文档/模拟RPA接口文档.md",
+      "size": 10422,
+      "sha256": "142f0a050dcd767996106e795a5bbce5e80b6af3f464a6af5c7cbad3e2970307"
+    },
+    {
+      "path": "06_知识证据索引/manifest.json",
+      "size": 5343,
+      "sha256": "1a576962ff9354b676fdce991f92a6808583e5030933a4a51767d3ef56745c29"
+    },
+    {
+      "path": "06_知识证据索引/pages.jsonl",
+      "size": 247258,
+      "sha256": "518f857d91968d77b45d4a94916ec0a9b010cbd9f6b365c771239f1a974a3c8d"
+    },
+    {
+      "path": "06_知识证据索引/vectors.npz",
+      "size": 2103536,
+      "sha256": "679a4ff1829bf17f5299046926a6d38d782a4e87fd4ab12a828b3c67107f6ca4"
     },
     {
       "path": "app/__init__.py",
@@ -391,18 +537,18 @@
     },
     {
       "path": "docs/三场景竞赛评测报告.md",
-      "size": 5255,
-      "sha256": "5ff5d9a8811bf0d2405d3c264349ec32ac3d5c9d74f3f4de0205424a3461f90d"
+      "size": 9348,
+      "sha256": "e6608017a0c68d30f6db40b799ec1b4372bfaa75f4e4779dbb7c1d9f3d91d077"
     },
     {
       "path": "docs/前三项交付与公开仓库检查报告.md",
-      "size": 2997,
-      "sha256": "2e7c60edcc0481d95fd8b0a6ca7fed954ea095ca9ef3628feb72ab1264b13e1f"
+      "size": 3886,
+      "sha256": "55fd201347ad7674e29a835ab2a2d72da0e798e92b5c22b1e3dbd6140c254202"
     },
     {
       "path": "docs/竞赛技术方案.md",
-      "size": 20830,
-      "sha256": "5453642b39720bb2ad0ed79b0a2c235db8c103753c20d031a6b6175ab71f44ab"
+      "size": 25058,
+      "sha256": "6139a368cd90fb671b973823566bdbef5d368c2f320efe301da5616fe2bf00bb"
     },
     {
       "path": "docs/端到端验收与交付检查报告.md",
@@ -416,8 +562,8 @@
     },
     {
       "path": "README.md",
-      "size": 4759,
-      "sha256": "47687cd67de12d782fe1af1b390d3444c8e99b8c349721b06f1c3672b553626e"
+      "size": 4820,
+      "sha256": "e92da3e09e128aa8608a5f8b567228ecb4ad647a787998d202c3de4bae2f7f10"
     },
     {
       "path": "requirements-llamaindex.txt",
@@ -431,13 +577,13 @@
     },
     {
       "path": "scripts/audit_public_release.py",
-      "size": 3083,
-      "sha256": "7fb329901447abb72fb58ccf7861077851e7fcf51bcb1b7db3ca6d895ad172d4"
+      "size": 2898,
+      "sha256": "1ccce6eb83d417141c1f19624b80ef5cbf4445fbfde3794f3471d4cca600e12a"
     },
     {
       "path": "scripts/competition_evaluation.py",
-      "size": 9476,
-      "sha256": "5b425f641ff653a54475709867266aab53bf2a8fc68e9c5efb3e16d807ecb3e7"
+      "size": 12179,
+      "sha256": "45aa85445d34e24d6984808c3a0d05e11e8a486686b80d376d90cdce46a70ca3"
     },
     {
       "path": "scripts/configure_qwen.ps1",
@@ -476,13 +622,13 @@
     },
     {
       "path": "scripts/prepare_judge_package.py",
-      "size": 6146,
-      "sha256": "c8fe3a1c71836df69ae211759a8f18faa3bfeaa6598373778fc0a68567c943fd"
+      "size": 7279,
+      "sha256": "58f89b1e48402f224971b3027ef740f3f85a2263832ed030650ef3fe974d852a"
     },
     {
       "path": "scripts/prepare_public_release.py",
-      "size": 4435,
-      "sha256": "fabb0fb65068fe66c1af2f1efda913a121d4ec61aa94b8daa411efd00c09b963"
+      "size": 5198,
+      "sha256": "c7272d5621e73f7402c6de5c75931a538dcb413e97bb83136a881b5293872700"
     },
     {
       "path": "scripts/review_database_ops.py",
@@ -521,8 +667,13 @@
     },
     {
       "path": "tests/__init__.py",
-      "size": 55,
-      "sha256": "beb1a950739bd87ab87ca1baec4bddb2975206469dbc2de3c97a8c37822c6bd4"
+      "size": 28,
+      "sha256": "d61dd108a89607064a9f0cdb2a30bd0a8c3d4e2d55aaef9fb621d1103636c30f"
+    },
+    {
+      "path": "tests/fixture_factory.py",
+      "size": 1097,
+      "sha256": "775af0b0171cea761f03a2d212c820209f9050f4e724b9c1cf8557f025697b1b"
     },
     {
       "path": "tests/test_analysis.py",
@@ -546,18 +697,18 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "size": 5157,
-      "sha256": "62bb51cd155b5606c5946bddba216c6e6ee91e2acd05b195d94c1117eda82fdc"
+      "size": 6003,
+      "sha256": "dc604e043ee8402cc3a733c503ed21795fc01a13dcb0993088337f86935451b0"
     },
     {
       "path": "tests/test_deployment.py",
-      "size": 11854,
-      "sha256": "423279f0043404f56aa8c743877857bad2a93cc995d38d21fa2aff9729114a4c"
+      "size": 12071,
+      "sha256": "395b2b22a68b172a221662abc093334b2242734438b967cda90f95b67620646b"
     },
     {
       "path": "tests/test_execution.py",
-      "size": 13317,
-      "sha256": "81af2a7107d25fd626153b998da8802523fcf3a7078636e4703c17eba0ee22df"
+      "size": 13192,
+      "sha256": "21c1dc8c59345332ffadc7ec9ded4129bdfef198799b2e8ac8210eb6d00689fc"
     },
     {
       "path": "tests/test_knowledge.py",
@@ -586,18 +737,18 @@
     },
     {
       "path": "tests/test_review.py",
-      "size": 18142,
-      "sha256": "3b9a3668aadbe5bb20b3b65f5a78d8673daeaaf001ad37d5bd0d288d7d279d01"
+      "size": 18156,
+      "sha256": "9f2ba6e58b6db92f1260231c98882fe1b17eee1363e78e7ee14d97c68d55a149"
     },
     {
       "path": "tests/test_rpa.py",
-      "size": 15485,
-      "sha256": "a75f5250a0a1c9962cc47a4d46fb5d4c01a5082e479ce65be701b1057f604eac"
+      "size": 15462,
+      "sha256": "54a54a6deba28fdbbcc74f70c4fb04ef03cc587ed2ba7ab56a341f07b86458e7"
     },
     {
       "path": "tests/test_task_llm.py",
-      "size": 6920,
-      "sha256": "3be46593749c3fe57bfd59e8bf76a3e10e06a0b2d16a4a5238cdb3eb8d04c4e4"
+      "size": 6706,
+      "sha256": "8114530bb5f8d4c8c23a9625256db4c0ce7df1b6292d57ce8c313a7975e12ac3"
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
@@ -633,6 +784,26 @@
       "path": "配置通义千问API.cmd",
       "size": 445,
       "sha256": "ade2ab3473327380d572b4accb3e9c753e0a26c189892c5b7cd22ec9229c62d5"
+    },
+    {
+      "path": "（创灵境）成本智能分析系统技术方案文档.docx",
+      "size": 187657,
+      "sha256": "c75b23b70370363b58e68e8d6b2e9b861cffc8efd1848ce0a3ab9cdae94033a5"
+    },
+    {
+      "path": "（创灵境）成本智能分析系统技术方案文档.pdf",
+      "size": 553884,
+      "sha256": "2560a251392cc717c9060bf1f0a2c824a3c64d0e7922889b64043d132c0d2591"
+    },
+    {
+      "path": "（创灵境）成本智能分析系统竞赛评测报告.docx",
+      "size": 52335,
+      "sha256": "0fcba04c50744ba19c517260a4f192d993c14dd42c63196cbb3db54ee278d1c7"
+    },
+    {
+      "path": "（创灵境）成本智能分析系统竞赛评测报告.pdf",
+      "size": 321904,
+      "sha256": "6fb9619939c81bbb2e2c18c9cf23e966cfe53209bc89a6d93fa2c34e5691f6ca"
     }
   ]
 }

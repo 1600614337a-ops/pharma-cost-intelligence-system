@@ -20,16 +20,16 @@ from app.review import (
     create_review_app,
 )
 from app.review.auth import AuthManager, AuthenticationError
+from tests.fixture_factory import candidate_bundle, write_candidate_bundle
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-CANDIDATE_FILE = PROJECT_ROOT / "08_RPA任务输出" / "2026-05_银黄口服液_RPA任务候选.json"
 TOKEN = "review-test-token-2026"
 FIXED_TIME = datetime.fromisoformat("2026-08-02T12:00:00+08:00")
 
 
 def load_bundle() -> TaskCandidateBundle:
-    return TaskCandidateBundle.model_validate_json(CANDIDATE_FILE.read_text(encoding="utf-8"))
+    return candidate_bundle()
 
 
 class ReviewStoreTests(unittest.TestCase):
@@ -229,10 +229,11 @@ class ReviewWebTests(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.db_path = Path(self.temporary.name) / "review.sqlite3"
+        self.candidate_file = write_candidate_bundle(Path(self.temporary.name) / "candidates.json")
         self.app = create_review_app(
             database_path=self.db_path,
             admin_token=TOKEN,
-            candidate_files=[CANDIDATE_FILE],
+            candidate_files=[self.candidate_file],
         )
         self.client = TestClient(self.app)
         self.headers = {"X-Review-Token": TOKEN}
@@ -283,7 +284,7 @@ class ReviewWebTests(unittest.TestCase):
         ).json()
         self.assertEqual(detail["candidate"]["product"], "银黄口服液")
         self.assertIn("6.15%", detail["candidate"]["finding"])
-        self.assertEqual(len(detail["candidate"]["source_refs"]), 6)
+        self.assertEqual(len(detail["candidate"]["source_refs"]), 10)
 
     def test_role_permissions_and_two_person_submission_authorization(self) -> None:
         analyst = self.client.post(
