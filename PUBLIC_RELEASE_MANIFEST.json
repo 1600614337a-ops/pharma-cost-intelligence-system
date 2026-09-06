@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-self-contained-demo",
-  "created_at": "2026-09-06T14:24:35.465152+00:00",
+  "created_at": "2026-09-06T14:36:44.179591+00:00",
   "competition_demo_data_included": true,
   "requires_secure_data_overlay": false,
   "api_key_included": false,
@@ -17,13 +17,13 @@
     },
     {
       "path": ".gitattributes",
-      "size": 315,
-      "sha256": "b638c26ae5e902714ea44b8112d8bb048ca65b4236e727a538b1e03ca39bbd9b"
+      "size": 467,
+      "sha256": "b1170b9d3eb897018322be6962272cfeb8c6f93a4eb0e480f020ea50c67865d3"
     },
     {
       "path": ".github/workflows/cross-environment.yml",
-      "size": 1121,
-      "sha256": "05f4e578ec22ce723487dd4a9bf00496ca4f944ba53ebca06b68fbf8c0d0b501"
+      "size": 1565,
+      "sha256": "7b0d05dac6cf91e7a0b36734db0e8fd033c726c2d677ab7c27ed53ed7162491a"
     },
     {
       "path": ".gitignore",
