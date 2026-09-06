@@ -12,34 +12,7 @@ $runtimeDir = Join-Path $projectRoot "tmp\demo_runtime"
 $statePath = Join-Path $runtimeDir "processes.json"
 New-Item -ItemType Directory -Path $runtimeDir -Force | Out-Null
 
-$systemPythonPath = (Get-Command python -ErrorAction Stop).Source
-$venvDir = Join-Path $projectRoot ".venv"
-$pythonPath = Join-Path $venvDir "Scripts\python.exe"
-$requirementsPath = Join-Path $projectRoot "requirements.txt"
-$requirementsMarker = Join-Path $venvDir ".requirements.sha256"
-
-if (-not (Test-Path -LiteralPath $pythonPath)) {
-    Write-Host "首次运行：正在创建项目独立Python环境..."
-    & $systemPythonPath -m venv $venvDir
-    if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $pythonPath)) {
-        throw "无法创建Python虚拟环境，请确认Python 3.11+包含venv组件。"
-    }
-}
-
-$requirementsHash = (Get-FileHash -LiteralPath $requirementsPath -Algorithm SHA256).Hash
-$installedHash = if (Test-Path -LiteralPath $requirementsMarker) {
-    (Get-Content -LiteralPath $requirementsMarker -Raw -Encoding UTF8).Trim()
-} else {
-    ""
-}
-if ($installedHash -ne $requirementsHash) {
-    Write-Host "首次运行或依赖已更新：正在安装项目依赖，请保持网络连接..."
-    & $pythonPath -m pip install --disable-pip-version-check -r $requirementsPath
-    if ($LASTEXITCODE -ne 0) {
-        throw "项目依赖安装失败，请检查网络、代理或requirements.txt。"
-    }
-    Set-Content -LiteralPath $requirementsMarker -Value $requirementsHash -Encoding UTF8 -NoNewline
-}
+$pythonPath = & (Join-Path $PSScriptRoot "initialize_python.ps1") -ProjectRoot $projectRoot
 
 function Import-LlmConfiguration {
     $localAppData = [Environment]::GetFolderPath([Environment+SpecialFolder]::LocalApplicationData)
@@ -237,6 +210,9 @@ $webArgs = @(
     "--rpa-base-url", "http://127.0.0.1:$RpaPort"
 )
 
+# Start-Process joins ArgumentList: quote paths to preserve spaces in extraction folders.
+$rpaArgs = @($rpaArgs | ForEach-Object { '"' + $_ + '"' })
+$webArgs = @($webArgs | ForEach-Object { '"' + $_ + '"' })
 $rpaProcess = Start-Process -FilePath $pythonPath -ArgumentList $rpaArgs -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput $rpaOut -RedirectStandardError $rpaErr -PassThru
 $webProcess = Start-Process -FilePath $pythonPath -ArgumentList $webArgs -WorkingDirectory $projectRoot -WindowStyle Hidden -RedirectStandardOutput $webOut -RedirectStandardError $webErr -PassThru
 

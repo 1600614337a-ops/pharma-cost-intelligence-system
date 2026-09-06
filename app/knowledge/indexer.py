@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import unicodedata
 from dataclasses import dataclass
@@ -289,15 +290,32 @@ def build_knowledge_index(
     has_error = any(issue.severity == "ERROR" for issue in issues)
     has_warning = any(issue.severity == "WARNING" for issue in issues)
     status = "FAIL" if has_error else "PASS_WITH_WARNING" if has_warning else "PASS"
+    # Store paths relative to the published index so the complete project can be
+    # moved to another directory or mounted at /workspace inside Docker.
+    # os.path.relpath is used here because Path.relative_to only supports child
+    # paths, while the governed source root is normally the index parent.
+    try:
+        portable_source_root = Path(os.path.relpath(source_root, output_root)).as_posix()
+        portable_catalog = (
+            Path(os.path.relpath(resolved_catalog, output_root)).as_posix()
+            if resolved_catalog
+            else None
+        )
+    except ValueError:
+        # Different Windows drives cannot be represented by one relative path.
+        # This fallback only applies to non-portable custom build locations.
+        portable_source_root = str(source_root)
+        portable_catalog = str(resolved_catalog) if resolved_catalog else None
+
     manifest = KnowledgeIndexManifest(
         index_version=INDEX_VERSION,
         extractor=f"pypdf {pypdf_version}; python-docx {docx_version}; UTF-8 text; {VECTOR_VERSION}",
-        generated_at=datetime.now().astimezone().isoformat(timespec="seconds"), source_root=str(source_root), output_root=str(output_root),
+        generated_at=datetime.now().astimezone().isoformat(timespec="seconds"), source_root=portable_source_root, output_root=".",
         index_file=INDEX_FILENAME, index_file_sha256=_sha256_file(index_path), status=status, document_count=len(summaries),
         page_count=sum(item.page_count for item in summaries), chunk_count=len(chunks), sources=summaries, issues=issues,
         bm25_version=BM25_VERSION, vector_model=VECTOR_VERSION, vector_file=VECTOR_FILENAME if chunks else None,
         vector_file_sha256=_sha256_file(vector_path) if chunks else None, vector_dimensions=vector_dimensions,
-        catalog_file=str(resolved_catalog) if resolved_catalog else None,
+        catalog_file=portable_catalog,
         catalog_file_sha256=_sha256_file(resolved_catalog) if resolved_catalog else None,
     )
     manifest_path = output_root / MANIFEST_FILENAME

@@ -1,0 +1,391 @@
+{
+  "acceptance_version": "1.0.0",
+  "status": "PASS",
+  "base_url": "http://127.0.0.1:8380",
+  "checks": [
+    {
+      "name": "Web健康状态",
+      "status": "PASS",
+      "actual": "ok",
+      "expected": "ok"
+    },
+    {
+      "name": "正式流程从零开始",
+      "status": "PASS",
+      "actual": {
+        "generated_count": 0,
+        "confirmed_count": 0,
+        "delivered_count": 0,
+        "failed_count": 0
+      },
+      "expected": {
+        "generated_count": 0,
+        "confirmed_count": 0,
+        "delivered_count": 0,
+        "failed_count": 0
+      }
+    },
+    {
+      "name": "整改统计按流程递增",
+      "status": "PASS",
+      "actual": {
+        "generated_count": 3,
+        "confirmed_count": 3,
+        "delivered_count": 3,
+        "failed_count": 0
+      },
+      "expected": {
+        "generated_count": 3,
+        "confirmed_count": 3,
+        "delivered_count": 3,
+        "failed_count": 0
+      }
+    }
+  ],
+  "scenarios": [
+    {
+      "sequence": 1,
+      "name": "月度",
+      "request": {
+        "analysis_type": "月度成本分析",
+        "product": "银黄口服液",
+        "month": "2026-05"
+      },
+      "report_id": "ff83fe2dbc7643478c6d73e2d49f2dc6",
+      "report_number": "CA-202605-YH-001",
+      "generation": {
+        "mode": "llm",
+        "status": "generated",
+        "provider_protocol": "chat_completions",
+        "model": "qwen3.8-max",
+        "request_id": "c5cb849f-86c0-99e5-b854-57b307b41254",
+        "attempt_count": 1,
+        "warnings": []
+      },
+      "workflow_generation": {
+        "mode": "llm",
+        "status": "generated",
+        "provider_protocol": "chat_completions",
+        "model": "qwen3.8-max",
+        "request_id": "cfd9785e-8b14-9db6-ac25-0f708232475c",
+        "attempt_count": 1,
+        "warnings": [],
+        "controlled_fields": [
+          "task_title",
+          "suggestion",
+          "suggested_priority",
+          "suggested_department"
+        ],
+        "protected_fields": [
+          "task_id",
+          "report_number",
+          "report_contract_sha256",
+          "analysis_month",
+          "analysis_type",
+          "analysis_period",
+          "product",
+          "source_field",
+          "source_refs",
+          "finding",
+          "created_at",
+          "state",
+          "validation_status"
+        ]
+      },
+      "checks": [
+        {
+          "name": "分析类型",
+          "status": "PASS",
+          "actual": "月度成本分析",
+          "expected": "月度成本分析"
+        },
+        {
+          "name": "报告受控大模型状态",
+          "status": "PASS",
+          "actual": {
+            "mode": "llm",
+            "status": "generated",
+            "provider_protocol": "chat_completions",
+            "model": "qwen3.8-max",
+            "request_id": "c5cb849f-86c0-99e5-b854-57b307b41254",
+            "attempt_count": 1,
+            "warnings": []
+          },
+          "expected": "generated"
+        },
+        {
+          "name": "PDF有效",
+          "status": "PASS",
+          "actual": 683089,
+          "expected": ">10000字节"
+        },
+        {
+          "name": "Word有效",
+          "status": "PASS",
+          "actual": 164902,
+          "expected": ">10000字节"
+        },
+        {
+          "name": "报告下载类型",
+          "status": "PASS",
+          "actual": {
+            "pdf": "application/pdf",
+            "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          },
+          "expected": "PDF与DOCX"
+        },
+        {
+          "name": "候选校验",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "人工确认",
+          "status": "PASS",
+          "actual": "approved",
+          "expected": "approved"
+        },
+        {
+          "name": "模拟送达",
+          "status": "PASS",
+          "actual": "sent",
+          "expected": "sent 或 duplicate_remote（远端幂等送达）"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "sequence": 2,
+      "name": "季度",
+      "request": {
+        "analysis_type": "季度成本分析",
+        "product": "板蓝根颗粒",
+        "quarter": "2026-Q2"
+      },
+      "report_id": "6fcb1f7b0c814feb9173fb81d75d95af",
+      "report_number": "QA-2026Q2-板蓝-001",
+      "generation": {
+        "mode": "llm",
+        "status": "generated",
+        "provider_protocol": "chat_completions",
+        "model": "qwen3.8-max",
+        "request_id": "50816884-a371-9348-9fc3-74636d45e90c",
+        "attempt_count": 1,
+        "warnings": []
+      },
+      "workflow_generation": {
+        "mode": "deterministic",
+        "status": "not_requested",
+        "provider_protocol": null,
+        "model": null,
+        "request_id": null,
+        "attempt_count": 0,
+        "warnings": [],
+        "controlled_fields": [
+          "task_title",
+          "suggestion",
+          "suggested_priority",
+          "suggested_department"
+        ],
+        "protected_fields": [
+          "task_id",
+          "report_number",
+          "report_contract_sha256",
+          "analysis_month",
+          "analysis_type",
+          "analysis_period",
+          "product",
+          "source_field",
+          "source_refs",
+          "finding",
+          "created_at",
+          "state",
+          "validation_status"
+        ]
+      },
+      "checks": [
+        {
+          "name": "分析类型",
+          "status": "PASS",
+          "actual": "季度成本分析",
+          "expected": "季度成本分析"
+        },
+        {
+          "name": "报告受控大模型状态",
+          "status": "PASS",
+          "actual": {
+            "mode": "llm",
+            "status": "generated",
+            "provider_protocol": "chat_completions",
+            "model": "qwen3.8-max",
+            "request_id": "50816884-a371-9348-9fc3-74636d45e90c",
+            "attempt_count": 1,
+            "warnings": []
+          },
+          "expected": "generated"
+        },
+        {
+          "name": "PDF有效",
+          "status": "PASS",
+          "actual": 676895,
+          "expected": ">10000字节"
+        },
+        {
+          "name": "Word有效",
+          "status": "PASS",
+          "actual": 163630,
+          "expected": ">10000字节"
+        },
+        {
+          "name": "报告下载类型",
+          "status": "PASS",
+          "actual": {
+            "pdf": "application/pdf",
+            "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          },
+          "expected": "PDF与DOCX"
+        },
+        {
+          "name": "候选校验",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "人工确认",
+          "status": "PASS",
+          "actual": "approved",
+          "expected": "approved"
+        },
+        {
+          "name": "模拟送达",
+          "status": "PASS",
+          "actual": "sent",
+          "expected": "sent 或 duplicate_remote（远端幂等送达）"
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "sequence": 3,
+      "name": "专题",
+      "request": {
+        "analysis_type": "专题分析",
+        "product": "六味地黄胶囊",
+        "month": "2026-03",
+        "topic": "工厂成本差异专项"
+      },
+      "report_id": "b58fe5556a044b1d8632ad7d04db40e7",
+      "report_number": "SA-202603-LWDH-001",
+      "generation": {
+        "mode": "llm",
+        "status": "generated",
+        "provider_protocol": "chat_completions",
+        "model": "qwen3.8-max",
+        "request_id": "e4fab1a1-32e9-9c9d-af0e-dca20f37fa39",
+        "attempt_count": 1,
+        "warnings": []
+      },
+      "workflow_generation": {
+        "mode": "deterministic",
+        "status": "not_requested",
+        "provider_protocol": null,
+        "model": null,
+        "request_id": null,
+        "attempt_count": 0,
+        "warnings": [],
+        "controlled_fields": [
+          "task_title",
+          "suggestion",
+          "suggested_priority",
+          "suggested_department"
+        ],
+        "protected_fields": [
+          "task_id",
+          "report_number",
+          "report_contract_sha256",
+          "analysis_month",
+          "analysis_type",
+          "analysis_period",
+          "product",
+          "source_field",
+          "source_refs",
+          "finding",
+          "created_at",
+          "state",
+          "validation_status"
+        ]
+      },
+      "checks": [
+        {
+          "name": "分析类型",
+          "status": "PASS",
+          "actual": "专题分析",
+          "expected": "专题分析"
+        },
+        {
+          "name": "报告受控大模型状态",
+          "status": "PASS",
+          "actual": {
+            "mode": "llm",
+            "status": "generated",
+            "provider_protocol": "chat_completions",
+            "model": "qwen3.8-max",
+            "request_id": "e4fab1a1-32e9-9c9d-af0e-dca20f37fa39",
+            "attempt_count": 1,
+            "warnings": []
+          },
+          "expected": "generated"
+        },
+        {
+          "name": "PDF有效",
+          "status": "PASS",
+          "actual": 692978,
+          "expected": ">10000字节"
+        },
+        {
+          "name": "Word有效",
+          "status": "PASS",
+          "actual": 163868,
+          "expected": ">10000字节"
+        },
+        {
+          "name": "报告下载类型",
+          "status": "PASS",
+          "actual": {
+            "pdf": "application/pdf",
+            "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+          },
+          "expected": "PDF与DOCX"
+        },
+        {
+          "name": "候选校验",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "人工确认",
+          "status": "PASS",
+          "actual": "approved",
+          "expected": "approved"
+        },
+        {
+          "name": "模拟送达",
+          "status": "PASS",
+          "actual": "sent",
+          "expected": "sent 或 duplicate_remote（远端幂等送达）"
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "final_stats": {
+    "generated_count": 3,
+    "confirmed_count": 3,
+    "delivered_count": 3,
+    "failed_count": 0,
+    "source": "本地报告流程文件与模拟RPA回执"
+  }
+}

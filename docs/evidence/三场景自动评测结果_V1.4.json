@@ -1,0 +1,619 @@
+{
+  "evaluation_version": "1.4.0",
+  "generated_at": "2026-09-03T16:58:34.045712+08:00",
+  "status": "PASS",
+  "summary": {
+    "scenario_count": 3,
+    "passed_scenarios": 3,
+    "automated_scenario_pass_rate_pct": "100.00",
+    "report_structure_completeness_pct": "100.00",
+    "report_structure_checks": "9/9",
+    "benchmark_three_step_format_accuracy_pct": "100.00",
+    "benchmark_three_step_checks": "9/9",
+    "rpa_executed": true,
+    "rpa_success_count": 3,
+    "rpa_trigger_success_rate_pct": "100.00"
+  },
+  "scenarios": [
+    {
+      "scenario": "银黄口服液 2026-05",
+      "report_number": "CA-202605-YH-001",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "报告契约状态",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "报告字段数量",
+          "status": "PASS",
+          "actual": 107,
+          "expected": 107
+        },
+        {
+          "name": "动态表格数量",
+          "status": "PASS",
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "本月单位成本",
+          "status": "PASS",
+          "actual": "11.21",
+          "expected": "11.21"
+        },
+        {
+          "name": "上月单位成本",
+          "status": "PASS",
+          "actual": "10.90",
+          "expected": "10.90"
+        },
+        {
+          "name": "单位成本环比",
+          "status": "PASS",
+          "actual": "2.84%",
+          "expected": "2.84%"
+        },
+        {
+          "name": "材料贡献度",
+          "status": "PASS",
+          "actual": "67.09%",
+          "expected": "67.09%"
+        },
+        {
+          "name": "单位成本同比",
+          "status": "PASS",
+          "actual": "4.67%",
+          "expected": "4.67%"
+        },
+        {
+          "name": "单位成本预算偏差",
+          "status": "PASS",
+          "actual": "5.75%",
+          "expected": "5.75%"
+        },
+        {
+          "name": "本月工时",
+          "status": "PASS",
+          "actual": "231.72",
+          "expected": "231.72"
+        },
+        {
+          "name": "一厂减二厂单位成本差异",
+          "status": "PASS",
+          "actual": "-0.39",
+          "expected": "-0.39"
+        },
+        {
+          "name": "对标三步法第1步：差异总览格式",
+          "status": "PASS",
+          "actual": "4行×6列",
+          "expected": "4行×6列"
+        },
+        {
+          "name": "对标三步法第2步：结构拆解格式",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "对标三步法第3步：归因与建议格式",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：金银花",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：6.15%",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：市场行情不等于企业实际采购价",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "禁止结论：采购价环比上涨12%",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "禁止结论：板蓝根上涨10%",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "禁止结论：设备故障导致单位成本上涨",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "V1.1新增结构化指标可用",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "八类受治理证据引用完整",
+          "status": "PASS",
+          "actual": 8,
+          "expected": 8
+        },
+        {
+          "name": "整改候选数量",
+          "status": "PASS",
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "候选来源可追溯",
+          "status": "PASS",
+          "actual": 10,
+          "expected": "至少1条"
+        },
+        {
+          "name": "模拟RPA触发",
+          "status": "PASS",
+          "actual": "sent",
+          "expected": "sent或幂等拦截"
+        }
+      ],
+      "rpa_result": {
+        "task_id": "TASK-202605-101",
+        "idempotency_key": "f4680540d494e85855de6f4358e9d23e676be4b68d9b0501dd246d6a4f3f14ed",
+        "state": "sent",
+        "attempt_count": 1,
+        "http_status": 200,
+        "remote_status": "sent",
+        "message": "任务创建成功，已分发至责任人",
+        "tracking_url": "http://localhost:8090/api/rpa/tasks/TASK-202605-101",
+        "request_payload": {
+          "task_id": "TASK-202605-101",
+          "task_title": "复核银黄口服液直接材料差异证据",
+          "assignee": {
+            "name": "竞赛评测责任人",
+            "department": "采购部",
+            "role": "评测专用账号"
+          },
+          "source": {
+            "analysis_type": "月度成本分析",
+            "analysis_month": "2026-05",
+            "product": "银黄口服液",
+            "finding": "直接材料单位成本环比上升0.22元/盒；直接材料总成本变动额+34,000.00元，对总成本变动贡献度为+67.09%。金银花单位消耗成本变动+0.15元/盒，为最大明细驱动。同期同名市场价环比上升6.15%，方向关系为一致；市场行情不等于企业实际采购价，不能据此断言采购因果。建议：①复核金银花对应的采购合同、订单、入库单和发票，补齐企业实际采购量价证据；②核对相关批次的领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。"
+          },
+          "priority": "high",
+          "deadline": "2026-09-10",
+          "suggestion": "复核两厂银黄口服液金银花采购量价、批次领退料、投料耗用及工艺收率记录，核验直接材料差异；预期结果：形成可追溯的直接材料差异证据链",
+          "notify_method": "wechat",
+          "created_at": "2026-09-03T16:58:34.045712+08:00"
+        },
+        "response_payload": {
+          "code": 200,
+          "message": "任务创建成功，已分发至责任人",
+          "data": {
+            "task_id": "TASK-202605-101",
+            "status": "sent",
+            "notify_status": {
+              "wechat": "已发送至 竞赛评测责任人(采购部)",
+              "sent_at": "2026-09-03T16:58:34.766486"
+            },
+            "tracking_url": "http://localhost:8090/api/rpa/tasks/TASK-202605-101"
+          }
+        }
+      }
+    },
+    {
+      "scenario": "板蓝根颗粒 2026-05",
+      "report_number": "CA-202605-BLG-001",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "报告契约状态",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "报告字段数量",
+          "status": "PASS",
+          "actual": 107,
+          "expected": 107
+        },
+        {
+          "name": "动态表格数量",
+          "status": "PASS",
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "本月单位成本",
+          "status": "PASS",
+          "actual": "7.47",
+          "expected": "7.47"
+        },
+        {
+          "name": "上月单位成本",
+          "status": "PASS",
+          "actual": "7.24",
+          "expected": "7.24"
+        },
+        {
+          "name": "单位成本环比",
+          "status": "PASS",
+          "actual": "3.18%",
+          "expected": "3.18%"
+        },
+        {
+          "name": "材料贡献度",
+          "status": "PASS",
+          "actual": "69.90%",
+          "expected": "69.90%"
+        },
+        {
+          "name": "单位成本同比",
+          "status": "PASS",
+          "actual": "5.21%",
+          "expected": "5.21%"
+        },
+        {
+          "name": "单位成本预算偏差",
+          "status": "PASS",
+          "actual": "6.71%",
+          "expected": "6.71%"
+        },
+        {
+          "name": "本月工时",
+          "status": "PASS",
+          "actual": "164.71",
+          "expected": "164.71"
+        },
+        {
+          "name": "一厂减二厂单位成本差异",
+          "status": "PASS",
+          "actual": "-0.50",
+          "expected": "-0.50"
+        },
+        {
+          "name": "对标三步法第1步：差异总览格式",
+          "status": "PASS",
+          "actual": "4行×6列",
+          "expected": "4行×6列"
+        },
+        {
+          "name": "对标三步法第2步：结构拆解格式",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "对标三步法第3步：归因与建议格式",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：板蓝根",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：8.47%",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：市场行情不等于企业实际采购价",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "禁止结论：采购价环比上涨12%",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "禁止结论：板蓝根上涨10%",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "禁止结论：设备故障导致单位成本上涨",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "V1.1新增结构化指标可用",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "八类受治理证据引用完整",
+          "status": "PASS",
+          "actual": 8,
+          "expected": 8
+        },
+        {
+          "name": "整改候选数量",
+          "status": "PASS",
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "候选来源可追溯",
+          "status": "PASS",
+          "actual": 10,
+          "expected": "至少1条"
+        },
+        {
+          "name": "模拟RPA触发",
+          "status": "PASS",
+          "actual": "sent",
+          "expected": "sent或幂等拦截"
+        }
+      ],
+      "rpa_result": {
+        "task_id": "TASK-202605-201",
+        "idempotency_key": "94f0e390bf21b963aed2839a67fd37c3e6e055ac4b8ee99fc937c023bbf67555",
+        "state": "sent",
+        "attempt_count": 1,
+        "http_status": 200,
+        "remote_status": "sent",
+        "message": "任务创建成功，已分发至责任人",
+        "tracking_url": "http://localhost:8090/api/rpa/tasks/TASK-202605-201",
+        "request_payload": {
+          "task_id": "TASK-202605-201",
+          "task_title": "复核板蓝根颗粒直接材料差异证据",
+          "assignee": {
+            "name": "竞赛评测责任人",
+            "department": "采购部",
+            "role": "评测专用账号"
+          },
+          "source": {
+            "analysis_type": "月度成本分析",
+            "analysis_month": "2026-05",
+            "product": "板蓝根颗粒",
+            "finding": "直接材料单位成本环比上升0.18元/盒；直接材料总成本变动额+36,640.00元，对总成本变动贡献度为+69.90%。板蓝根单位消耗成本变动+0.15元/盒，为最大明细驱动。同期同名市场价环比上升8.47%，方向关系为一致；市场行情不等于企业实际采购价，不能据此断言采购因果。建议：①复核板蓝根对应的采购合同、订单、入库单和发票，补齐企业实际采购量价证据；②核对相关批次的领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。"
+          },
+          "priority": "medium",
+          "deadline": "2026-09-10",
+          "suggestion": "复核两厂板蓝根颗粒板蓝根采购量价、批次领退料、投料耗用及工艺收率记录，核验直接材料差异；预期结果：形成可追溯的直接材料差异证据链",
+          "notify_method": "wechat",
+          "created_at": "2026-09-03T16:58:34.045712+08:00"
+        },
+        "response_payload": {
+          "code": 200,
+          "message": "任务创建成功，已分发至责任人",
+          "data": {
+            "task_id": "TASK-202605-201",
+            "status": "sent",
+            "notify_status": {
+              "wechat": "已发送至 竞赛评测责任人(采购部)",
+              "sent_at": "2026-09-03T16:58:35.410793"
+            },
+            "tracking_url": "http://localhost:8090/api/rpa/tasks/TASK-202605-201"
+          }
+        }
+      }
+    },
+    {
+      "scenario": "六味地黄胶囊 2026-03",
+      "report_number": "CA-202603-LWDH-001",
+      "status": "PASS",
+      "checks": [
+        {
+          "name": "报告契约状态",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "报告字段数量",
+          "status": "PASS",
+          "actual": 107,
+          "expected": 107
+        },
+        {
+          "name": "动态表格数量",
+          "status": "PASS",
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "本月单位成本",
+          "status": "PASS",
+          "actual": "17.02",
+          "expected": "17.02"
+        },
+        {
+          "name": "上月单位成本",
+          "status": "PASS",
+          "actual": "17.60",
+          "expected": "17.60"
+        },
+        {
+          "name": "单位成本环比",
+          "status": "PASS",
+          "actual": "-3.30%",
+          "expected": "-3.30%"
+        },
+        {
+          "name": "产量环比",
+          "status": "PASS",
+          "actual": "25.00%",
+          "expected": "25.00%"
+        },
+        {
+          "name": "单位成本同比",
+          "status": "PASS",
+          "actual": "0.59%",
+          "expected": "0.59%"
+        },
+        {
+          "name": "单位成本预算偏差",
+          "status": "PASS",
+          "actual": "-0.47%",
+          "expected": "-0.47%"
+        },
+        {
+          "name": "本月工时",
+          "status": "PASS",
+          "actual": "603.43",
+          "expected": "603.43"
+        },
+        {
+          "name": "一厂减二厂单位成本差异",
+          "status": "PASS",
+          "actual": "-1.16",
+          "expected": "-1.16"
+        },
+        {
+          "name": "对标三步法第1步：差异总览格式",
+          "status": "PASS",
+          "actual": "4行×6列",
+          "expected": "4行×6列"
+        },
+        {
+          "name": "对标三步法第2步：结构拆解格式",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "对标三步法第3步：归因与建议格式",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：单位成本实际下降",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：胶囊填充机故障",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "必需归因边界：不量化其单位成本影响",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "禁止结论：采购价环比上涨12%",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "禁止结论：板蓝根上涨10%",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "禁止结论：设备故障导致单位成本上涨",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "V1.1新增结构化指标可用",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "八类受治理证据引用完整",
+          "status": "PASS",
+          "actual": 8,
+          "expected": 8
+        },
+        {
+          "name": "整改候选数量",
+          "status": "PASS",
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "候选来源可追溯",
+          "status": "PASS",
+          "actual": 10,
+          "expected": "至少1条"
+        },
+        {
+          "name": "模拟RPA触发",
+          "status": "PASS",
+          "actual": "sent",
+          "expected": "sent或幂等拦截"
+        }
+      ],
+      "rpa_result": {
+        "task_id": "TASK-202603-301",
+        "idempotency_key": "d6056f2bdadec71119a7a45928a6613f29527b5f68f495dc08b1afe70b01f49b",
+        "state": "sent",
+        "attempt_count": 1,
+        "http_status": 200,
+        "remote_status": "sent",
+        "message": "任务创建成功，已分发至责任人",
+        "tracking_url": "http://localhost:8090/api/rpa/tasks/TASK-202603-301",
+        "request_payload": {
+          "task_id": "TASK-202603-301",
+          "task_title": "复核六味地黄胶囊直接材料差异证据",
+          "assignee": {
+            "name": "竞赛评测责任人",
+            "department": "采购部",
+            "role": "评测专用账号"
+          },
+          "source": {
+            "analysis_type": "月度成本分析",
+            "analysis_month": "2026-03",
+            "product": "六味地黄胶囊",
+            "finding": "直接材料单位成本环比下降0.36元/盒；直接材料总成本变动额+73,850.00元，对总成本变动贡献度为+71.77%。山茱萸单位消耗成本变动-0.10元/盒，为最大明细驱动。同期同名市场价环比下降3.77%，方向关系为一致；市场行情不等于企业实际采购价，不能据此断言采购因果。建议：①复核山茱萸对应的采购合同、订单、入库单和发票，补齐企业实际采购量价证据；②核对相关批次的领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。"
+          },
+          "priority": "medium",
+          "deadline": "2026-09-10",
+          "suggestion": "复核两厂六味地黄胶囊山茱萸采购量价、批次领退料、投料耗用及工艺收率记录，核验直接材料差异；预期结果：形成可追溯的直接材料差异证据链",
+          "notify_method": "wechat",
+          "created_at": "2026-09-03T16:58:34.045712+08:00"
+        },
+        "response_payload": {
+          "code": 200,
+          "message": "任务创建成功，已分发至责任人",
+          "data": {
+            "task_id": "TASK-202603-301",
+            "status": "sent",
+            "notify_status": {
+              "wechat": "已发送至 竞赛评测责任人(采购部)",
+              "sent_at": "2026-09-03T16:58:36.040491"
+            },
+            "tracking_url": "http://localhost:8090/api/rpa/tasks/TASK-202603-301"
+          }
+        }
+      }
+    }
+  ]
+}

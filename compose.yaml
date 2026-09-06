@@ -1,3 +1,5 @@
+name: pharma-cost-intelligence
+
 services:
   cost-intelligence:
     build:

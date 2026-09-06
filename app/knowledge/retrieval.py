@@ -60,7 +60,56 @@ def _query_terms(query: str) -> list[str]:
     return terms
 
 
-def _load_verified_index(index_dir: str | Path) -> tuple[KnowledgeIndexManifest, list[KnowledgeChunk]]:
+def _all_sources_match(root: Path, manifest: KnowledgeIndexManifest) -> bool:
+    """Return whether every governed source exists below root with its recorded hash."""
+
+    return all(
+        (root / Path(source.source_path)).is_file()
+        and _sha256_file(root / Path(source.source_path)) == source.source_sha256
+        for source in manifest.sources
+    )
+
+
+def _resolve_source_root(index_root: Path, manifest: KnowledgeIndexManifest) -> Path:
+    """Resolve portable manifests and recover legacy manifests after relocation."""
+
+    recorded = Path(manifest.source_root)
+    if not recorded.is_absolute():
+        return (index_root / recorded).resolve()
+
+    # Indexes created before the portable format recorded the build computer's
+    # absolute project path.  A normal distribution keeps 06_知识证据索引 directly
+    # below the project root, so prefer that current location when its hashes
+    # prove that it contains the same governed documents.
+    relocated = index_root.parent.resolve()
+    if _all_sources_match(relocated, manifest):
+        return relocated
+    return recorded.resolve()
+
+
+def _resolve_catalog_path(
+    index_root: Path,
+    source_root: Path,
+    manifest: KnowledgeIndexManifest,
+) -> Path | None:
+    if not manifest.catalog_file:
+        return None
+    recorded = Path(manifest.catalog_file)
+    if not recorded.is_absolute():
+        return (index_root / recorded).resolve()
+
+    legacy_source_root = Path(manifest.source_root)
+    if legacy_source_root.is_absolute():
+        try:
+            relocated = source_root / recorded.relative_to(legacy_source_root)
+        except ValueError:
+            relocated = None
+        if relocated is not None and relocated.is_file():
+            return relocated.resolve()
+    return recorded.resolve()
+
+
+def _load_verified_index(index_dir: str | Path) -> tuple[KnowledgeIndexManifest, list[KnowledgeChunk], Path]:
     root = Path(index_dir).resolve()
     manifest_path = root / MANIFEST_FILENAME
     if not manifest_path.is_file():
@@ -77,12 +126,12 @@ def _load_verified_index(index_dir: str | Path) -> tuple[KnowledgeIndexManifest,
         vector_path = root / manifest.vector_file
         if not vector_path.is_file() or _sha256_file(vector_path) != manifest.vector_file_sha256:
             raise KnowledgeRetrievalError("语义向量文件缺失或哈希不一致，请重新构建")
-    if manifest.catalog_file:
-        catalog_path = Path(manifest.catalog_file)
+    source_root = _resolve_source_root(root, manifest)
+    catalog_path = _resolve_catalog_path(root, source_root, manifest)
+    if catalog_path is not None:
         if not catalog_path.is_file() or _sha256_file(catalog_path) != manifest.catalog_file_sha256:
             raise KnowledgeRetrievalError("知识文档目录清单已变化或缺失，请重新构建")
 
-    source_root = Path(manifest.source_root)
     for source in manifest.sources:
         path = source_root / Path(source.source_path)
         if not path.is_file() or _sha256_file(path) != source.source_sha256:
@@ -99,7 +148,7 @@ def _load_verified_index(index_dir: str | Path) -> tuple[KnowledgeIndexManifest,
                 raise KnowledgeRetrievalError(f"知识块索引第{line_number}行无效：{exc}") from exc
     if len(chunks) != manifest.chunk_count:
         raise KnowledgeRetrievalError("知识块索引记录数与清单不一致，请重新构建")
-    return manifest, chunks
+    return manifest, chunks, source_root
 
 
 def _legacy_score(chunk: KnowledgeChunk, terms: Iterable[str], product: str | None) -> tuple[int, list[str]]:
@@ -222,14 +271,12 @@ def search_knowledge(
 
     if not 1 <= top_k <= 20:
         raise KnowledgeRetrievalError("top_k必须位于1至20")
-    manifest, chunks = _load_verified_index(index_dir)
+    manifest, chunks, source_root = _load_verified_index(index_dir)
     terms = _query_terms(query)
     requested_types = list(document_types or [])
     eligible = _eligible_indices(chunks, requested_types, product)
     warnings: list[str] = []
     status = "PASS"
-    source_root = Path(manifest.source_root)
-
     if not manifest.vector_file:
         candidates: list[tuple[float, int, list[str], float, float]] = []
         summaries: list[tuple[float, int, list[str], float, float]] = []

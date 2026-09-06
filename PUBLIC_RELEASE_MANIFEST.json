@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-self-contained-demo",
-  "created_at": "2026-09-03T13:02:16.293323+00:00",
+  "created_at": "2026-09-06T12:01:38.1264018Z",
   "competition_demo_data_included": true,
   "requires_secure_data_overlay": false,
   "api_key_included": false,
@@ -26,34 +26,24 @@
       "sha256": "9accfa37e3125fedb0cf8124c98eea492960977b2003f129c0299f59b1a691eb"
     },
     {
-      "path": "01_成本明细数据/中药一厂_人工工时明细_2026年1-6月.csv",
-      "size": 1565,
-      "sha256": "cb4d519b474fe144dcbba64988039e60d5207c3bc44c5927e903bdf5ba4bf323"
+      "path": "（创灵境）成本智能分析系统技术方案文档.docx",
+      "size": 187657,
+      "sha256": "c75b23b70370363b58e68e8d6b2e9b861cffc8efd1848ce0a3ab9cdae94033a5"
     },
     {
-      "path": "01_成本明细数据/中药一厂_制造费用明细_2026年1-6月.csv",
-      "size": 8086,
-      "sha256": "9fe8245f517e8cd787d58e9113f93d08521043975a4997dead3329e12caee90f"
+      "path": "（创灵境）成本智能分析系统技术方案文档.pdf",
+      "size": 553884,
+      "sha256": "2560a251392cc717c9060bf1f0a2c824a3c64d0e7922889b64043d132c0d2591"
     },
     {
-      "path": "01_成本明细数据/中药一厂_原材料消耗明细_2026年1-6月.csv",
-      "size": 10175,
-      "sha256": "911cb2ac45043f027848df6ad7daea55c0f3d6b4d2a2397a783abfb1b71be8d5"
+      "path": "（创灵境）成本智能分析系统竞赛评测报告.docx",
+      "size": 52335,
+      "sha256": "0fcba04c50744ba19c517260a4f192d993c14dd42c63196cbb3db54ee278d1c7"
     },
     {
-      "path": "01_成本明细数据/中药一厂_成本汇总_2025年1-6月.csv",
-      "size": 1780,
-      "sha256": "a0d573417032d3fa865af82567fc81e1cad151678fe4f4fd77464f259fc3d96b"
-    },
-    {
-      "path": "01_成本明细数据/中药一厂_成本汇总_2026年1-6月.csv",
-      "size": 1779,
-      "sha256": "08b6be09c9297d8df82b346cfa83507f34a278d7a000187960768d9bb4931c26"
-    },
-    {
-      "path": "01_成本明细数据/中药一厂_预算数据_2026年.csv",
-      "size": 1779,
-      "sha256": "987526c99f4a98a2775830c110506460a6027eafcf9d6cf7a07a01eb74cef9aa"
+      "path": "（创灵境）成本智能分析系统竞赛评测报告.pdf",
+      "size": 321904,
+      "sha256": "6fb9619939c81bbb2e2c18c9cf23e966cfe53209bc89a6d93fa2c34e5691f6ca"
     },
     {
       "path": "01_成本明细数据/中药二厂_成本汇总_2025年1-6月.csv",
@@ -66,9 +56,34 @@
       "sha256": "8cb6f41faaa944f98060b0ae2e3fc989420cad0d0b03227dd160127567f3b240"
     },
     {
-      "path": "02_行业参考数据/药材市场价格行情_2026年上半年.csv",
-      "size": 1583,
-      "sha256": "44210be6e6fdb89e0212e544f63cd5f8cfe72389716019c1ddffcc5032cdf94c"
+      "path": "01_成本明细数据/中药一厂_成本汇总_2025年1-6月.csv",
+      "size": 1780,
+      "sha256": "a0d573417032d3fa865af82567fc81e1cad151678fe4f4fd77464f259fc3d96b"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_成本汇总_2026年1-6月.csv",
+      "size": 1779,
+      "sha256": "08b6be09c9297d8df82b346cfa83507f34a278d7a000187960768d9bb4931c26"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_人工工时明细_2026年1-6月.csv",
+      "size": 1565,
+      "sha256": "cb4d519b474fe144dcbba64988039e60d5207c3bc44c5927e903bdf5ba4bf323"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_预算数据_2026年.csv",
+      "size": 1779,
+      "sha256": "987526c99f4a98a2775830c110506460a6027eafcf9d6cf7a07a01eb74cef9aa"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_原材料消耗明细_2026年1-6月.csv",
+      "size": 10175,
+      "sha256": "911cb2ac45043f027848df6ad7daea55c0f3d6b4d2a2397a783abfb1b71be8d5"
+    },
+    {
+      "path": "01_成本明细数据/中药一厂_制造费用明细_2026年1-6月.csv",
+      "size": 8086,
+      "sha256": "9fe8245f517e8cd787d58e9113f93d08521043975a4997dead3329e12caee90f"
     },
     {
       "path": "02_行业参考数据/行业成本基准数据_2026.csv",
@@ -76,14 +91,9 @@
       "sha256": "31fa1383e2cf2c9d38da3eee3d5398b207c1806a6b67bb18e222f6eddf4154ed"
     },
     {
-      "path": "03_制药知识文档/GMP法规核心摘要_2010修订版.pdf",
-      "size": 815792,
-      "sha256": "2e599f526df282da063695de31a7007b97c7ff1ad16d7a97c91747f32534a048"
-    },
-    {
-      "path": "03_制药知识文档/产品配方文档_六味地黄胶囊.pdf",
-      "size": 436675,
-      "sha256": "281a6829ed15ce1df55d9c13f16fd5052e26276a6d30020520967657431eb4e7"
+      "path": "02_行业参考数据/药材市场价格行情_2026年上半年.csv",
+      "size": 1583,
+      "sha256": "44210be6e6fdb89e0212e544f63cd5f8cfe72389716019c1ddffcc5032cdf94c"
     },
     {
       "path": "03_制药知识文档/产品配方文档_板蓝根颗粒.pdf",
@@ -91,9 +101,19 @@
       "sha256": "5f1dd55e4a388b190fc74c601f0589574bccbfa716a2025ea3e79857dd2eec47"
     },
     {
+      "path": "03_制药知识文档/产品配方文档_六味地黄胶囊.pdf",
+      "size": 436675,
+      "sha256": "281a6829ed15ce1df55d9c13f16fd5052e26276a6d30020520967657431eb4e7"
+    },
+    {
       "path": "03_制药知识文档/产品配方文档_银黄口服液.pdf",
       "size": 345398,
       "sha256": "834aa8a81c2938dfb9e6ec28b8743ea0e667c237e06a6609415d97fe3b85b5ad"
+    },
+    {
+      "path": "03_制药知识文档/车间设备清单_中药一厂.pdf",
+      "size": 375424,
+      "sha256": "1e3808fc86fece94d3736690f087c218b8e082e6defe869e68bbdfdcdce7e503"
     },
     {
       "path": "03_制药知识文档/派生知识/历史成本异常处理记录_中药一厂.md",
@@ -116,9 +136,9 @@
       "sha256": "871f86bfaa610bb0db8b84b0f45606019fe889ec437695baf150cbe696cfa102"
     },
     {
-      "path": "03_制药知识文档/车间设备清单_中药一厂.pdf",
-      "size": 375424,
-      "sha256": "1e3808fc86fece94d3736690f087c218b8e082e6defe869e68bbdfdcdce7e503"
+      "path": "03_制药知识文档/GMP法规核心摘要_2010修订版.pdf",
+      "size": 815792,
+      "sha256": "2e599f526df282da063695de31a7007b97c7ff1ad16d7a97c91747f32534a048"
     },
     {
       "path": "04_报告模板/月度成本分析报告模板.docx",
@@ -129,6 +149,11 @@
       "path": "04_报告模板/月度成本分析报告模板.md",
       "size": 6149,
       "sha256": "3a1f0abb31efa05a91ee4edc3f4a7736b80c7f76db61db07caa911a7ebdf9b2b"
+    },
+    {
+      "path": "05_RPA接口文档/模拟RPA接口文档.md",
+      "size": 10422,
+      "sha256": "142f0a050dcd767996106e795a5bbce5e80b6af3f464a6af5c7cbad3e2970307"
     },
     {
       "path": "05_RPA接口文档/Dockerfile",
@@ -146,14 +171,9 @@
       "sha256": "72b7dd981782e40c30a580b5bc5233a96ece788ba1e69d7686917830d40ee106"
     },
     {
-      "path": "05_RPA接口文档/模拟RPA接口文档.md",
-      "size": 10422,
-      "sha256": "142f0a050dcd767996106e795a5bbce5e80b6af3f464a6af5c7cbad3e2970307"
-    },
-    {
       "path": "06_知识证据索引/manifest.json",
-      "size": 5343,
-      "sha256": "1a576962ff9354b676fdce991f92a6808583e5030933a4a51767d3ef56745c29"
+      "size": 5226,
+      "sha256": "41299d85e30b1fbffc543a1ce2755edfd6a16f970622520113b710db8594e22e"
     },
     {
       "path": "06_知识证据索引/pages.jsonl",
@@ -166,14 +186,74 @@
       "sha256": "679a4ff1829bf17f5299046926a6d38d782a4e87fd4ab12a828b3c67107f6ca4"
     },
     {
+      "path": "配置通义千问API.cmd",
+      "size": 445,
+      "sha256": "ade2ab3473327380d572b4accb3e9c753e0a26c189892c5b7cd22ec9229c62d5"
+    },
+    {
+      "path": "启动跨环境演示.cmd",
+      "size": 652,
+      "sha256": "3278e9f95a4b75750bd65eff0d1186f8ba8c81e28a1450b4502812439ea5d31b"
+    },
+    {
+      "path": "停止跨环境演示.cmd",
+      "size": 178,
+      "sha256": "f99a1f4bf60ed896357eb8436a982ace19deef44500cbb586a86a0b49884e57f"
+    },
+    {
+      "path": "停止演示系统.cmd",
+      "size": 215,
+      "sha256": "b85c68533efc471da6eb5df57194bfd2d70ec8e370842a548da64c65133bd688"
+    },
+    {
+      "path": "演示前预检.cmd",
+      "size": 194,
+      "sha256": "67fd169f448121fe053b90c8821a811faa56946fb705f646a981bb7f8093e214"
+    },
+    {
+      "path": "一键启动系统.cmd",
+      "size": 216,
+      "sha256": "acf26fa5d2cbd600876930b88ca368911da8ba95fac12c8fb6a85080020ea5af"
+    },
+    {
       "path": "app/__init__.py",
       "size": 46,
       "sha256": "ce8694f535806d35da0e2c2084837275581f6ee8e07e0023e12d24805de6d699"
     },
     {
+      "path": "app/__pycache__/__init__.cpython-312.pyc",
+      "size": 236,
+      "sha256": "7cade762a93350106ac9db0e29e9b48432544d39008cf43d57161e5426c789e6"
+    },
+    {
+      "path": "app/__pycache__/analyze.cpython-312.pyc",
+      "size": 7033,
+      "sha256": "12c0b52fe986e826c0c39f4fde3c4cafc069a70f01691b5c3fb51294f332e3ec"
+    },
+    {
+      "path": "app/__pycache__/validate.cpython-312.pyc",
+      "size": 3960,
+      "sha256": "13cd0475032d275d43bb6f2f0a0a3730d8c8b435fd841e8354c8a3b055c9027e"
+    },
+    {
       "path": "app/analysis/__init__.py",
       "size": 333,
       "sha256": "348f2a843c4bea929728e2a1941bd31d39e2b770147645992a73fbae5553eb3d"
+    },
+    {
+      "path": "app/analysis/__pycache__/__init__.cpython-312.pyc",
+      "size": 494,
+      "sha256": "753fa0b3e31cb875ea635057d778d55741bb6bfb79aebc7656a9eaa96f3d5dcb"
+    },
+    {
+      "path": "app/analysis/__pycache__/engine.cpython-312.pyc",
+      "size": 36545,
+      "sha256": "2f45cd2cf49002778412ccf0c81baf2f7f41d97497be896b17a59251ee937d72"
+    },
+    {
+      "path": "app/analysis/__pycache__/models.cpython-312.pyc",
+      "size": 7311,
+      "sha256": "552b05bff5c0d3c44c9ffafadc3bbc51c54c0e0ca6ed35eb71af1a817ea3669c"
     },
     {
       "path": "app/analysis/engine.py",
@@ -201,6 +281,21 @@
       "sha256": "67aa238774171d863a7d53ae1d6565fdc9520820f18b2f68d34037753f36311a"
     },
     {
+      "path": "app/batch/__pycache__/__init__.cpython-312.pyc",
+      "size": 556,
+      "sha256": "787a159d159ebfd6c6e5c0c2f510c8a5a01e57ef91b798ea1382a6802dab71b2"
+    },
+    {
+      "path": "app/batch/__pycache__/models.cpython-312.pyc",
+      "size": 3232,
+      "sha256": "3822e3d508a2709eaf3c59115eb15416dfcd671ebc94fcb0a6e0eebe32193013"
+    },
+    {
+      "path": "app/batch/__pycache__/runner.cpython-312.pyc",
+      "size": 13079,
+      "sha256": "433761de91e6fbdd467555f296b44793e3bf670ddce60d0903b1fd8cf962e3d9"
+    },
+    {
       "path": "app/batch/models.py",
       "size": 1670,
       "sha256": "faaaaafbd1afd65a91a6879ffcc9516141185f60ed2dd5312451db7aa9028021"
@@ -219,6 +314,46 @@
       "path": "app/dashboard/__main__.py",
       "size": 1054,
       "sha256": "14e79703fa117880441a5939f476b58df24657ca9f989d6637104a0667059f52"
+    },
+    {
+      "path": "app/dashboard/__pycache__/__init__.cpython-312.pyc",
+      "size": 354,
+      "sha256": "03bffa4e9645f563d39a4dfbfcbf772610e689fe165bac994776bef81a30a945"
+    },
+    {
+      "path": "app/dashboard/__pycache__/models.cpython-312.pyc",
+      "size": 3930,
+      "sha256": "8b5867db1ac913c196b78b98a6291ec8967e184264cf3762f9e8ad9f2729a79a"
+    },
+    {
+      "path": "app/dashboard/__pycache__/period_reports.cpython-312.pyc",
+      "size": 26160,
+      "sha256": "48310a2beed3ff7b94dfbde1d86481c8ca05f98213f43d931c1d6a20571ba6fe"
+    },
+    {
+      "path": "app/dashboard/__pycache__/report_view.cpython-312.pyc",
+      "size": 1664,
+      "sha256": "c4333bc781cbe1ffd5a402a40ea85a4f8820c05ea5f0fe2192497018f780b595"
+    },
+    {
+      "path": "app/dashboard/__pycache__/reports.cpython-312.pyc",
+      "size": 7051,
+      "sha256": "39f928fb2018053bafa4074cfab52b8fd14c617929db7fdb2ebb17fd7bc0646f"
+    },
+    {
+      "path": "app/dashboard/__pycache__/service.cpython-312.pyc",
+      "size": 52824,
+      "sha256": "ee834547c861e1eb3a0529990de93573bb34846a36d0452eb8dddfc8057218ca"
+    },
+    {
+      "path": "app/dashboard/__pycache__/web.cpython-312.pyc",
+      "size": 12438,
+      "sha256": "a43c88cd51cd5d34a5464a31165bfcea04ddd672382fe1686293092a244a9686"
+    },
+    {
+      "path": "app/dashboard/__pycache__/workflow.cpython-312.pyc",
+      "size": 18245,
+      "sha256": "3eec3d70556fbf63f7fdc6017d46ff6819ed8a0fa5eec22c83ee0cc90eec7e61"
     },
     {
       "path": "app/dashboard/models.py",
@@ -276,6 +411,26 @@
       "sha256": "a3e8f3826b942cc3f3a432c4e33d1e79389e6d3e412e7fa3ce3f9308099732f4"
     },
     {
+      "path": "app/data_quality/__pycache__/__init__.cpython-312.pyc",
+      "size": 412,
+      "sha256": "239ba1835c2c072adb613b315c893b975dabf38fcf0bf39d72dccb3f394a2ca7"
+    },
+    {
+      "path": "app/data_quality/__pycache__/models.cpython-312.pyc",
+      "size": 14077,
+      "sha256": "1896d12fc0ffc51b4e306a92b08488659b9f15599b412f8f238a6f0d4a580515"
+    },
+    {
+      "path": "app/data_quality/__pycache__/normalization.cpython-312.pyc",
+      "size": 3091,
+      "sha256": "5e5e91db0f7c3ffffa4568ed57425933791a965c49a26635d731fc423e99c0c5"
+    },
+    {
+      "path": "app/data_quality/__pycache__/validator.cpython-312.pyc",
+      "size": 34135,
+      "sha256": "d07443b97fe4707531f0c60982429ee5f87be50a8cd333ef70b001d63b70402c"
+    },
+    {
       "path": "app/data_quality/models.py",
       "size": 9614,
       "sha256": "4109e3df55b65d85a039aa696462cc75c1e2fd5a61ac1b09c304370261244646"
@@ -296,6 +451,16 @@
       "sha256": "2ddd7ba4ba2bb0a753ef16c09f69e55b6ab34632c41d33b74e90e722749da229"
     },
     {
+      "path": "app/evaluation/__pycache__/__init__.cpython-312.pyc",
+      "size": 431,
+      "sha256": "2082c563989885899c27b1101044010da8912aab5cf25c737bc8d41e48f173f0"
+    },
+    {
+      "path": "app/evaluation/__pycache__/llm_golden.cpython-312.pyc",
+      "size": 17700,
+      "sha256": "2175ef9c421771d98a0bf78cf57528d07e3a711cf1a659a6e0e6f41239e8068f"
+    },
+    {
       "path": "app/evaluation/llm_golden.py",
       "size": 14628,
       "sha256": "7eadc2c35913fbaf8948ea42e55d0189752c629e0ee257e0b1bb8b71fab06be1"
@@ -311,14 +476,54 @@
       "sha256": "9f4d71c2dffcc34693b727464ea034cab68b14983c33920cc8c81d399c994146"
     },
     {
+      "path": "app/knowledge/__pycache__/__init__.cpython-312.pyc",
+      "size": 797,
+      "sha256": "0739b7f36c9943f4b7a5e67197343b4bab372120931fafc1b87b789d12da4ed2"
+    },
+    {
+      "path": "app/knowledge/__pycache__/__main__.cpython-312.pyc",
+      "size": 7952,
+      "sha256": "368846c20961e43f9843178389c7a30f4ae99585067c418d698de04fd55381d1"
+    },
+    {
+      "path": "app/knowledge/__pycache__/hybrid.cpython-312.pyc",
+      "size": 10848,
+      "sha256": "857734967f682eeecba299fd3738ae25f504afffc98ebf9aee47fc4e9e47f80c"
+    },
+    {
+      "path": "app/knowledge/__pycache__/indexer.cpython-312.pyc",
+      "size": 21962,
+      "sha256": "f09074fe37a65b1a2b5f3646b92f43169b3ef77458968489b6950812a35c65c1"
+    },
+    {
+      "path": "app/knowledge/__pycache__/llamaindex_adapter.cpython-312.pyc",
+      "size": 7441,
+      "sha256": "2315af1a9be977ded04259307571ac5ce02dc69e3f27cd7e2193b1409a2e5ef3"
+    },
+    {
+      "path": "app/knowledge/__pycache__/models.cpython-312.pyc",
+      "size": 5363,
+      "sha256": "d94bdfa6cbeeb505b3f8fa3053d32de94342f074f5a50c23f46e91450a4d7876"
+    },
+    {
+      "path": "app/knowledge/__pycache__/parsers.cpython-312.pyc",
+      "size": 8670,
+      "sha256": "a6abc5d51c26a8b47c66d2a887bded7e1eacbf0d1e13465d5c016e9df43582f6"
+    },
+    {
+      "path": "app/knowledge/__pycache__/retrieval.cpython-312.pyc",
+      "size": 19270,
+      "sha256": "03c37bf1281794a5665ba4977b2409ba44adf3e1461e59632b95e6959e2a1315"
+    },
+    {
       "path": "app/knowledge/hybrid.py",
       "size": 6036,
       "sha256": "975a60158168ccb9324ae47e7ba9eadfe9e3d620605b7d065cb0807f8746176c"
     },
     {
       "path": "app/knowledge/indexer.py",
-      "size": 15353,
-      "sha256": "3dea3f1f1d636509527cffe13374e5ef113371324c9f7fc0ca92304b9df50d6f"
+      "size": 16202,
+      "sha256": "75d61d493c55adf82bdcd4ddad61a8e96947a367e5ebcedc3a04d1abda9390fd"
     },
     {
       "path": "app/knowledge/llamaindex_adapter.py",
@@ -337,13 +542,43 @@
     },
     {
       "path": "app/knowledge/retrieval.py",
-      "size": 12505,
-      "sha256": "f5f572e593594222f4788e2aff43573449f5fc0c9fdfafe0fdc1f834e4b69e06"
+      "size": 14319,
+      "sha256": "cfd39ff7a19356864517194921ea63958a6592124896f515bfa57044bf884b31"
     },
     {
       "path": "app/llm/__init__.py",
       "size": 421,
       "sha256": "b8fc8fc9905a14213ce299c2e91f89da5ac54bcb2d0fd23b28601f4e1f9e361f"
+    },
+    {
+      "path": "app/llm/__pycache__/__init__.cpython-312.pyc",
+      "size": 563,
+      "sha256": "623ea7505a12faa3af3049b2db60c250d85167a7a329d629208f80567a9a8cf3"
+    },
+    {
+      "path": "app/llm/__pycache__/client.cpython-312.pyc",
+      "size": 13760,
+      "sha256": "0114c9fb7a14bd9a05c7218237fc4dbc9f4c4cfec9c35832babf329fb968f73a"
+    },
+    {
+      "path": "app/llm/__pycache__/guardrails.cpython-312.pyc",
+      "size": 9988,
+      "sha256": "2ab06b8b86d3cb6687866d92a5d55478d9b3633ac7e93db7573a1e3540545792"
+    },
+    {
+      "path": "app/llm/__pycache__/models.cpython-312.pyc",
+      "size": 10197,
+      "sha256": "2c500cf13628567866448ffcfa3a1673091cc1c710698651760021ceed903fcc"
+    },
+    {
+      "path": "app/llm/__pycache__/service.cpython-312.pyc",
+      "size": 9583,
+      "sha256": "9b580f8f96ba3f6af0d2b0660c19d5c71b83196168bb3d3b47a6d77a8ff0e695"
+    },
+    {
+      "path": "app/llm/__pycache__/tasks.cpython-312.pyc",
+      "size": 10350,
+      "sha256": "e24dcaf55a4d67ff1f80fddbabea388629b0c697a1e646e4abcf1116db6bd861"
     },
     {
       "path": "app/llm/client.py",
@@ -376,6 +611,16 @@
       "sha256": "46dd407412d15d3c020dd2605b6017dd3fffe08e4d231dfb0a2235fcc935f93e"
     },
     {
+      "path": "app/mock_rpa/__pycache__/__init__.cpython-312.pyc",
+      "size": 406,
+      "sha256": "6695d316d37a1f5c2b7792ff9eb3c4dcacce3768e0f1f17cad91fc091037961c"
+    },
+    {
+      "path": "app/mock_rpa/__pycache__/server.cpython-312.pyc",
+      "size": 10371,
+      "sha256": "abfe86c11b552717fc89a49acca369c7ed965b4987b27a8e498ce07024a39b40"
+    },
+    {
       "path": "app/mock_rpa/server.py",
       "size": 7235,
       "sha256": "03288ea50bc60666fb4247f34056fe016f50df241e096c00021ef791d314636c"
@@ -389,6 +634,46 @@
       "path": "app/reporting/__main__.py",
       "size": 2077,
       "sha256": "006f60a5ac17b2eb1d98aad9c485fe2035eaaf1736d7718c46960329dafed915"
+    },
+    {
+      "path": "app/reporting/__pycache__/__init__.cpython-312.pyc",
+      "size": 703,
+      "sha256": "f3620c98407a16e109de23dcfb1426f7dd114178e14c5bb862861345d8fa0000"
+    },
+    {
+      "path": "app/reporting/__pycache__/__main__.cpython-312.pyc",
+      "size": 3685,
+      "sha256": "c33e003e5cd4196cbc026edf32b6c245d2bb7dfdadff74a8b5e8bca3dfe08b01"
+    },
+    {
+      "path": "app/reporting/__pycache__/benchmark_guidance.cpython-312.pyc",
+      "size": 8972,
+      "sha256": "3e14dbe5787012553363a9896b811870518e2cfe4fc150516afa1f00272c416e"
+    },
+    {
+      "path": "app/reporting/__pycache__/charts.cpython-312.pyc",
+      "size": 14629,
+      "sha256": "5355c9ef63a7d08a7dd093f093941ea46fb49baa1508cecf776ae52698d52344"
+    },
+    {
+      "path": "app/reporting/__pycache__/contract.cpython-312.pyc",
+      "size": 40431,
+      "sha256": "56f1e63aac516b910b3a6903439b4cafd82629cfb7c922557bfef8a065ae1c95"
+    },
+    {
+      "path": "app/reporting/__pycache__/models.cpython-312.pyc",
+      "size": 3799,
+      "sha256": "d4bd53a9d708b8151914a392ff6cde6b7242056615f59f70fa2e1959f2e6bb25"
+    },
+    {
+      "path": "app/reporting/__pycache__/renderers.cpython-312.pyc",
+      "size": 56965,
+      "sha256": "f5e10a00a6c5c988202b37ebfe5085fb031130146c07ec262b91ecc19857fb83"
+    },
+    {
+      "path": "app/reporting/__pycache__/trend_context.cpython-312.pyc",
+      "size": 3337,
+      "sha256": "8310d9fb238f6f5a6a67765d8e77cce86a21bbbc3af640b101e094e5634fcdb7"
     },
     {
       "path": "app/reporting/benchmark_guidance.py",
@@ -434,6 +719,46 @@
       "path": "app/review/__main__.py",
       "size": 2540,
       "sha256": "da3d6c065f2ca719473b9298f72902e1d5b64c79f86284ab094abd75af2c3ce9"
+    },
+    {
+      "path": "app/review/__pycache__/__init__.cpython-312.pyc",
+      "size": 1127,
+      "sha256": "a9a46fef7d196c7c08ce9fe79f477298cc7d25b7b27d037a0a23f31bea4ad962"
+    },
+    {
+      "path": "app/review/__pycache__/auth.cpython-312.pyc",
+      "size": 7133,
+      "sha256": "dc0990f1f0c87aa817c9300efe8830f70e06aa12f81059cd10f34769e12a2f12"
+    },
+    {
+      "path": "app/review/__pycache__/config.cpython-312.pyc",
+      "size": 13370,
+      "sha256": "ac2e46133c313ab91ca3fac1c98e9c85b62d408004a4a26f949760188f862941"
+    },
+    {
+      "path": "app/review/__pycache__/database.cpython-312.pyc",
+      "size": 43595,
+      "sha256": "77d286c1b9a3de805360efcaeef638b132e424fa7bb8ac87dbc971b9b1a13e59"
+    },
+    {
+      "path": "app/review/__pycache__/execution.cpython-312.pyc",
+      "size": 13752,
+      "sha256": "44153f327e6dd35f84135443374b1584f81ae042d1df0a836f0e15c0e6507faa"
+    },
+    {
+      "path": "app/review/__pycache__/identity.cpython-312.pyc",
+      "size": 11050,
+      "sha256": "4e5a6b7ead02ae539b9846dd036c1f71772498d1771175e5a7d69fe63b40ea35"
+    },
+    {
+      "path": "app/review/__pycache__/operations.cpython-312.pyc",
+      "size": 14614,
+      "sha256": "fc7dce6385b800584a42e4621aa76562936fbf71727e11b175192eac4f48cd9c"
+    },
+    {
+      "path": "app/review/__pycache__/web.cpython-312.pyc",
+      "size": 21757,
+      "sha256": "b45519de55ac8aa77606b8ad2738c5cb23b29781be2fde191dc6801a7f28fccd"
     },
     {
       "path": "app/review/auth.py",
@@ -496,6 +821,31 @@
       "sha256": "5aeb59b932e8549df36c84b95d1ac7d194b9aa1fd94e108647b8256b56a2bebf"
     },
     {
+      "path": "app/rpa/__pycache__/__init__.cpython-312.pyc",
+      "size": 886,
+      "sha256": "243c891cb53ac2071b881e7469072b751887f4ca1999af32e0e98767cbb83c4a"
+    },
+    {
+      "path": "app/rpa/__pycache__/__main__.cpython-312.pyc",
+      "size": 7799,
+      "sha256": "49413ae955cf1e0be38d0cd688edcd4dcad464bf2c813b1938a66d742a100db9"
+    },
+    {
+      "path": "app/rpa/__pycache__/client.cpython-312.pyc",
+      "size": 11981,
+      "sha256": "957e0108e57fbc21f1607b1db0c4e4299dff21d9c69ef9cf268d11d1141a89fb"
+    },
+    {
+      "path": "app/rpa/__pycache__/models.cpython-312.pyc",
+      "size": 7207,
+      "sha256": "8f8d0ea1882cf5c20f819045c94d7990bac27f12747db7f79bd367873c3409d8"
+    },
+    {
+      "path": "app/rpa/__pycache__/workflow.cpython-312.pyc",
+      "size": 9105,
+      "sha256": "aaf90bcd2225f97db0ba57faeb063bed43f9c21c608462b89198e18cf8dd71c5"
+    },
+    {
       "path": "app/rpa/client.py",
       "size": 8933,
       "sha256": "cec7402d3640dc669362e75eadc578421006c98ae3939f92ef35808e51ebaea3"
@@ -517,8 +867,8 @@
     },
     {
       "path": "compose.yaml",
-      "size": 691,
-      "sha256": "933ff3c03af557d370c5857afac1306f12998910687f9835113487dcc30e16f4"
+      "size": 723,
+      "sha256": "4534a204e31cffe644b415393de8e3479c696a2674a4a4c31825dde8e8ed3d7b"
     },
     {
       "path": "Dockerfile",
@@ -526,24 +876,9 @@
       "sha256": "5a221240592ff4cc104e41bca7ef7c9c69ce2e50621ca5ced14889897a52dcee"
     },
     {
-      "path": "docs/一键启动与演示前预检报告.md",
-      "size": 5028,
-      "sha256": "3afee2e1c37dc129766916e7518ae994c7a5d7f34fed094824ac76eb5989ea4b"
-    },
-    {
-      "path": "docs/三场景竞赛评测报告.md",
-      "size": 9348,
-      "sha256": "e6608017a0c68d30f6db40b799ec1b4372bfaa75f4e4779dbb7c1d9f3d91d077"
-    },
-    {
-      "path": "docs/前三项交付与公开仓库检查报告.md",
-      "size": 3886,
-      "sha256": "55fd201347ad7674e29a835ab2a2d72da0e798e92b5c22b1e3dbd6140c254202"
-    },
-    {
-      "path": "docs/竞赛技术方案.md",
-      "size": 25058,
-      "sha256": "6139a368cd90fb671b973823566bdbef5d368c2f320efe301da5616fe2bf00bb"
+      "path": "docs/第三方依赖与许可证清单.md",
+      "size": 3580,
+      "sha256": "d375d7b4a8ff21e8984999210cd2b24088bb9734d1e44c20e5c0c0c29d41d81c"
     },
     {
       "path": "docs/端到端验收与交付检查报告.md",
@@ -551,14 +886,49 @@
       "sha256": "676cfb4c8cd50aeeb8d6a78e7ebe40038709828a04fedb0729d0457f6182b5c5"
     },
     {
-      "path": "docs/第三方依赖与许可证清单.md",
-      "size": 3580,
-      "sha256": "d375d7b4a8ff21e8984999210cd2b24088bb9734d1e44c20e5c0c0c29d41d81c"
+      "path": "docs/竞赛技术方案.md",
+      "size": 25058,
+      "sha256": "184137c69df2f21bbd3af9d69aa676fe686c85fc53f0be9f75748921fd356afd"
+    },
+    {
+      "path": "docs/前三项交付与公开仓库检查报告.md",
+      "size": 3886,
+      "sha256": "55fd201347ad7674e29a835ab2a2d72da0e798e92b5c22b1e3dbd6140c254202"
+    },
+    {
+      "path": "docs/三场景竞赛评测报告.md",
+      "size": 9348,
+      "sha256": "e6608017a0c68d30f6db40b799ec1b4372bfaa75f4e4779dbb7c1d9f3d91d077"
+    },
+    {
+      "path": "docs/一键启动与演示前预检报告.md",
+      "size": 5028,
+      "sha256": "f2e143737e535502dfe0ac48ad771e0be012db15af4815e5600de43c0b9ce76d"
+    },
+    {
+      "path": "docs/evidence/端到端验收结果_20260903_最终.json",
+      "size": 10443,
+      "sha256": "10130cad874f4bee79a12d2b0cc119990f1f811cc25c966fbd81acfc86d00598"
+    },
+    {
+      "path": "docs/evidence/三场景大模型自动验收结果_20260824.json",
+      "size": 30510,
+      "sha256": "59f0a9053d241e7479ea23a45fb003cc0ce8e2a63bea40a8f4189df30c4e63b6"
+    },
+    {
+      "path": "docs/evidence/三场景自动评测结果_V1.4.json",
+      "size": 20051,
+      "sha256": "266c8cf37325aab73dacd9bb8110cdb22048d22e1ee977f448af9fa6b3ee50ea"
+    },
+    {
+      "path": "README_评委运行说明.md",
+      "size": 4900,
+      "sha256": "2e1a809869676576378ea700df1adbb28147425dccbf72e6821028127060629e"
     },
     {
       "path": "README.md",
       "size": 4820,
-      "sha256": "e92da3e09e128aa8608a5f8b567228ecb4ad647a787998d202c3de4bae2f7f10"
+      "sha256": "688e6b8d128766719662d831175fa145215d0381c195d07375e31ee94457eeae"
     },
     {
       "path": "requirements-llamaindex.txt",
@@ -606,14 +976,19 @@
       "sha256": "71b78ab0bf1ff4d589b489a48b39a1f2282de8756b8d4b9abb1ec6707bc4e83f"
     },
     {
+      "path": "scripts/initialize_python.ps1",
+      "size": 3900,
+      "sha256": "acad33bd4ff2d81c951c9722637c5d86b1a56560064e64a890595c59e855a48b"
+    },
+    {
       "path": "scripts/llm_golden_evaluation.py",
       "size": 6784,
       "sha256": "2d781262854a9b55d17e790918a767c90cdb8ecb5a94b51e6f64f96d5dc9958f"
     },
     {
       "path": "scripts/preflight_demo.ps1",
-      "size": 495,
-      "sha256": "9f91697dabb43963ffc840960cd4b7cae5d348a28b55dea63591f5b35681458c"
+      "size": 527,
+      "sha256": "6c70e028f869f5e25cca568a0a65d8b2906c52a5f764ccdc36971d0bc9ba0456"
     },
     {
       "path": "scripts/prepare_judge_package.py",
@@ -623,7 +998,7 @@
     {
       "path": "scripts/prepare_public_release.py",
       "size": 5219,
-      "sha256": "b2e390081ae65f314f4ab3ac037323ec42903020662fdbfdc6d441e19c6def72"
+      "sha256": "b6bb76884a8053997d5dbd6110b09dad3e91722b691d9a369a863ff9ac0f54ee"
     },
     {
       "path": "scripts/review_database_ops.py",
@@ -642,8 +1017,8 @@
     },
     {
       "path": "scripts/start_demo.ps1",
-      "size": 11560,
-      "sha256": "f650d6551046513eeefcaa7e41d0ff5fcb1542932ceb5f316a7c91bc800acef9"
+      "size": 10524,
+      "sha256": "e0c65406e5d2631d36c97fc9c1923d236b9543deba5ad8d07641120b33043bfb"
     },
     {
       "path": "scripts/stop_demo.ps1",
@@ -652,18 +1027,103 @@
     },
     {
       "path": "start-docker.sh",
-      "size": 145,
-      "sha256": "b46b2efc436513df94668072064bd6b74a174542cbc3c313a9c1b5d1a1af69a4"
+      "size": 173,
+      "sha256": "b521229d9170e75dfa2735dd231bb395bd3e043e918c4c965646b4a1c58b10bc"
     },
     {
       "path": "stop-docker.sh",
-      "size": 67,
-      "sha256": "24da36b5456edc0ff11fb30e8c86574b585a9b821b1b0d91ccd1e840e3448af6"
+      "size": 95,
+      "sha256": "844154f6a0f2ba11d8fdee9938f1093853e1b0803caab3c7b65be69823579789"
     },
     {
       "path": "tests/__init__.py",
       "size": 28,
       "sha256": "d61dd108a89607064a9f0cdb2a30bd0a8c3d4e2d55aaef9fb621d1103636c30f"
+    },
+    {
+      "path": "tests/__pycache__/__init__.cpython-312.pyc",
+      "size": 221,
+      "sha256": "1a6f6d7ee13649a8f3db94bfa43be940408ed8658b2eac5670cc01b969bdd2ed"
+    },
+    {
+      "path": "tests/__pycache__/fixture_factory.cpython-312.pyc",
+      "size": 1969,
+      "sha256": "704e3b59b86b53dbef4ee0680d5c92cccf88228d5feb40f5b02aa1329bca91f9"
+    },
+    {
+      "path": "tests/__pycache__/test_analysis.cpython-312.pyc",
+      "size": 23301,
+      "sha256": "e0e8597313fa0449203f10c68d673d80a6314613675b8bfa0ca60b58faa5ccec"
+    },
+    {
+      "path": "tests/__pycache__/test_batch.cpython-312.pyc",
+      "size": 5590,
+      "sha256": "20e90f9a01647de8cc65c66a85a98f657042f684a07091a83fbdb624e45ae2c5"
+    },
+    {
+      "path": "tests/__pycache__/test_dashboard.cpython-312.pyc",
+      "size": 83761,
+      "sha256": "ad3bb40ed966c26c09f7289429823a35467857865c5dde8741a4ce8aef7487a5"
+    },
+    {
+      "path": "tests/__pycache__/test_data_quality.cpython-312.pyc",
+      "size": 26224,
+      "sha256": "a85a69bd588e94efad5dcab4a8f6fff85738ca79512a946cf995aef0a28c18e1"
+    },
+    {
+      "path": "tests/__pycache__/test_delivery.cpython-312.pyc",
+      "size": 11578,
+      "sha256": "fb38710735888afbe5ecb25c9d811e84602ac8e5f1e217695a13d8ba5324462f"
+    },
+    {
+      "path": "tests/__pycache__/test_deployment.cpython-312.pyc",
+      "size": 17742,
+      "sha256": "16673f463974ae6ca796bca7d44773c058c15b8c3e802c34a62f638076ffa631"
+    },
+    {
+      "path": "tests/__pycache__/test_execution.cpython-312.pyc",
+      "size": 19091,
+      "sha256": "442d3547fddbf98aee0f551a4a16dd4954b21e6a1c2f27bae7f6c1b54cad4c21"
+    },
+    {
+      "path": "tests/__pycache__/test_knowledge.cpython-312.pyc",
+      "size": 31296,
+      "sha256": "e64860912aa816e10c2004a6bed477bb9a40d61d7b656a75be145e9b972f60ba"
+    },
+    {
+      "path": "tests/__pycache__/test_llamaindex_adapter.cpython-312.pyc",
+      "size": 3335,
+      "sha256": "9684ead06f04bf69b795348ba8d21cf5999d154ea757879665f0ac7b1ec84d2a"
+    },
+    {
+      "path": "tests/__pycache__/test_llm_golden_evaluation.cpython-312.pyc",
+      "size": 14403,
+      "sha256": "fd3685ad33420c6877c17260411b537960032c29be735fad666daebf34b61d17"
+    },
+    {
+      "path": "tests/__pycache__/test_llm.cpython-312.pyc",
+      "size": 30218,
+      "sha256": "fc1203416e507ac8bca008f6f0a60cede905450932c4354fa3874915b1567901"
+    },
+    {
+      "path": "tests/__pycache__/test_reporting.cpython-312.pyc",
+      "size": 41463,
+      "sha256": "a8381d2e39368302be688255aebc0ed9716dec8c4663afaf9336ed1cc56c7161"
+    },
+    {
+      "path": "tests/__pycache__/test_review.cpython-312.pyc",
+      "size": 29366,
+      "sha256": "fa877193449124527e365ae2a6a5d037f1f6c032a4142d3320c6dce9633d2ca2"
+    },
+    {
+      "path": "tests/__pycache__/test_rpa.cpython-312.pyc",
+      "size": 24702,
+      "sha256": "1486b283c791b22deb9f9d2f8cecc0065a56ab88342e4bf56b41c4b4c75cb34e"
+    },
+    {
+      "path": "tests/__pycache__/test_task_llm.cpython-312.pyc",
+      "size": 10866,
+      "sha256": "fcee25cdd200c2098621c96e115787a98184f36ce432ad2cda16089b79cec3c0"
     },
     {
       "path": "tests/fixture_factory.py",
@@ -692,8 +1152,8 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "size": 6003,
-      "sha256": "dc604e043ee8402cc3a733c503ed21795fc01a13dcb0993088337f86935451b0"
+      "size": 7733,
+      "sha256": "0b1823dfca35559b600dd59f3cf8589f976e3aa4a55330108db884c0a738b8c6"
     },
     {
       "path": "tests/test_deployment.py",
@@ -707,8 +1167,8 @@
     },
     {
       "path": "tests/test_knowledge.py",
-      "size": 18146,
-      "sha256": "38884984ba93b22b2a473f96fbac65562abbf3dd5e572ca8bf6598f86bb033a3"
+      "size": 19685,
+      "sha256": "f5a3d563dc55d5988073875260e4e302d4e7eb753303043cf6629cc1f169ab0f"
     },
     {
       "path": "tests/test_llamaindex_adapter.py",
@@ -716,14 +1176,14 @@
       "sha256": "25aec4ed11ae4cef441e8d9f3250efc283c726cb969eed74a538b0e248a8803a"
     },
     {
-      "path": "tests/test_llm.py",
-      "size": 19874,
-      "sha256": "ad4e30045c0e1ba81b41d5c2702fbbd3d299a6317a3a024494d63b1b037883ba"
-    },
-    {
       "path": "tests/test_llm_golden_evaluation.py",
       "size": 9800,
       "sha256": "b4fcefb4e65532cfe22c430786e914c6002eba61d560d01b71ee958895a15ada"
+    },
+    {
+      "path": "tests/test_llm.py",
+      "size": 19874,
+      "sha256": "ad4e30045c0e1ba81b41d5c2702fbbd3d299a6317a3a024494d63b1b037883ba"
     },
     {
       "path": "tests/test_reporting.py",
@@ -749,56 +1209,6 @@
       "path": "THIRD_PARTY_NOTICES.md",
       "size": 1854,
       "sha256": "038aa89658ad446c03a9ed54e9e6b23b70e1f87cc863b8ed640484e359e61d1b"
-    },
-    {
-      "path": "停止演示系统.cmd",
-      "size": 147,
-      "sha256": "e180b8d7afe8b6a7afe30dcf630a3386bdaea6f58370b1a6f8f566b267d59683"
-    },
-    {
-      "path": "停止跨环境演示.cmd",
-      "size": 82,
-      "sha256": "fae1411a267d1cd4acdf787a0084a3ebd2779f6bc8a3e2f2a90decdd991915c6"
-    },
-    {
-      "path": "启动演示系统.cmd",
-      "size": 148,
-      "sha256": "edfd34336bf3162dc05750dd3ad211caa3e553077c23edb188553421bb2deb93"
-    },
-    {
-      "path": "启动跨环境演示.cmd",
-      "size": 310,
-      "sha256": "e81cbb227b97b26b4523e86e74d7bfb7e3b1f6db90cf5fd949a86d41b1719b68"
-    },
-    {
-      "path": "演示前预检.cmd",
-      "size": 136,
-      "sha256": "02a70b24f609598fd9af3d820b414dfd98eb94f4c29fc0e17422c35b9dbabcd7"
-    },
-    {
-      "path": "配置通义千问API.cmd",
-      "size": 445,
-      "sha256": "ade2ab3473327380d572b4accb3e9c753e0a26c189892c5b7cd22ec9229c62d5"
-    },
-    {
-      "path": "（创灵境）成本智能分析系统技术方案文档.docx",
-      "size": 187657,
-      "sha256": "c75b23b70370363b58e68e8d6b2e9b861cffc8efd1848ce0a3ab9cdae94033a5"
-    },
-    {
-      "path": "（创灵境）成本智能分析系统技术方案文档.pdf",
-      "size": 553884,
-      "sha256": "2560a251392cc717c9060bf1f0a2c824a3c64d0e7922889b64043d132c0d2591"
-    },
-    {
-      "path": "（创灵境）成本智能分析系统竞赛评测报告.docx",
-      "size": 52335,
-      "sha256": "0fcba04c50744ba19c517260a4f192d993c14dd42c63196cbb3db54ee278d1c7"
-    },
-    {
-      "path": "（创灵境）成本智能分析系统竞赛评测报告.pdf",
-      "size": 321904,
-      "sha256": "6fb9619939c81bbb2e2c18c9cf23e966cfe53209bc89a6d93fa2c34e5691f6ca"
     }
   ]
 }

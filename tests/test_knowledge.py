@@ -59,6 +59,8 @@ class KnowledgeIndexTests(unittest.TestCase):
         self.assertEqual(self.manifest.bm25_version, "bm25-okapi-1.0")
         self.assertEqual(self.manifest.vector_model, "local-tfidf-lsi-1.0")
         self.assertEqual(self.manifest.vector_dimensions, 96)
+        self.assertFalse(Path(self.manifest.source_root).is_absolute())
+        self.assertEqual(self.manifest.output_root, ".")
         self.assertTrue((self.index_root / "vectors.npz").is_file())
         self.assertEqual(
             sha256_file(self.index_root / "vectors.npz"),
@@ -106,6 +108,33 @@ class KnowledgeIndexTests(unittest.TestCase):
             )
             with self.assertRaises(KnowledgeRetrievalError):
                 search_knowledge(copied, "银黄口服液")
+
+    def test_legacy_absolute_manifest_survives_project_relocation(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            relocated_root = Path(temporary) / "评委 解压目录"
+            shutil.copytree(PROJECT_ROOT / "03_制药知识文档", relocated_root / "03_制药知识文档")
+            shutil.copytree(CURRENT_INDEX, relocated_root / "06_知识证据索引")
+            manifest_path = relocated_root / "06_知识证据索引" / "manifest.json"
+            payload = json.loads(manifest_path.read_text(encoding="utf-8"))
+            payload["source_root"] = r"Z:\原作者电脑\已经不存在的项目目录"
+            payload["output_root"] = r"Z:\原作者电脑\已经不存在的项目目录\06_知识证据索引"
+            manifest_path.write_text(
+                json.dumps(payload, ensure_ascii=False, indent=2),
+                encoding="utf-8",
+                newline="\n",
+            )
+
+            result = search_knowledge(
+                relocated_root / "06_知识证据索引",
+                "银黄口服液 金银花 配方",
+                product="银黄口服液",
+                top_k=1,
+            )
+            self.assertEqual(result.status, "PASS")
+            self.assertTrue(result.hits)
+            self.assertTrue(
+                Path(result.hits[0].citation.absolute_path).is_relative_to(relocated_root)
+            )
 
     def test_hybrid_ranking_preserves_exact_process_evidence(self) -> None:
         result = search_knowledge(

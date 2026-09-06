@@ -5,7 +5,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $projectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$pythonPath = (Get-Command python -ErrorAction Stop).Source
+$pythonPath = & (Join-Path $PSScriptRoot "initialize_python.ps1") -ProjectRoot $projectRoot
 $arguments = @(
     (Join-Path $PSScriptRoot "demo_preflight.py"),
     "--project-root", $projectRoot,

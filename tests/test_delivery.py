@@ -104,9 +104,15 @@ class CompetitionDeliveryTests(unittest.TestCase):
         self.assertIn("processes.json", start_script)
         self.assertIn("ConvertTo-SecureString", start_script)
         self.assertIn("COST_LLM_PROVIDER", start_script)
-        self.assertIn("-m venv", start_script)
-        self.assertIn("requirements.txt", start_script)
-        self.assertIn(".requirements.sha256", start_script)
+        self.assertIn("initialize_python.ps1", start_script)
+        preflight_script = (ROOT / "scripts" / "preflight_demo.ps1").read_text(encoding="utf-8-sig")
+        self.assertIn("initialize_python.ps1", preflight_script)
+        bootstrap = (ROOT / "scripts" / "initialize_python.ps1").read_text(encoding="utf-8-sig")
+        self.assertIn("-m venv", bootstrap)
+        self.assertIn("requirements.txt", bootstrap)
+        self.assertIn(".requirements.sha256", bootstrap)
+        self.assertIn("Test-PythonRuntime", bootstrap)
+        self.assertIn(".environment-root", bootstrap)
         self.assertIn("Find-AvailablePortPair", start_script)
         self.assertIn("Test-LocalPortAvailable", start_script)
         self.assertIn("port_auto_selected", start_script)
@@ -122,6 +128,30 @@ class CompetitionDeliveryTests(unittest.TestCase):
         self.assertIn("Win32_Process", stop_script)
         self.assertIn('default="127.0.0.1"', rpa_wrapper)
         self.assertIn("host=args.host", rpa_wrapper)
+
+    def test_docker_launchers_use_a_directory_independent_project_name(self) -> None:
+        compose = (ROOT / "compose.yaml").read_text(encoding="utf-8")
+        windows_start = (ROOT / "启动跨环境演示.cmd").read_text(encoding="utf-8")
+        windows_stop = (ROOT / "停止跨环境演示.cmd").read_text(encoding="utf-8")
+        unix_start = (ROOT / "start-docker.sh").read_text(encoding="utf-8")
+        unix_stop = (ROOT / "stop-docker.sh").read_text(encoding="utf-8")
+        self.assertTrue(compose.startswith("name: pharma-cost-intelligence\n"))
+        for launcher in (windows_start, windows_stop, unix_start, unix_stop):
+            self.assertIn("docker compose -p pharma-cost-intelligence", launcher)
+        self.assertIn("--wait --wait-timeout 180", windows_start)
+        self.assertIn("docker info", windows_start)
+
+    def test_windows_entrypoints_preserve_exit_codes(self) -> None:
+        for name in (
+            "一键启动系统.cmd",
+            "停止演示系统.cmd",
+            "演示前预检.cmd",
+            "启动跨环境演示.cmd",
+            "停止跨环境演示.cmd",
+        ):
+            content = (ROOT / name).read_text(encoding="utf-8")
+            self.assertIn("setlocal", content, name)
+            self.assertIn("exit /b", content, name)
 
 
 if __name__ == "__main__":

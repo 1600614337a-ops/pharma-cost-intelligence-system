@@ -17,7 +17,7 @@ from pathlib import Path
 ROOT_FILES = (
     "Dockerfile", "compose.yaml", ".dockerignore", ".env.example", ".gitignore",
     ".gitattributes", "requirements.txt", "requirements-llamaindex.txt",
-    "THIRD_PARTY_NOTICES.md", "启动演示系统.cmd", "停止演示系统.cmd",
+    "THIRD_PARTY_NOTICES.md", "一键启动系统.cmd", "停止演示系统.cmd",
     "演示前预检.cmd", "配置通义千问API.cmd", "启动跨环境演示.cmd",
     "停止跨环境演示.cmd", "start-docker.sh", "stop-docker.sh",
 )

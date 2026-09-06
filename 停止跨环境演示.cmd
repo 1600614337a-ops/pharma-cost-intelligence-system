@@ -1,5 +1,8 @@
 @echo off
+setlocal
 chcp 65001 >nul
 cd /d "%~dp0"
-docker compose down
-if errorlevel 1 pause
+docker compose -p pharma-cost-intelligence down
+set "EXIT_CODE=%ERRORLEVEL%"
+if not "%EXIT_CODE%"=="0" pause
+exit /b %EXIT_CODE%

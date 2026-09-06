@@ -1,0 +1,781 @@
+{
+  "evaluation_version": "1.0.0",
+  "generated_at": "2026-08-24T02:42:14.261539+08:00",
+  "status": "PASS",
+  "model": {
+    "provider": "dashscope",
+    "protocol": "chat_completions",
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "model": "qwen3.8-max"
+  },
+  "summary": {
+    "scenario_count": 3,
+    "run_count": 3,
+    "passed_scenarios": 3,
+    "passed_runs": 3,
+    "scenario_pass_rate_pct": "100.00",
+    "run_pass_rate_pct": "100.00"
+  },
+  "scenario_results": [
+    {
+      "scenario": "银黄口服液 2026-05",
+      "status": "PASS",
+      "run_count": 1,
+      "failed_check_count": 0,
+      "protected_output_stable": true,
+      "narrative_variant_count": 1
+    },
+    {
+      "scenario": "板蓝根颗粒 2026-05",
+      "status": "PASS",
+      "run_count": 1,
+      "failed_check_count": 0,
+      "protected_output_stable": true,
+      "narrative_variant_count": 1
+    },
+    {
+      "scenario": "六味地黄胶囊 2026-03",
+      "status": "PASS",
+      "run_count": 1,
+      "failed_check_count": 0,
+      "protected_output_stable": true,
+      "narrative_variant_count": 1
+    }
+  ],
+  "runs": [
+    {
+      "scenario": "银黄口服液 2026-05",
+      "product": "银黄口服液",
+      "month": "2026-05",
+      "run_index": 1,
+      "report_number": "CA-202605-YH-001",
+      "status": "PASS",
+      "generation": {
+        "mode": "llm",
+        "status": "generated",
+        "provider_protocol": "chat_completions",
+        "model": "qwen3.8-max",
+        "request_id": "2d901be6-f2d2-9644-abb9-e4dd568dc790",
+        "attempt_count": 1,
+        "warnings": []
+      },
+      "protected_fingerprint": "10c5a53ee4bfe69f5f740bf51e548a68436d4ee31b188eea18a2307541934bca",
+      "narrative_fingerprint": "62537994fd562d3ec0e8235b38ffe93b11a18f1a9af26692f4e2597e75b8cf08",
+      "narratives": {
+        "波动告警描述": "2026年5月银黄口服液月度成本分析未触发成本要素±10%阈值告警。",
+        "材料成本归因分析文本": "2026年5月银黄口服液直接材料单位成本环比上升0.22元/盒；直接材料总成本变动额+34,000.00元，对总成本变动贡献度为+67.09%。其中，金银花单位消耗成本变动+0.15元/盒，为最大明细驱动因素。同期同名物料市场价环比上升6.15%，方向一致，但市场行情不等于企业实际采购价，不能据此断言采购因果。可执行核查建议：①复核金银花对应的采购合同、订单、入库单和发票，补齐企业实际采购量价证据；②核对相关批次的领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。",
+        "成本异常排查分析": "2026年5月银黄口服液单位成本环比上升2.84%，同比上升4.67%，预算偏差5.75%（成本高于预算，经营不利）。本月未触发成本要素±10%阈值告警。",
+        "差异结构拆解分析": "2026年5月银黄口服液工厂对标显示：直接材料中药一厂较中药二厂高0.01元/盒；直接人工中药一厂较中药二厂低0.20元/盒；制造费用中药一厂较中药二厂低0.20元/盒；单位成本中药一厂较中药二厂低0.39元/盒。",
+        "差异归因分析文本": "2026年5月银黄口服液工厂对标总体差异如下：直接材料中药一厂较中药二厂高0.01元/盒；直接人工中药一厂较中药二厂低0.20元/盒；制造费用中药一厂较中药二厂低0.20元/盒；单位成本中药一厂较中药二厂低0.39元/盒。工厂差异按中药一厂减中药二厂计算，成本越低评价越有利。\n\n原因研判方面，三项成本要素中直接人工差异绝对额最大，中药一厂较中药二厂低0.20元/盒（-11.56%），评价为经营有利。本厂内部材料明细显示金银花环比变动+0.15元/盒，该线索仅用于确定核查顺序，不能替代两厂同期明细归因。结合《银黄口服液 产品配方文档》《中药一厂 生产工艺路线文档》及GMP知识证据，优先核查实际工时、班组配置、工资率与人工分摊口径。\n\n证据边界方面，以上排序基于2026年5月同期结构化成本差异和本厂内部明细。在对标厂原材料消耗、实际采购量价、工艺收率、人工工时或费用分摊明细未补齐前，核查方向不表述为已确认因果。",
+        "本月亮点": "2026年5月银黄口服液中药一厂单位成本较中药二厂低0.39元/盒；单位成本同比上升4.67%，预算偏差5.75%（成本高于预算，经营不利）。",
+        "需关注问题": "2026年5月银黄口服液直接材料单位成本环比上升0.22元/盒；直接材料总成本变动额+34,000.00元，对总成本变动贡献度为+67.09%。金银花单位消耗成本变动+0.15元/盒，为最大明细驱动。同期同名市场价环比上升6.15%，方向一致，但市场行情不等于企业实际采购价，不能据此断言采购因果。建议：①复核金银花对应的采购合同、订单、入库单和发票，补齐企业实际采购量价证据；②核对相关批次的领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。"
+      },
+      "checks": [
+        {
+          "name": "确定性基线契约",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "增强后契约",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "生成模式",
+          "status": "PASS",
+          "actual": "llm",
+          "expected": "llm"
+        },
+        {
+          "name": "生成状态",
+          "status": "PASS",
+          "actual": "generated",
+          "expected": "generated"
+        },
+        {
+          "name": "生成告警为空",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "请求标识存在",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "模型名称",
+          "status": "PASS",
+          "actual": "qwen3.8-max",
+          "expected": "qwen3.8-max"
+        },
+        {
+          "name": "受保护契约未改变",
+          "status": "PASS",
+          "actual": "10c5a53ee4bfe69f5f740bf51e548a68436d4ee31b188eea18a2307541934bca",
+          "expected": "10c5a53ee4bfe69f5f740bf51e548a68436d4ee31b188eea18a2307541934bca"
+        },
+        {
+          "name": "报告字段数量",
+          "status": "PASS",
+          "actual": 107,
+          "expected": 107
+        },
+        {
+          "name": "动态表格数量",
+          "status": "PASS",
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "黄金数值：本月单位成本",
+          "status": "PASS",
+          "actual": "11.21",
+          "expected": "11.21"
+        },
+        {
+          "name": "黄金数值：上月单位成本",
+          "status": "PASS",
+          "actual": "10.90",
+          "expected": "10.90"
+        },
+        {
+          "name": "黄金数值：单位成本环比",
+          "status": "PASS",
+          "actual": "2.84%",
+          "expected": "2.84%"
+        },
+        {
+          "name": "黄金数值：材料贡献度",
+          "status": "PASS",
+          "actual": "67.09%",
+          "expected": "67.09%"
+        },
+        {
+          "name": "黄金数值：单位成本同比",
+          "status": "PASS",
+          "actual": "4.67%",
+          "expected": "4.67%"
+        },
+        {
+          "name": "黄金数值：单位成本预算偏差",
+          "status": "PASS",
+          "actual": "5.75%",
+          "expected": "5.75%"
+        },
+        {
+          "name": "黄金数值：本月工时",
+          "status": "PASS",
+          "actual": "231.72",
+          "expected": "231.72"
+        },
+        {
+          "name": "黄金数值：一厂减二厂单位成本差异",
+          "status": "PASS",
+          "actual": "-0.39",
+          "expected": "-0.39"
+        },
+        {
+          "name": "100个非叙述字段逐项一致",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "补充指标逐项一致",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "5张受保护动态表逐项一致",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "改进建议表格受控生成",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "知识引用逐项一致",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "七个受控叙述字段有效",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "叙述字段来源未改变",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "叙述来源文件真实存在",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "缺失数据保持暂无数据",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "八类受治理证据引用完整",
+          "status": "PASS",
+          "actual": 8,
+          "expected": 8
+        },
+        {
+          "name": "关键事实或边界：金银花",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "关键事实或边界：6.15%",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "关键事实或边界：市场行情不等于企业实际采购价",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "单位成本环比方向未写反",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "单位成本环比进入叙述",
+          "status": "PASS",
+          "actual": [
+            "2.84%"
+          ],
+          "expected": [
+            "2.84%"
+          ]
+        },
+        {
+          "name": "无禁止结论或采购因果",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "受控生成护栏复验",
+          "status": "PASS",
+          "actual": null,
+          "expected": null
+        }
+      ]
+    },
+    {
+      "scenario": "板蓝根颗粒 2026-05",
+      "product": "板蓝根颗粒",
+      "month": "2026-05",
+      "run_index": 1,
+      "report_number": "CA-202605-BLG-001",
+      "status": "PASS",
+      "generation": {
+        "mode": "llm",
+        "status": "generated",
+        "provider_protocol": "chat_completions",
+        "model": "qwen3.8-max",
+        "request_id": "f8e57c33-2a84-9c67-9d05-688718964803",
+        "attempt_count": 1,
+        "warnings": []
+      },
+      "protected_fingerprint": "35e693fb984615dc9051f95345de1f9bb88affc7bd38d124fea67733488dc038",
+      "narrative_fingerprint": "6a3e91868dc8a75dfb83de25caa4502daa4d5cb8c588ea46e126341a9012575b",
+      "narratives": {
+        "波动告警描述": "2026年5月板蓝根颗粒月度成本分析未触发成本要素±10%阈值告警。",
+        "材料成本归因分析文本": "2026年5月板蓝根颗粒直接材料单位成本环比上升0.18元/盒；直接材料总成本变动额+36,640.00元，对总成本变动贡献度为+69.90%。其中，板蓝根单位消耗成本变动+0.15元/盒，系最大明细驱动因素。同期同名物料市场价环比上升8.47%，方向一致，但市场行情不等于企业实际采购价，不能据此断言采购因果。建议：①复核板蓝根对应的采购合同、订单、入库单和发票，补齐企业实际采购量价证据；②核对相关批次的领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。",
+        "成本异常排查分析": "2026年5月板蓝根颗粒单位成本环比上升3.18%，同比上升5.21%，预算偏差6.71%（成本高于预算，经营不利）。本月未触发成本要素±10%阈值告警。",
+        "差异结构拆解分析": "2026年5月板蓝根颗粒工厂对标显示：直接材料中药一厂较中药二厂低0.20元/盒；直接人工中药一厂较中药二厂低0.13元/盒；制造费用中药一厂较中药二厂低0.17元/盒；单位成本中药一厂较中药二厂低0.50元/盒。",
+        "差异归因分析文本": "总体差异方面，2026年5月板蓝根颗粒单位成本中药一厂较中药二厂低0.50元/盒。分项来看，直接材料低0.20元/盒，直接人工低0.13元/盒，制造费用低0.17元/盒。工厂差异按中药一厂减中药二厂计算，成本越低评价越有利。\n\n原因研判显示，三项成本要素中直接材料差异绝对额最大，中药一厂较中药二厂低0.20元/盒（-4.04%），评价为经营有利。本厂内部材料明细显示板蓝根环比变动+0.15元/盒，该线索仅用于确定核查顺序，不能替代两厂同期明细归因。结合《板蓝根颗粒 产品配方文档》《中药一厂 生产工艺路线文档》及GMP知识证据，优先核查采购量价、批次领退料、投料耗用与工艺收率证据。\n\n证据边界方面，以上排序基于2026年5月同期结构化成本差异和本厂内部明细。在对标厂原材料消耗、实际采购量价、工艺收率、人工工时或费用分摊明细未补齐前，核查方向不表述为已确认因果。",
+        "本月亮点": "2026年5月板蓝根颗粒中药一厂单位成本较中药二厂低0.50元/盒，对标表现有利；单位成本同比上升5.21%，预算偏差6.71%（成本高于预算，经营不利）。",
+        "需关注问题": "2026年5月板蓝根颗粒直接材料单位成本环比上升0.18元/盒；直接材料总成本变动额+36,640.00元，对总成本变动贡献度为+69.90%。板蓝根单位消耗成本变动+0.15元/盒，为最大明细驱动。同期同名市场价环比上升8.47%，方向一致，但市场行情不等于企业实际采购价，不能据此断言采购因果。建议：①复核板蓝根对应的采购合同、订单、入库单和发票，补齐企业实际采购量价证据；②核对相关批次的领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。"
+      },
+      "checks": [
+        {
+          "name": "确定性基线契约",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "增强后契约",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "生成模式",
+          "status": "PASS",
+          "actual": "llm",
+          "expected": "llm"
+        },
+        {
+          "name": "生成状态",
+          "status": "PASS",
+          "actual": "generated",
+          "expected": "generated"
+        },
+        {
+          "name": "生成告警为空",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "请求标识存在",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "模型名称",
+          "status": "PASS",
+          "actual": "qwen3.8-max",
+          "expected": "qwen3.8-max"
+        },
+        {
+          "name": "受保护契约未改变",
+          "status": "PASS",
+          "actual": "35e693fb984615dc9051f95345de1f9bb88affc7bd38d124fea67733488dc038",
+          "expected": "35e693fb984615dc9051f95345de1f9bb88affc7bd38d124fea67733488dc038"
+        },
+        {
+          "name": "报告字段数量",
+          "status": "PASS",
+          "actual": 107,
+          "expected": 107
+        },
+        {
+          "name": "动态表格数量",
+          "status": "PASS",
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "黄金数值：本月单位成本",
+          "status": "PASS",
+          "actual": "7.47",
+          "expected": "7.47"
+        },
+        {
+          "name": "黄金数值：上月单位成本",
+          "status": "PASS",
+          "actual": "7.24",
+          "expected": "7.24"
+        },
+        {
+          "name": "黄金数值：单位成本环比",
+          "status": "PASS",
+          "actual": "3.18%",
+          "expected": "3.18%"
+        },
+        {
+          "name": "黄金数值：材料贡献度",
+          "status": "PASS",
+          "actual": "69.90%",
+          "expected": "69.90%"
+        },
+        {
+          "name": "黄金数值：单位成本同比",
+          "status": "PASS",
+          "actual": "5.21%",
+          "expected": "5.21%"
+        },
+        {
+          "name": "黄金数值：单位成本预算偏差",
+          "status": "PASS",
+          "actual": "6.71%",
+          "expected": "6.71%"
+        },
+        {
+          "name": "黄金数值：本月工时",
+          "status": "PASS",
+          "actual": "164.71",
+          "expected": "164.71"
+        },
+        {
+          "name": "黄金数值：一厂减二厂单位成本差异",
+          "status": "PASS",
+          "actual": "-0.50",
+          "expected": "-0.50"
+        },
+        {
+          "name": "100个非叙述字段逐项一致",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "补充指标逐项一致",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "5张受保护动态表逐项一致",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "改进建议表格受控生成",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "知识引用逐项一致",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "七个受控叙述字段有效",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "叙述字段来源未改变",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "叙述来源文件真实存在",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "缺失数据保持暂无数据",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "八类受治理证据引用完整",
+          "status": "PASS",
+          "actual": 8,
+          "expected": 8
+        },
+        {
+          "name": "关键事实或边界：板蓝根",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "关键事实或边界：8.47%",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "关键事实或边界：市场行情不等于企业实际采购价",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "单位成本环比方向未写反",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "单位成本环比进入叙述",
+          "status": "PASS",
+          "actual": [
+            "3.18%"
+          ],
+          "expected": [
+            "3.18%"
+          ]
+        },
+        {
+          "name": "无禁止结论或采购因果",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "受控生成护栏复验",
+          "status": "PASS",
+          "actual": null,
+          "expected": null
+        }
+      ]
+    },
+    {
+      "scenario": "六味地黄胶囊 2026-03",
+      "product": "六味地黄胶囊",
+      "month": "2026-03",
+      "run_index": 1,
+      "report_number": "CA-202603-LWDH-001",
+      "status": "PASS",
+      "generation": {
+        "mode": "llm",
+        "status": "generated",
+        "provider_protocol": "chat_completions",
+        "model": "qwen3.8-max",
+        "request_id": "11b15a43-34e1-9b66-91a7-3059be4d0443",
+        "attempt_count": 1,
+        "warnings": []
+      },
+      "protected_fingerprint": "ead989e010139113c5c925b7ef5e7609add16d0f2950a16d639aa1dc121e9a94",
+      "narrative_fingerprint": "6f5caed05f79fa1c0ca9b87ce2f64894abb0ceeb5b6dfc54fa67ac1e5206c2a4",
+      "narratives": {
+        "波动告警描述": "2026年3月六味地黄胶囊月度成本分析未触发成本要素±10%阈值告警。",
+        "材料成本归因分析文本": "2026年3月直接材料单位成本环比下降0.36元/盒；直接材料总成本变动额+73,850.00元，对总成本变动贡献度为+71.77%。山茱萸单位消耗成本变动-0.10元/盒，为最大明细驱动因素。同期同名市场价环比下降3.77%，方向一致，但市场行情不等于企业实际采购价，不能据此断言采购因果。建议：①复核山茱萸采购合同、订单、入库单及发票，补齐企业实际采购量价证据；②核对相关批次领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。",
+        "成本异常排查分析": "2026年3月六味地黄胶囊单位成本环比-3.30%，同比0.59%，预算偏差-0.47%（经营有利）。未触发成本要素±10%阈值告警。设备文档记录胶囊填充机故障及维修事件，但当月单位成本实际下降；因缺少费用归属和分摊依据，不量化其对单位成本的影响。",
+        "差异结构拆解分析": "2026年3月六味地黄胶囊工厂对标显示：直接材料中药一厂较二厂低0.63元/盒；直接人工中药一厂较二厂低0.23元/盒；制造费用中药一厂较二厂低0.30元/盒；单位成本中药一厂较二厂低1.16元/盒。",
+        "差异归因分析文本": "总体差异方面，2026年3月六味地黄胶囊中药一厂较中药二厂单位成本低1.16元/盒。其中直接材料低0.63元/盒，直接人工低0.23元/盒，制造费用低0.30元/盒。工厂差异按中药一厂减中药二厂计算，成本越低评价越有利。\n\n原因研判方面，三项成本要素中直接材料差异绝对额最大，中药一厂较二厂低0.63元/盒（-4.99%），评价为经营有利。本厂内部材料明细显示山茱萸环比变动-0.10元/盒，该线索仅用于确定核查顺序，不能替代两厂同期明细归因。结合产品配方、生产工艺、设备记录及GMP知识证据，优先核查采购量价、批次领退料、投料耗用与工艺收率证据。设备记录存在胶囊填充机故障及维修事件，但当月单位成本实际下降，且缺少费用归属与分摊依据，不将该事件写成成本上涨原因。\n\n证据边界方面，以上排序基于2026年3月同期结构化成本差异和本厂内部明细。在对标厂原材料消耗、实际采购量价、工艺收率、人工工时或费用分摊明细未补齐前，核查方向不表述为已确认因果。",
+        "本月亮点": "2026年3月六味地黄胶囊中药一厂单位成本较二厂低1.16元/盒；单位成本同比0.59%，预算偏差-0.47%（经营有利）。",
+        "需关注问题": "2026年3月直接材料单位成本环比下降0.36元/盒；直接材料总成本变动额+73,850.00元，对总成本变动贡献度为+71.77%。山茱萸单位消耗成本变动-0.10元/盒，为最大明细驱动。同期同名市场价环比下降3.77%，方向一致，但市场行情不等于企业实际采购价，不能据此断言采购因果。建议：①复核山茱萸采购合同、订单、入库单及发票，补齐企业实际采购量价证据；②核对相关批次领料、退料和投料记录，确认单位耗用成本变动来源；③如需归因至工艺收率，应补充批次收率和工艺参数后再作判断。"
+      },
+      "checks": [
+        {
+          "name": "确定性基线契约",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "增强后契约",
+          "status": "PASS",
+          "actual": "PASS",
+          "expected": "PASS"
+        },
+        {
+          "name": "生成模式",
+          "status": "PASS",
+          "actual": "llm",
+          "expected": "llm"
+        },
+        {
+          "name": "生成状态",
+          "status": "PASS",
+          "actual": "generated",
+          "expected": "generated"
+        },
+        {
+          "name": "生成告警为空",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "请求标识存在",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "模型名称",
+          "status": "PASS",
+          "actual": "qwen3.8-max",
+          "expected": "qwen3.8-max"
+        },
+        {
+          "name": "受保护契约未改变",
+          "status": "PASS",
+          "actual": "ead989e010139113c5c925b7ef5e7609add16d0f2950a16d639aa1dc121e9a94",
+          "expected": "ead989e010139113c5c925b7ef5e7609add16d0f2950a16d639aa1dc121e9a94"
+        },
+        {
+          "name": "报告字段数量",
+          "status": "PASS",
+          "actual": 107,
+          "expected": 107
+        },
+        {
+          "name": "动态表格数量",
+          "status": "PASS",
+          "actual": 6,
+          "expected": 6
+        },
+        {
+          "name": "黄金数值：本月单位成本",
+          "status": "PASS",
+          "actual": "17.02",
+          "expected": "17.02"
+        },
+        {
+          "name": "黄金数值：上月单位成本",
+          "status": "PASS",
+          "actual": "17.60",
+          "expected": "17.60"
+        },
+        {
+          "name": "黄金数值：单位成本环比",
+          "status": "PASS",
+          "actual": "-3.30%",
+          "expected": "-3.30%"
+        },
+        {
+          "name": "黄金数值：产量环比",
+          "status": "PASS",
+          "actual": "25.00%",
+          "expected": "25.00%"
+        },
+        {
+          "name": "黄金数值：单位成本同比",
+          "status": "PASS",
+          "actual": "0.59%",
+          "expected": "0.59%"
+        },
+        {
+          "name": "黄金数值：单位成本预算偏差",
+          "status": "PASS",
+          "actual": "-0.47%",
+          "expected": "-0.47%"
+        },
+        {
+          "name": "黄金数值：本月工时",
+          "status": "PASS",
+          "actual": "603.43",
+          "expected": "603.43"
+        },
+        {
+          "name": "黄金数值：一厂减二厂单位成本差异",
+          "status": "PASS",
+          "actual": "-1.16",
+          "expected": "-1.16"
+        },
+        {
+          "name": "100个非叙述字段逐项一致",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "补充指标逐项一致",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "5张受保护动态表逐项一致",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "改进建议表格受控生成",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "知识引用逐项一致",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "七个受控叙述字段有效",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "叙述字段来源未改变",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "叙述来源文件真实存在",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "缺失数据保持暂无数据",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "八类受治理证据引用完整",
+          "status": "PASS",
+          "actual": 8,
+          "expected": 8
+        },
+        {
+          "name": "关键事实或边界：单位成本实际下降",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "关键事实或边界：胶囊填充机故障",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "关键事实或边界：设备事件成本影响不可量化",
+          "status": "PASS",
+          "actual": true,
+          "expected": true
+        },
+        {
+          "name": "单位成本环比方向未写反",
+          "status": "PASS",
+          "actual": false,
+          "expected": false
+        },
+        {
+          "name": "单位成本环比进入叙述",
+          "status": "PASS",
+          "actual": [
+            "-3.30%",
+            "3.30%"
+          ],
+          "expected": [
+            "-3.30%",
+            "3.30%"
+          ]
+        },
+        {
+          "name": "无禁止结论或采购因果",
+          "status": "PASS",
+          "actual": [],
+          "expected": []
+        },
+        {
+          "name": "受控生成护栏复验",
+          "status": "PASS",
+          "actual": null,
+          "expected": null
+        }
+      ]
+    }
+  ]
+}
