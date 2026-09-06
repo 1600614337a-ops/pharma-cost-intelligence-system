@@ -17,9 +17,20 @@ jobs:
         run: docker compose -p pharma-cost-intelligence build
 
       - name: Run complete test suite in an isolated container
-        run: >-
-          docker compose -p pharma-cost-intelligence run --rm --no-deps
-          --entrypoint python cost-intelligence -m unittest discover -s tests
+        shell: bash
+        run: |
+          set +e
+          docker compose -p pharma-cost-intelligence run --rm --no-deps \
+            --entrypoint python cost-intelligence -m unittest discover -s tests 2>&1 | tee test-output.log
+          test_status=${PIPESTATUS[0]}
+          if [[ ${test_status} -ne 0 ]]; then
+            message="$(tail -n 80 test-output.log)"
+            message="${message//'%'/'%25'}"
+            message="${message//$'\r'/'%0D'}"
+            message="${message//$'\n'/'%0A'}"
+            echo "::error file=.github,line=1::${message}"
+          fi
+          exit "${test_status}"
 
       - name: Start and wait for health check
         run: docker compose -p pharma-cost-intelligence up -d --wait --wait-timeout 240
