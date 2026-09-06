@@ -6,7 +6,7 @@ import hashlib
 import json
 import re
 import unicodedata
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Iterable
 
 from .hybrid import bm25_scores, vector_scores
@@ -70,11 +70,22 @@ def _all_sources_match(root: Path, manifest: KnowledgeIndexManifest) -> bool:
     )
 
 
+def _is_absolute_reference(value: str) -> bool:
+    """Recognise absolute paths written by either Windows or POSIX hosts."""
+
+    return (
+        Path(value).is_absolute()
+        or PureWindowsPath(value).is_absolute()
+        or PurePosixPath(value).is_absolute()
+    )
+
+
 def _resolve_source_root(index_root: Path, manifest: KnowledgeIndexManifest) -> Path:
     """Resolve portable manifests and recover legacy manifests after relocation."""
 
-    recorded = Path(manifest.source_root)
-    if not recorded.is_absolute():
+    recorded_value = manifest.source_root
+    recorded = Path(recorded_value)
+    if not _is_absolute_reference(recorded_value):
         return (index_root / recorded).resolve()
 
     # Indexes created before the portable format recorded the build computer's
@@ -94,14 +105,22 @@ def _resolve_catalog_path(
 ) -> Path | None:
     if not manifest.catalog_file:
         return None
-    recorded = Path(manifest.catalog_file)
-    if not recorded.is_absolute():
+    recorded_value = manifest.catalog_file
+    recorded = Path(recorded_value)
+    if not _is_absolute_reference(recorded_value):
         return (index_root / recorded).resolve()
 
-    legacy_source_root = Path(manifest.source_root)
-    if legacy_source_root.is_absolute():
+    legacy_source_value = manifest.source_root
+    legacy_source_root = Path(legacy_source_value)
+    if _is_absolute_reference(legacy_source_value):
         try:
-            relocated = source_root / recorded.relative_to(legacy_source_root)
+            if PureWindowsPath(recorded_value).is_absolute():
+                relative = PureWindowsPath(recorded_value).relative_to(
+                    PureWindowsPath(legacy_source_value)
+                )
+                relocated = source_root.joinpath(*relative.parts)
+            else:
+                relocated = source_root / recorded.relative_to(legacy_source_root)
         except ValueError:
             relocated = None
         if relocated is not None and relocated.is_file():

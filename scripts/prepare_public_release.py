@@ -21,7 +21,7 @@ ROOT_FILES = (
     "演示前预检.cmd", "配置通义千问API.cmd", "启动跨环境演示.cmd",
     "停止跨环境演示.cmd", "start-docker.sh", "stop-docker.sh",
 )
-SOURCE_DIRECTORIES = ("app", "scripts", "tests")
+SOURCE_DIRECTORIES = ("app", "scripts", "tests", ".github")
 DEMO_DIRECTORIES = (
     "01_成本明细数据",
     "02_行业参考数据",
@@ -43,6 +43,9 @@ PUBLIC_DOCUMENTS = {
     "00_项目规范/24_一键启动与演示前预检报告.md": "docs/一键启动与演示前预检报告.md",
     "00_项目规范/32_端到端验收与交付检查报告.md": "docs/端到端验收与交付检查报告.md",
     "00_项目规范/33_前三项交付与公开仓库检查报告.md": "docs/前三项交付与公开仓库检查报告.md",
+    "output/evaluation/三场景自动评测结果_V1.4.json": "docs/evidence/三场景自动评测结果_V1.4.json",
+    "output/evaluation/三场景大模型自动验收结果_20260824.json": "docs/evidence/三场景大模型自动验收结果_20260824.json",
+    "output/evaluation/端到端验收结果_20260903_最终.json": "docs/evidence/端到端验收结果_20260903_最终.json",
 }
 
 
@@ -50,6 +53,7 @@ def _ignore(_directory: str, names: list[str]) -> set[str]:
     return {
         name for name in names
         if name in {"__pycache__", ".pytest_cache", ".DS_Store"}
+        or name == "package_portable_fix.py"
         or name.endswith((".pyc", ".pyo"))
     }
 
@@ -93,6 +97,7 @@ def main() -> int:
     for filename in ROOT_FILES:
         shutil.copy2(root / filename, temporary / filename)
     shutil.copy2(root / "README_PUBLIC.md", temporary / "README.md")
+    shutil.copy2(root / "README_JUDGE.md", temporary / "README_评委运行说明.md")
     for filename in FORMAL_DOCUMENTS:
         shutil.copy2(root / filename, temporary / filename)
     for source_name, target_name in PUBLIC_DOCUMENTS.items():

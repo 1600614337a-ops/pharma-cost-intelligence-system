@@ -24,8 +24,11 @@ class CompetitionDeliveryTests(unittest.TestCase):
             "（创灵境）成本智能分析系统竞赛评测报告.docx",
             formal_documents,
         )
-        for source in formal_documents:
-            self.assertTrue((ROOT / source).is_file(), source)
+        for source, destination in formal_documents.items():
+            self.assertTrue(
+                (ROOT / source).is_file() or (ROOT / destination).is_file(),
+                source,
+            )
         self.assertEqual(len(evaluation_evidence), 3)
         for source, destination in evaluation_evidence.items():
             self.assertTrue(
@@ -136,6 +139,7 @@ class CompetitionDeliveryTests(unittest.TestCase):
         unix_start = (ROOT / "start-docker.sh").read_text(encoding="utf-8")
         unix_stop = (ROOT / "stop-docker.sh").read_text(encoding="utf-8")
         self.assertTrue(compose.startswith("name: pharma-cost-intelligence\n"))
+        self.assertNotIn("init: true", compose)
         for launcher in (windows_start, windows_stop, unix_start, unix_stop):
             self.assertIn("docker compose -p pharma-cost-intelligence", launcher)
         self.assertIn("--wait --wait-timeout 180", windows_start)
@@ -152,6 +156,26 @@ class CompetitionDeliveryTests(unittest.TestCase):
             content = (ROOT / name).read_text(encoding="utf-8")
             self.assertIn("setlocal", content, name)
             self.assertIn("exit /b", content, name)
+
+    def test_windows_entrypoints_use_archive_safe_crlf(self) -> None:
+        for name in (
+            "一键启动系统.cmd",
+            "停止演示系统.cmd",
+            "演示前预检.cmd",
+            "启动跨环境演示.cmd",
+            "停止跨环境演示.cmd",
+            "配置通义千问API.cmd",
+        ):
+            content = (ROOT / name).read_bytes()
+            self.assertIn(b"\r\n", content, name)
+            self.assertNotIn(b"\n", content.replace(b"\r\n", b""), name)
+
+    def test_docker_image_installs_and_refreshes_cjk_fonts(self) -> None:
+        dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
+        charts = (ROOT / "app" / "reporting" / "charts.py").read_text(encoding="utf-8")
+        self.assertIn("fonts-noto-cjk", dockerfile)
+        self.assertIn("fc-cache -f", dockerfile)
+        self.assertIn("NotoSansCJK-Regular.ttc", charts)
 
 
 if __name__ == "__main__":

@@ -16,8 +16,6 @@
 启动跨环境演示.cmd
 ```
 
-启动脚本已固定 Docker Compose 项目名为 `pharma-cost-intelligence`，解压目录可使用中文、空格或下划线；目录名不会参与镜像标签生成。
-
 ### macOS / Linux
 
 在解压目录执行：
@@ -29,7 +27,7 @@ bash start-docker.sh
 ### 通用命令
 
 ```bash
-docker compose -p pharma-cost-intelligence up --build -d
+docker compose up --build -d
 ```
 
 首次构建完成后访问：
@@ -41,7 +39,7 @@ http://127.0.0.1:8080
 停止服务：
 
 ```bash
-docker compose -p pharma-cost-intelligence down
+docker compose down
 ```
 
 容器启动前会自动检查10份CSV、知识索引、107字段报告契约、Word模板和LibreOffice；关键文件缺失时将停止启动并给出错误原因。
@@ -51,14 +49,10 @@ docker compose -p pharma-cost-intelligence down
 若电脑已经安装 Python 3.11+ 和 LibreOffice，可直接双击：
 
 ```text
-一键启动系统.cmd
+启动演示系统.cmd
 ```
 
-请先将 ZIP 完整解压，不要在压缩软件内直接运行 CMD。建议安装 Python 3.12（勾选 Add Python to PATH）及 LibreOffice。启动器会依次寻找 `py`、`python`、`python3`，验证 Python 3.11+，再为当前目录建立 `.venv` 并联网安装依赖。不需要安装在 D 盘或使用参赛者的用户名。
-
-若检测到旧电脑或移动目录后的虚拟环境，启动器会将它保留为 `.venv.backup-*` 并自动重建；依赖缺失时会重新安装。系统环境缺失时会给出安装提示，不会自动安装系统软件。后续在同一目录启动可复用有效环境。路径支持中文和空格。默认端口被占用时会自动选择下一组可用端口，请以输出的 Dashboard 地址为准。
-
-没有 Python/LibreOffice 时，可安装并启动 Docker Desktop，改用“启动跨环境演示.cmd”。两个入口都需要先满足上述运行前提，并非零依赖离线启动。Qwen 密钥需要在评委电脑上单独配置，不会随压缩包迁移。
+首次运行会在解压目录自动创建 `.venv` 独立环境并安装 `requirements.txt`，无需手工安装 `pydantic` 等依赖；该过程需要网络连接，耗时取决于网络环境。依赖文件未变化时，后续启动不会重复安装。默认端口被占用时，启动脚本会自动选择下一组可用端口，请以启动窗口输出的 `Dashboard` 地址为准。
 
 停止时双击：
 
@@ -105,10 +99,10 @@ docs/                   技术方案和评测说明
 
 正式交付文档以包内以下四份文件为准：
 
-- `（创灵境）成本智能分析系统技术方案文档.docx`
-- `（创灵境）成本智能分析系统技术方案文档.pdf`
-- `（创灵境）成本智能分析系统竞赛评测报告.docx`
-- `（创灵境）成本智能分析系统竞赛评测报告.pdf`
+- `docs/（创灵境）成本智能分析系统技术方案文档.docx`
+- `docs/（创灵境）成本智能分析系统技术方案文档.pdf`
+- `docs/（创灵境）成本智能分析系统竞赛评测报告.docx`
+- `docs/（创灵境）成本智能分析系统竞赛评测报告.pdf`
 
 ## 六、验收命令
 

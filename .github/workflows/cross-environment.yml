@@ -1,0 +1,33 @@
+name: Cross-environment Docker verification
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  docker-smoke-and-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build portable image
+        run: docker compose -p pharma-cost-intelligence build
+
+      - name: Start and wait for health check
+        run: docker compose -p pharma-cost-intelligence up -d --wait --wait-timeout 240
+
+      - name: Verify dashboard and complete test suite
+        run: |
+          curl --fail --show-error --silent http://127.0.0.1:8080/health
+          docker compose -p pharma-cost-intelligence exec -T cost-intelligence python -m unittest discover -s tests
+
+      - name: Show logs after failure
+        if: failure()
+        run: docker compose -p pharma-cost-intelligence logs --no-color
+
+      - name: Stop services
+        if: always()
+        run: docker compose -p pharma-cost-intelligence down --volumes --remove-orphans

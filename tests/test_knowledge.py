@@ -23,6 +23,7 @@ from app.knowledge import (
     search_knowledge,
 )
 from app.knowledge.models import KnowledgeChunk
+from app.knowledge.retrieval import _is_absolute_reference
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -66,6 +67,11 @@ class KnowledgeIndexTests(unittest.TestCase):
             sha256_file(self.index_root / "vectors.npz"),
             self.manifest.vector_file_sha256,
         )
+
+    def test_absolute_path_detection_is_cross_platform(self) -> None:
+        self.assertTrue(_is_absolute_reference(r"Z:\原作者电脑\项目"))
+        self.assertTrue(_is_absolute_reference("/opt/project"))
+        self.assertFalse(_is_absolute_reference("../project"))
 
     def test_index_hash_and_chunk_metadata(self) -> None:
         index_path = self.index_root / "pages.jsonl"

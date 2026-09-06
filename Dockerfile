@@ -17,6 +17,7 @@ RUN apt-get update \
         libreoffice-writer \
         poppler-utils \
         tini \
+    && fc-cache -f \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /opt/app

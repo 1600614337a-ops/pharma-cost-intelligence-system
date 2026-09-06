@@ -31,6 +31,8 @@ _MISSING = {"", "暂无数据", "不适用", "—", "-"}
 
 def _font_family() -> str:
     for path in (
+        Path("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"),
+        Path("/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc"),
         Path("C:/Windows/Fonts/msyh.ttc"),
         Path("C:/Windows/Fonts/msyh.ttf"),
         Path("C:/Windows/Fonts/simhei.ttf"),
@@ -39,6 +41,21 @@ def _font_family() -> str:
         if path.is_file():
             font_manager.fontManager.addfont(str(path))
             return font_manager.FontProperties(fname=str(path)).get_name()
+    for family in (
+        "Noto Sans CJK SC",
+        "Noto Sans CJK JP",
+        "Microsoft YaHei",
+        "SimHei",
+    ):
+        try:
+            resolved = font_manager.findfont(
+                font_manager.FontProperties(family=family),
+                fallback_to_default=False,
+            )
+        except ValueError:
+            continue
+        if resolved:
+            return font_manager.FontProperties(fname=resolved).get_name()
     return "DejaVu Sans"
 
 
