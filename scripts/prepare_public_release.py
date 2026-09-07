@@ -30,12 +30,6 @@ DEMO_DIRECTORIES = (
     "05_RPA接口文档",
     "06_知识证据索引",
 )
-FORMAL_DOCUMENTS = (
-    "（创灵境）成本智能分析系统技术方案文档.docx",
-    "（创灵境）成本智能分析系统技术方案文档.pdf",
-    "（创灵境）成本智能分析系统竞赛评测报告.docx",
-    "（创灵境）成本智能分析系统竞赛评测报告.pdf",
-)
 PUBLIC_DOCUMENTS = {
     "00_项目规范/21_竞赛技术方案.md": "docs/竞赛技术方案.md",
     "00_项目规范/22_三场景竞赛评测报告.md": "docs/三场景竞赛评测报告.md",
@@ -98,8 +92,6 @@ def main() -> int:
         shutil.copy2(root / filename, temporary / filename)
     shutil.copy2(root / "README_PUBLIC.md", temporary / "README.md")
     shutil.copy2(root / "README_JUDGE.md", temporary / "README_评委运行说明.md")
-    for filename in FORMAL_DOCUMENTS:
-        shutil.copy2(root / filename, temporary / filename)
     for source_name, target_name in PUBLIC_DOCUMENTS.items():
         target = temporary / target_name
         target.parent.mkdir(parents=True, exist_ok=True)

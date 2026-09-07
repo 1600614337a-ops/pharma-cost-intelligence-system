@@ -13,22 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class CompetitionDeliveryTests(unittest.TestCase):
-    def test_judge_package_includes_formal_competition_documents(self) -> None:
+    def test_judge_package_keeps_formal_documents_separate(self) -> None:
         namespace = runpy.run_path(str(ROOT / "scripts" / "prepare_judge_package.py"))
-        formal_documents = namespace["FORMAL_DOCUMENTS"]
         evaluation_evidence = namespace["EVALUATION_EVIDENCE"]
-        self.assertEqual(len(formal_documents), 4)
-        self.assertEqual(sum(path.endswith(".docx") for path in formal_documents), 2)
-        self.assertEqual(sum(path.endswith(".pdf") for path in formal_documents), 2)
-        self.assertIn(
-            "（创灵境）成本智能分析系统竞赛评测报告.docx",
-            formal_documents,
-        )
-        for source, destination in formal_documents.items():
-            self.assertTrue(
-                (ROOT / source).is_file() or (ROOT / destination).is_file(),
-                source,
-            )
         self.assertEqual(len(evaluation_evidence), 3)
         for source, destination in evaluation_evidence.items():
             self.assertTrue(
@@ -36,6 +23,9 @@ class CompetitionDeliveryTests(unittest.TestCase):
                 source,
             )
         script = (ROOT / "scripts" / "prepare_judge_package.py").read_text(encoding="utf-8")
+        public_script = (ROOT / "scripts" / "prepare_public_release.py").read_text(encoding="utf-8")
+        self.assertNotIn("FORMAL_DOCUMENTS", script)
+        self.assertNotIn("FORMAL_DOCUMENTS", public_script)
         self.assertIn('output.with_name(output.name + ".zip")', script)
 
     def test_demo_preflight_passes_without_port_probe(self) -> None:

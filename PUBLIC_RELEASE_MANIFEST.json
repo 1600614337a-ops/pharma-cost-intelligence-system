@@ -1,6 +1,6 @@
 {
   "release_format": "github-public-self-contained-demo",
-  "created_at": "2026-09-06T14:36:44.179591+00:00",
+  "created_at": "2026-09-07T02:16:20.949200+00:00",
   "competition_demo_data_included": true,
   "requires_secure_data_overlay": false,
   "api_key_included": false,
@@ -577,13 +577,13 @@
     },
     {
       "path": "README.md",
-      "size": 4820,
-      "sha256": "688e6b8d128766719662d831175fa145215d0381c195d07375e31ee94457eeae"
+      "size": 4541,
+      "sha256": "77ee787285616185b5915b3e62bcb88e0dc68df0dd6621276fc7ca02bb5a6672"
     },
     {
       "path": "README_评委运行说明.md",
-      "size": 4057,
-      "sha256": "9ebe9ed30ad91857e6625d6be091367f6b472626605d1d513d8373f4fa4527ca"
+      "size": 3840,
+      "sha256": "f7e63a96177ef0f2bb026e663a18e113407f0521f2506b6af24c9ad37b8a42ea"
     },
     {
       "path": "requirements-llamaindex.txt",
@@ -647,13 +647,13 @@
     },
     {
       "path": "scripts/prepare_judge_package.py",
-      "size": 7292,
-      "sha256": "b7ef055f57bf1596708307e2365d448b47702673db007a845ba3fc290bb769c0"
+      "size": 6297,
+      "sha256": "98799e938d6ea3fdcb66403b928fee88fc68451259a57f0fd9fd84e1e36c8fe7"
     },
     {
       "path": "scripts/prepare_public_release.py",
-      "size": 5752,
-      "sha256": "8662b6d99f5f5d857de1eee797cee949006a51d41e5827fa5a9cf529e20e2c65"
+      "size": 5353,
+      "sha256": "a3fcae730501e8fc23d7d4f648acf5d02da92c8c4a10f31491b0760cf3052522"
     },
     {
       "path": "scripts/review_database_ops.py",
@@ -722,8 +722,8 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "size": 8785,
-      "sha256": "3cb1ae4d49f291bfe821b72418a660d5abd04cd65b0d047e4d00a1884e35e9e6"
+      "size": 8368,
+      "sha256": "030d6e05029f36cfba4def966ba4a988714d2287bf860a85b4320b1a77bd1208"
     },
     {
       "path": "tests/test_deployment.py",
@@ -809,26 +809,6 @@
       "path": "配置通义千问API.cmd",
       "size": 445,
       "sha256": "ade2ab3473327380d572b4accb3e9c753e0a26c189892c5b7cd22ec9229c62d5"
-    },
-    {
-      "path": "（创灵境）成本智能分析系统技术方案文档.docx",
-      "size": 187657,
-      "sha256": "c75b23b70370363b58e68e8d6b2e9b861cffc8efd1848ce0a3ab9cdae94033a5"
-    },
-    {
-      "path": "（创灵境）成本智能分析系统技术方案文档.pdf",
-      "size": 553884,
-      "sha256": "2560a251392cc717c9060bf1f0a2c824a3c64d0e7922889b64043d132c0d2591"
-    },
-    {
-      "path": "（创灵境）成本智能分析系统竞赛评测报告.docx",
-      "size": 52335,
-      "sha256": "0fcba04c50744ba19c517260a4f192d993c14dd42c63196cbb3db54ee278d1c7"
-    },
-    {
-      "path": "（创灵境）成本智能分析系统竞赛评测报告.pdf",
-      "size": 321904,
-      "sha256": "6fb9619939c81bbb2e2c18c9cf23e966cfe53209bc89a6d93fa2c34e5691f6ca"
     }
   ]
 }

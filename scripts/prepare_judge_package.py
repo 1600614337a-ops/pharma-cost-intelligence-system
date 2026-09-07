@@ -21,12 +21,6 @@ CONTROLLED_DIRECTORIES = (
     "05_RPA接口文档",
     "06_知识证据索引",
 )
-FORMAL_DOCUMENTS = {
-    "（创灵境）成本智能分析系统技术方案文档.docx": "docs/（创灵境）成本智能分析系统技术方案文档.docx",
-    "（创灵境）成本智能分析系统技术方案文档.pdf": "docs/（创灵境）成本智能分析系统技术方案文档.pdf",
-    "（创灵境）成本智能分析系统竞赛评测报告.docx": "docs/（创灵境）成本智能分析系统竞赛评测报告.docx",
-    "（创灵境）成本智能分析系统竞赛评测报告.pdf": "docs/（创灵境）成本智能分析系统竞赛评测报告.pdf",
-}
 EVALUATION_EVIDENCE = {
     "output/evaluation/三场景自动评测结果_V1.4.json": "docs/evidence/三场景自动评测结果_V1.4.json",
     "output/evaluation/三场景大模型自动验收结果_20260824.json": "docs/evidence/三场景大模型自动验收结果_20260824.json",
@@ -108,9 +102,6 @@ def main() -> int:
     missing = [name for name in CONTROLLED_DIRECTORIES if not (root / name).is_dir()]
     if missing:
         raise RuntimeError("缺少受控目录：" + "、".join(missing))
-    missing_documents = [source for source in FORMAL_DOCUMENTS if not (root / source).is_file()]
-    if missing_documents:
-        raise RuntimeError("缺少正式交付文档：" + "、".join(missing_documents))
     missing_evidence = [source for source in EVALUATION_EVIDENCE if not (root / source).is_file()]
     if missing_evidence:
         raise RuntimeError("缺少评测证据：" + "、".join(missing_evidence))
@@ -123,10 +114,6 @@ def main() -> int:
     shutil.copytree(public_repo, temporary, ignore=_ignore)
     for directory in CONTROLLED_DIRECTORIES:
         shutil.copytree(root / directory, temporary / directory, ignore=_ignore, dirs_exist_ok=True)
-    for source, destination in FORMAL_DOCUMENTS.items():
-        target = temporary / destination
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(root / source, target)
     for source, destination in EVALUATION_EVIDENCE.items():
         target = temporary / destination
         target.parent.mkdir(parents=True, exist_ok=True)
